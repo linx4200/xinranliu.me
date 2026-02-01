@@ -35,3 +35,19 @@ jobs:
           GOOGLE_CALENDAR_ID=${{ secrets.GOOGLE_CALENDAR_ID }}
           GOOGLE_PRIVATE_KEY=${{ secrets.GOOGLE_PRIVATE_KEY }}
           GOOGLE_SERVICE_ACCOUNT_EMAIL=${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
+  
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            docker pull tonibellbell/personal-website:latest
+            docker stop lxr || true
+            docker rm lxr || true
+            docker run --name lxr -p 127.0.0.1:3000:3000 --env-file /root/xinran.liu/.env -d tonibellbell/personal-website:latest

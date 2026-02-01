@@ -22,18 +22,6 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Accept build arguments for Next.js public variables
-ARG GOOGLE_CALENDAR_ID
-ENV GOOGLE_CALENDAR_ID=${GOOGLE_CALENDAR_ID}
-ARG GOOGLE_PRIVATE_KEY
-ENV GOOGLE_PRIVATE_KEY=${GOOGLE_PRIVATE_KEY}
-ARG GOOGLE_SERVICE_ACCOUNT_EMAIL
-ENV GOOGLE_SERVICE_ACCOUNT_EMAIL=${GOOGLE_SERVICE_ACCOUNT_EMAIL}
-
-RUN echo "GOOGLE_SERVICE_ACCOUNT_EMAIL: $GOOGLE_SERVICE_ACCOUNT_EMAIL"
-RUN echo "GOOGLE_CALENDAR_ID: $GOOGLE_CALENDAR_ID"
-RUN echo "GOOGLE_PRIVATE_KEY: $GOOGLE_PRIVATE_KEY"
-
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
