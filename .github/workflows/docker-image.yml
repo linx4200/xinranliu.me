@@ -20,3 +20,18 @@ jobs:
         docker build . --file Dockerfile \
         --tag my-image-name:$(date +%s) \
         --build-arg NEXT_PUBLIC_BASE_URL="${{ vars.NEXT_PUBLIC_BASE_URL }}"
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: true
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/personal-website:latest
+
+   
