@@ -52,3 +52,4 @@ jobs:
             docker stop lxr || true
             docker rm lxr || true
             docker run --name lxr -p 127.0.0.1:3000:3000 --env-file /root/xinran.liu/.env -d tonibellbell/personal-website:latest
+            docker image prune -a
