@@ -39,6 +39,7 @@ jobs:
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
+    environment: Production
     steps:
       - name: Deploy to Server
         uses: appleboy/ssh-action@master
