@@ -27,7 +27,7 @@ export async function getAvailability() {
 
     return { busy: busyTimes };
   } catch (error) {
-    console.error('Calendar Error:', error);
+    console.error('Google Calendar API Error:', error);
     return { error: 'Failed to fetch calendar' };
   }
 }
