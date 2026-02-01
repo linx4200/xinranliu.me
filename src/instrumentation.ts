@@ -6,18 +6,28 @@ export async function register() {
     const originalError = console.error;
     const originalWarn = console.warn;
 
+    const formatArg = (arg: any) => {
+      if (arg instanceof Error) {
+        return arg.stack || arg.message || String(arg);
+      }
+      if (typeof arg === 'object') {
+        return JSON.stringify(arg);
+      }
+      return String(arg);
+    };
+
     console.log = (...args: any[]) => {
-      logger.info(args.map((arg) => (typeof arg === 'object' ? JSON.stringify(arg) : String(arg))).join(' '));
+      logger.info(args.map(formatArg).join(' '));
       originalLog.apply(console, args);
     };
 
     console.error = (...args: any[]) => {
-      logger.error(args.map((arg) => (typeof arg === 'object' ? JSON.stringify(arg) : String(arg))).join(' '));
+      logger.error(args.map(formatArg).join(' '));
       originalError.apply(console, args);
     };
 
     console.warn = (...args: any[]) => {
-      logger.warn(args.map((arg) => (typeof arg === 'object' ? JSON.stringify(arg) : String(arg))).join(' '));
+      logger.warn(args.map(formatArg).join(' '));
       originalWarn.apply(console, args);
     };
   }

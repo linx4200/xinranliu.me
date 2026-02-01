@@ -47,8 +47,6 @@ export default async function Page({ params }: PageProps<'/[lang]'>) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
 
-  console.log('=======process.env=====>', process.env);
-
   try {
     const resp = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/google-calendar`, {
       next: {
