@@ -2,9 +2,6 @@ import { google } from 'googleapis';
 
 export async function getAvailability() {
   try {
-    console.log(process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL);
-    console.log(process.env.GOOGLE_PRIVATE_KEY);
-    console.log(process.env.GOOGLE_CALENDAR_ID);
     const auth = new google.auth.JWT({
       email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
       key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),

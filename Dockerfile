@@ -23,8 +23,6 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Accept build arguments for Next.js public variables
-ARG NEXT_PUBLIC_BASE_URL
-ENV NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
 ARG GOOGLE_CALENDAR_ID
 ENV GOOGLE_CALENDAR_ID=${GOOGLE_CALENDAR_ID}
 ARG GOOGLE_PRIVATE_KEY

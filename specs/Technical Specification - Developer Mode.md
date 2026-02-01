@@ -120,6 +120,3 @@ export default function RootLayout({ children }) {
   );
 }
 ```
-
-### Hooks: `useDevModeReact`
-这是一个自定义 Hook，用于手动标记需要被 React 模式识别的组件。它为 React 组件注入必要的元数据，使得全局 `Info` 组件能够通过 DOM 事件关联到具体的组件信息。

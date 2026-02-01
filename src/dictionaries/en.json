@@ -33,7 +33,7 @@
       "busy": "Busy",
       "available": "Available for Freelance Work",
       "booked": "Currently Booked",
-      "unknown": "Status Unknown",
+      "unknown": "",
       "nextAvailable": "Next available in {n} days"
     },
     "sections": {

@@ -1,4 +1,17 @@
 export const data = {
+  "Availability": {
+    "name": "Availability",
+    "propList": [
+      {
+        "key": "summaries",
+        "value": "Record<string, string>"
+      },
+      {
+        "key": "calendarUrl",
+        "value": "string"
+      }
+    ]
+  },
   "DarkModeSwitch": {
     "name": "DarkModeSwitch",
     "propList": []
@@ -9,7 +22,12 @@ export const data = {
   },
   "Nav": {
     "name": "Nav",
-    "propList": []
+    "propList": [
+      {
+        "key": "dict",
+        "value": "Dictionary"
+      }
+    ]
   },
   "ProjectCard": {
     "name": "ProjectCard",
@@ -37,6 +55,10 @@ export const data = {
       {
         "key": "role",
         "value": "string | undefined"
+      },
+      {
+        "key": "image",
+        "value": "string | undefined"
       }
     ]
   },
@@ -45,7 +67,7 @@ export const data = {
     "propList": [
       {
         "key": "lang",
-        "value": "Locale"
+        "value": "string"
       }
     ]
   },
