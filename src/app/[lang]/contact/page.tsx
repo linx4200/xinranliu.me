@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import profile from './profile-image.jpg';
+import profile from './profile.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { Availability } from '@/components/Availability';
@@ -95,7 +95,7 @@ export default async function Page({ params }: PageProps<'/[lang]'>) {
             <h3 className="font-semibold mb-1 md:mb-2 text-lg md:text-base" dev-mode="tailwind">{dict.contact.links.linkedin.title}</h3>
             <p className="text-text-muted text-sm md:text-base" dev-mode="tailwind">{dict.contact.links.linkedin.description}</p>
           </div>
-          <CTAButton text={dict.contact.links.linkedin.button} />
+          <CTAButton text={dict.contact.links.linkedin.button} link="https://www.linkedin.com/in/xinran-liu-502897318" />
         </div>
 
         <div className="flex flex-col md:flex-row md:justify-between mt-5 md:items-center gap-3" dev-mode="tailwind">
