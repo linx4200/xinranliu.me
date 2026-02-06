@@ -1,8 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // todo: change 域名
-  const baseUrl = 'https://xinranliu.com' // Placeholder
+  const baseUrl = 'https://xinranliu.me' // Placeholder
 
   return [
     {

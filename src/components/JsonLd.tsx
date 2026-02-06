@@ -4,11 +4,11 @@ export const JsonLd = () => {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: 'Xinran Liu',
-    url: 'https://xinranliu.com', // TODO: change 域名
-    jobTitle: 'Independent Web Developer',
+    url: 'https://xinranliu.me',
+    jobTitle: 'Independent Frontend Engineer',
     sameAs: [
       'https://github.com/linx4200',
-      'https://www.linkedin.com/in/xinran-liu-b5b3261a2/'
+      'https://www.linkedin.com/in/xinran-liu-502897318'
     ],
     knowsAbout: ['React', 'Vue', 'Next.js', 'Web Development', 'Tailwind CSS'],
   };

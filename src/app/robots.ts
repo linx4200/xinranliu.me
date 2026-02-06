@@ -6,7 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    // todo: change 域名
-    sitemap: 'https://xinranliu.com/sitemap.xml',
+    sitemap: 'https://xinranliu.me/sitemap.xml',
   }
 }
