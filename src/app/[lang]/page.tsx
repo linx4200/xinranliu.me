@@ -31,20 +31,17 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
       </section>
 
       <section
-        className="
-          max-w-md lg:max-w-full
-          mt-10 lg:mt-20 mx-4 lg:mx-auto
-          px-5 py-10 lg:px-0 lg:py-10
-          bg-surface text-center
-        "
+        className="w-full mt-10 lg:mt-20 px-4 lg:px-0"
         aria-labelledby="contact-heading"
         dev-mode="tailwind"
       >
-        <h2 id="contact-heading" className="text-xl md:text-2xl font-bold mb-5" dev-mode="tailwind">{dict.home.sections.contact.title}</h2>
-        <p className="text-base text-text-muted mb-8" dev-mode="tailwind">{dict.home.sections.contact.description}</p>
-        <Link className="inline-block py-2 px-4
+        <div className="w-full max-w-md lg:max-w-none mx-auto py-10 px-4 lg:px-0 bg-surface text-center" dev-mode="tailwind">
+          <h2 id="contact-heading" className="text-xl md:text-2xl font-bold mb-5" dev-mode="tailwind">{dict.home.sections.contact.title}</h2>
+          <p className="text-base text-text-muted mb-8" dev-mode="tailwind">{dict.home.sections.contact.description}</p>
+          <Link className="inline-block py-2 px-4
           border border-solid rounded-lg
           text-base border-primary text-primary hover:bg-primary/5 transition-colors" href={`/${lang}/contact`} dev-mode="tailwind">{dict.home.sections.contact.button}</Link>
+        </div>
       </section>
     </>
   );

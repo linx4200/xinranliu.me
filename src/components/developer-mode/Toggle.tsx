@@ -25,6 +25,8 @@ export const DevModeToggle = () => {
 
   const handleToggle = () => setIsEnabled();
 
+  // todo: only show this when it's not mobile device
+
   return (
     <div className={`hidden lg:block ${isEnabled ? '' : 'pb-16'}`} data-dev-mode-react-name="DevModeToggle">
       <div className="mt-6 flex items-center justify-center gap-3" dev-mode="tailwind">
