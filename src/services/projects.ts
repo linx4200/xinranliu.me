@@ -9,6 +9,7 @@ export interface LocalizedProject {
   site?: string;
   github?: string;
   image?: string;
+  hoveredImage?: string;
 }
 
 export const getAllProjects = (lang: string): LocalizedProject[] => {

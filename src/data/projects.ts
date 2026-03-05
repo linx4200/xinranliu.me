@@ -1,6 +1,5 @@
 import type { LangCode } from '@/dictionaries';
 
-
 export type Project = {
   selected?: boolean;
   title: { [key in LangCode]: string };
@@ -9,6 +8,7 @@ export type Project = {
   site?: string;
   github?: string;
   image?: string;
+  hoveredImage?: string;
 };
 
 export const projects: Project[] = [
@@ -20,7 +20,8 @@ export const projects: Project[] = [
       zh: '一个现代化的 Vue 颜色选择器集合 —— 快速、无障碍且易于使用。',
     },
     tags: ['Vue', 'TypeScript', 'Vite'],
-    image: '/images/vuecolor-1.png',
+    image: '/images/vuecolor.png',
+    hoveredImage: '/images/vuecolor-hover.png',
     site: 'https://linx4200.github.io/vue-color/',
     github: 'https://github.com/linx4200/vue-color',
   },
@@ -31,11 +32,12 @@ export const projects: Project[] = [
       zh: '独立开发者作品集',
     },
     desc: {
-      en: 'Designed and developed this personal website as a professional independent web developer. The site you’re viewing now, built with SEO, accessibility, and performance in mind.',
-      zh: '设计并开发了这个个人网站，用于展示我作为专业独立 Web 开发者的工作。你正在浏览的正是这个网站，并兼顾了 SEO、无障碍与性能。',
+      en: 'Built and designed this personal website as an independent developer portfolio to showcase my technical skills and past work.',
+      zh: '本项目是由我独立设计与开发的技术作品集，用于集中展示我的专业技能及实战案例。',
     },
     tags: ['React', 'Tailwind', 'Next.js'],
-    image: '/images/personal-website-2.png',
+    image: '/images/personal-website.png',
+    hoveredImage: '/images/personal-website-hover.png',
     github: 'https://github.com/linx4200/xinran.liu',
   },
   {
@@ -45,7 +47,8 @@ export const projects: Project[] = [
       en: 'AfterZzz is a minimalist smart alarm that wakes you up after you actually fall asleep.',
       zh: 'AfterZzz 是一款极简智能闹钟，能在你真正入睡后才唤醒你。',
     },
-    image: '/images/afterzzz-1.png',
+    image: '/images/afterzzz.png',
+    hoveredImage: '/images/afterzzz-hover.png',
     tags: ['React Native', 'TypeScript'],
     github: 'https://github.com/linx4200/AfterZzz-Alarm',
   },

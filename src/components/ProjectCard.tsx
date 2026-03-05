@@ -11,11 +11,12 @@ type Props = {
   site?: string,
   github?: string,
   role?: string,
-  image?: string
+  image?: string,
+  hoveredImage?: string,
 }
 
 export const ProjectCard = (props: Props) => {
-  const { title, desc, tags, site, github, role, image } = props;
+  const { title, desc, tags, site, github, role, image, hoveredImage } = props;
   const safeTitleSlug = title
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
@@ -31,14 +32,15 @@ export const ProjectCard = (props: Props) => {
       aria-describedby={descriptionId}
       data-dev-mode-react-name="ProjectCard"
     >
-      <span className="
+      {/* <span className="
         pointer-events-none
         absolute inset-0 opacity-0 group-hover:opacity-100
         transition-opacity duration-200
         bg-[radial-gradient(circle_at_20%_20%,rgba(0,0,0,0.05),transparent_35%),radial-gradient(circle_at_80%_0%,rgba(0,0,0,0.04),transparent_30%)]
         dark:bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.08),transparent_35%),radial-gradient(circle_at_80%_0%,rgba(255,255,255,0.05),transparent_30%)]"
-      />
-      {image && <Image src={image} alt={title} className="w-full aspect-square" width={500} height={500} />}
+      /> */}
+      {image && <Image src={image} alt={title} className={`w-full aspect-square ${hoveredImage ? 'group-hover:hidden' : ''}`} width={500} height={500} />}
+      {hoveredImage && <Image src={hoveredImage} alt={title} className="w-full aspect-square group-hover:block hidden" width={500} height={500} />}
       {!image && <div
         role="img"
         aria-label={`${title} project preview with vibrant gradient colors`}

@@ -38,7 +38,7 @@
     },
     "sections": {
       "professionalBackground": "Professional Background",
-      "hireOrContact": "Hire Me or Contact Me"
+      "hireOrContact": "Hire Me"
     },
     "links": {
       "linkedin": {
@@ -67,8 +67,5 @@
         "button": "Send an Email"
       }
     }
-  },
-  "products": {
-    "cart": "Add to Cart"
   }
 }

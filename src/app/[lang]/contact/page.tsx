@@ -125,14 +125,6 @@ export default async function Page({ params }: PageProps<'/[lang]'>) {
           </div>
           <CTAButton text={dict.contact.links.fiverr.button} type="primary" />
         </div>
-
-        <div className="flex flex-col md:flex-row md:justify-between mt-5 md:items-center gap-3" dev-mode="tailwind">
-          <div>
-            <h3 className="font-semibold mb-1 md:mb-2 text-lg md:text-base" dev-mode="tailwind">{dict.contact.links.email.title}</h3>
-            <p className="text-text-muted text-sm md:text-base" dev-mode="tailwind">{dict.contact.links.email.description}</p>
-          </div>
-          <CTAButton text={dict.contact.links.email.button} link="mailto:liuxinran1008@gmail.com" type="primary" />
-        </div>
       </section>
     </div>
   );

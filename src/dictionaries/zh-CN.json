@@ -38,7 +38,7 @@
     },
     "sections": {
       "professionalBackground": "专业背景",
-      "hireOrContact": "雇佣或联系我"
+      "hireOrContact": "雇佣我"
     },
     "links": {
       "linkedin": {
@@ -67,8 +67,5 @@
         "button": "发送邮件"
       }
     }
-  },
-  "products": {
-    "cart": "加入购物车"
   }
 }
