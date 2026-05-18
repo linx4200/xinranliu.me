@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Personal Portfolio Website
+
+A modern, multilingual personal portfolio website built with Next.js, showcasing projects, skills, and professional experience. Features include developer mode for enhanced interactivity, Google Calendar integration, and seamless Docker deployment.
+
+## Features
+
+- **Multilingual Support**: English and Chinese (Simplified) with easy language switching
+- **Developer Mode**: Interactive developer tools and component information display
+- **Project Showcase**: Grid layout displaying featured projects with links and descriptions
+- **Skills Display**: Organized skill sets with categories and proficiency levels
+- **Contact Integration**: Direct links to social platforms and contact forms
+- **Responsive Design**: Mobile-first approach with Tailwind CSS
+- **SEO Optimized**: Server-side rendering, meta tags, and structured data
+- **Docker Deployment**: Containerized for easy deployment with CI/CD pipeline
+
+## Tech Stack
+
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Deployment**: Docker with GitHub Actions
+- **Integrations**: Google Calendar API, Docker Hub
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18+
+- npm, yarn, or pnpm
+- Docker (for deployment)
+
+### Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/yourusername/your-repo-name.git
+cd your-repo-name
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables:
+Create a `.env.local` file with required variables (see `.env.example` if available)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Run the development server:
+```bash
+npm run dev
+```
 
-## Learn More
+Open [http://localhost:3000](http://localhost:3000) to view the website.
 
-To learn more about Next.js, take a look at the following resources:
+### Docker Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Build and run with Docker:
+```bash
+docker build -t personal-website .
+docker run -p 3000:3000 personal-website
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
 
-## Deploy on Vercel
+```
+src/
+├── app/                 # Next.js app router pages
+├── components/          # Reusable React components
+├── data/               # Static data files
+├── dictionaries/       # Internationalization files
+├── hooks/              # Custom React hooks
+├── lib/                # Utility libraries
+├── services/           # API integrations
+├── store/              # State management
+└── styles/             # CSS stylesheets
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
