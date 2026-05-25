@@ -13,8 +13,6 @@ import type { Metadata } from "next";
 
 import "@/styles/globals.css";
 
-
-
 export async function generateMetadata({ params }: { params: Promise<{ lang: LangCode }> }): Promise<Metadata> {
   const { lang } = await params;
   const dict = await getDictionary(lang);
@@ -53,6 +51,9 @@ export default async function RootLayout({
   const dict = await getDictionary(lang);
   return (
     <html lang={displayLang}>
+      <head>
+        <JsonLd />
+      </head>
       <body
         className={`${geistSans.variable} ${geistSans.className} ${geistMono.variable} antialiased lg:w-5xl mx-auto`}
       >
@@ -67,7 +68,7 @@ export default async function RootLayout({
 
         <DeveloperModeFloatingToggle />
         <DeveloperModePopUpInfo />
-        <JsonLd />
+
         <SpeedInsights />
       </body>
     </html>
