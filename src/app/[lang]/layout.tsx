@@ -7,7 +7,8 @@ import Footer from '@/components/Footer';
 import { FloatingToggle as DeveloperModeFloatingToggle } from '@/components/developer-mode/FloatingToggle';
 import { Info as DeveloperModePopUpInfo } from '@/components/developer-mode/Info';
 
-import { supportedLanguages, hasLocale, getDictionary, getHtmlLang, type LangCode } from '@/dictionaries';
+import { supportedLanguages, hasLocale, getDictionary, getHtmlLang } from '@/dictionaries';
+import { siteMetadataBase } from '@/lib/seo';
 
 import { Geist, Geist_Mono } from 'next/font/google';
 
@@ -15,13 +16,9 @@ import type { Metadata } from "next";
 
 import "@/styles/globals.css";
 
-export async function generateMetadata({ params }: { params: Promise<{ lang: LangCode }> }): Promise<Metadata> {
-  const { lang } = await params;
-  const dict = await getDictionary(lang);
-
+export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: dict.metadata.title,
-    description: dict.metadata.description,
+    metadataBase: siteMetadataBase
   };
 }
 

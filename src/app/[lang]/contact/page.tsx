@@ -2,10 +2,24 @@ import Image from 'next/image';
 import profile from './profile.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
+
 import { Availability } from '@/components/Availability';
 import { getDictionary } from '@/dictionaries';
+import { getLocalizedAlternates } from '@/lib/seo';
+
+import type { Metadata } from 'next';
 
 const calendarUrl = `https://calendar.google.com/calendar/u/0?cid=${process.env.GOOGLE_CALENDAR_ID}`;
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
+  return {
+    title: dict.metadata.contact.title,
+    description: dict.metadata.contact.description,
+    alternates: getLocalizedAlternates(lang, '/contact'),
+  };
+}
 
 const CTAButton = ({ text, link, type = 'normal' }: { text: string, link?: string, type?: 'primary' | 'normal' }) => {
   const isDisabled = !link;

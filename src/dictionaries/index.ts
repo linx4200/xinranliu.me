@@ -21,12 +21,12 @@ export const hasLocale = (locale?: string): locale is LangCode => {
   return false;
 }
 
-export const resolveLocale = (locale: string): LangCode => {
+export const resolveLocale = (locale?: string): LangCode => {
   if (hasLocale(locale)) return locale
   return DEFAULT_LANG
 }
 
-export const getDictionary = async (locale: string) => {
+export const getDictionary = async (locale?: string) => {
   return dictionaries[resolveLocale(locale)]();
 }
 

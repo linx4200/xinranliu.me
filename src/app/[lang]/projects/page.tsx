@@ -1,5 +1,18 @@
 import { ProjectGrid } from '@/components/ProjectGrid';
 import { getDictionary } from '@/dictionaries';
+import { getLocalizedAlternates } from '@/lib/seo';
+
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
+  return {
+    title: dict.metadata.projects.title,
+    description: dict.metadata.projects.description,
+    alternates: getLocalizedAlternates(lang, '/projects'),
+  };
+}
 
 export default async function Page({ params }: PageProps<'/[lang]'>) {
   const { lang } = await params;

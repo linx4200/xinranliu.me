@@ -1,44 +1,32 @@
 import { MetadataRoute } from 'next'
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://xinranliu.me' // Placeholder
+import { getLanguageAlternates, siteUrl, type LocalizedRoute } from '@/lib/seo';
 
-  return [
-    {
-      url: `${baseUrl}/en`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/zh`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/en/projects`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/zh/projects`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/en/contact`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/zh/contact`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-  ]
+const localizedPages: Array<{
+  route: LocalizedRoute;
+  priority: number;
+}> = [
+  { route: '/', priority: 1 },
+  { route: '/projects', priority: 0.8 },
+  { route: '/contact', priority: 0.8 },
+];
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const lastModified = new Date();
+
+  return localizedPages.flatMap(({ route, priority }) => {
+    const alternates = getLanguageAlternates(route);
+
+    return Object.values(alternates).map((url) => ({
+      url: `${siteUrl}${url}`,
+      lastModified,
+      changeFrequency: 'monthly' as const,
+      priority,
+      alternates: {
+        languages: Object.fromEntries(
+          Object.entries(alternates).map(([locale, localizedUrl]) => [locale, `${siteUrl}${localizedUrl}`])
+        ),
+      },
+    }));
+  });
 }

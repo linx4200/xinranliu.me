@@ -5,6 +5,19 @@ import { DevModeToggle } from '@/components/developer-mode/Toggle';
 import { SelectedProjectsList } from '@/components/SelectedProjectsList';
 import { SkillSetList } from '@/components/SkillSetList';
 import { getDictionary } from '@/dictionaries';
+import { getLocalizedAlternates } from '@/lib/seo';
+
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
+  return {
+    title: dict.metadata.home.title,
+    description: dict.metadata.home.description,
+    alternates: getLocalizedAlternates(lang, '/'),
+  };
+}
 
 export default async function Home({ params }: PageProps<'/[lang]'>) {
   const { lang } = await params;
