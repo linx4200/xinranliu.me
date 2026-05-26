@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 
-import { getLanguageAlternates, siteUrl, type LocalizedRoute } from '@/lib/seo';
+import { getSitemapLanguageAlternates, siteUrl, type LocalizedRoute } from '@/lib/seo';
 
 const localizedPages: Array<{
   route: LocalizedRoute;
@@ -15,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
   return localizedPages.flatMap(({ route, priority }) => {
-    const alternates = getLanguageAlternates(route);
+    const alternates = getSitemapLanguageAlternates(route);
 
     return Object.values(alternates).map((url) => ({
       url: `${siteUrl}${url}`,

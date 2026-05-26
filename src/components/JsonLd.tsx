@@ -1,32 +1,36 @@
-
 import { projects } from '@/data/projects';
+import { getHtmlLang, resolveLocale, DEFAULT_LANG, type Dictionary } from '@/dictionaries';
+import { getLocalizedPath, siteUrl } from '@/lib/seo';
 
-export const JsonLd = () => {
+export const JsonLd = ({ lang, dict }: { lang: string, dict: Dictionary }) => {
+  const locale = resolveLocale(lang);
+  const localizedHomeUrl = `${siteUrl}${getLocalizedPath(locale, '/')}`;
+  const inLanguage = getHtmlLang(locale) ?? DEFAULT_LANG;
+
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'ProfilePage',
-    "dateCreated": "2024-12-23T12:34:00-05:00 // todo",
-    "dateModified": "2024-12-26T14:53:00-05:00 // todo",
-    "mainEntity": {
-      "@id": "#me",
-      "@type": "Person",
-      name: 'Xinran Liu',
-      jobTitle: 'Independent Frontend Engineer',
-      knowsAbout: ['React', 'Vue', 'Next.js', 'Web Development', 'Tailwind CSS'],
-    },
-    hasPart: projects.map((project) => ({
+    '@type': 'Person',
+    '@id': `${siteUrl}#me`,
+    inLanguage,
+    name: 'Xinran Liu',
+    url: localizedHomeUrl,
+    description: dict.metadata.home.description,
+    jobTitle: dict.jsonld.jobTitle,
+    knowsAbout: ['React', 'Vue', 'Next.js', 'Web Development', 'Tailwind CSS'],
+    subjectOf: projects.map((project) => ({
       '@type': 'CreativeWork', // https://schema.org/CreativeWork
-      name: project.title.en,
-      description: project.desc.en,
-      url: project.site ?? project.github ?? 'https://xinranliu.me/projects',
+      name: project.title[locale],
+      description: project.desc[locale],
+      inLanguage,
+      url: project.site ?? project.github ?? `${siteUrl}${getLocalizedPath(locale, '/projects')}`,
       keywords: project.tags?.join(',') ?? '',
-      author: { '@id': '#me' }
+      author: { '@id': `${siteUrl}#me` }
     })),
-    url: 'https://xinranliu.me',
     sameAs: [
       'https://github.com/linx4200',
       'https://www.linkedin.com/in/xinran-liu-502897318'
     ],
+    primaryImageOfPage: "/images/search-landing-portfolio.png"
   };
 
 

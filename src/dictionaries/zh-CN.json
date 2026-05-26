@@ -1,4 +1,7 @@
 {
+  "jsonld": {
+    "jobTitle": "独立 Web 开发者"
+  },
   "metadata": {
     "home": {
       "title": "Xinran Liu | 独立 Web 开发者",
@@ -17,6 +20,33 @@
     "home": "首页",
     "projects": "项目",
     "contact": "联系我"
+  },
+  "ui": {
+    "skipToMainContent": "跳转到主要内容",
+    "navigation": {
+      "primary": "主导航",
+      "toggleMenu": "切换导航菜单"
+    },
+    "languageSwitch": {
+      "toggleCurrent": "切换语言。当前语言：{language}。",
+      "english": "英文",
+      "chinese": "中文"
+    },
+    "darkMode": {
+      "toggleCurrent": "切换深色模式。当前为{mode}模式。",
+      "light": "浅色",
+      "dark": "深色"
+    },
+    "documentationLink": "文档（在新标签页打开）",
+    "contact": {
+      "portraitAlt": "Xinran Liu 的头像",
+      "instagram": "在 Instagram 上访问 Xinran Liu"
+    },
+    "projects": {
+      "previewPlaceholder": "{title} 项目预览，带有鲜明的渐变色彩",
+      "openLiveSite": "打开 {title} 在线站点",
+      "openGithub": "在 GitHub 上查看 {title}"
+    }
   },
   "home": {
     "hero": {

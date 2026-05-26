@@ -18,7 +18,7 @@ import "@/styles/globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    metadataBase: siteMetadataBase
+    metadataBase: siteMetadataBase,
   };
 }
 
@@ -51,12 +51,12 @@ export default async function RootLayout({
   return (
     <html lang={displayLang}>
       <head>
-        <JsonLd />
+        <JsonLd lang={lang} dict={dict} />
       </head>
       <body
         className={`${geistSans.variable} ${geistSans.className} ${geistMono.variable} antialiased lg:w-5xl mx-auto`}
       >
-        <a href="#main-content" className="skip-link">Skip to main content</a>
+        <a href="#main-content" className="skip-link">{dict.ui.skipToMainContent}</a>
         <Nav dict={dict} />
         {/* The height of nav and footer is 15*spacing */}
         <main id="main-content" className="w-full min-h-[calc(100vh_-_var(--spacing)*30)]" role="main">

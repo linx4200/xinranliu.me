@@ -18,6 +18,7 @@ const DarkModeSwitch = dynamic(() => import('@/components/DarkModeSwitch').then(
 const Nav = ({ dict }: { dict: Dictionary }) => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const ui = dict.ui;
 
   const pages = [
     {
@@ -41,7 +42,7 @@ const Nav = ({ dict }: { dict: Dictionary }) => {
         pr-2 lg:pr-0
         flex items-center justify-between lg:justify-end lg:gap-5
         text-base/15"
-      aria-label="Primary"
+      aria-label={ui.navigation.primary}
       dev-mode="tailwind"
       data-dev-mode-react-name="Nav"
     >
@@ -52,7 +53,7 @@ const Nav = ({ dict }: { dict: Dictionary }) => {
         type="button"
         className="lg:hidden p-2 text-text-muted"
         onClick={() => setIsOpen(!isOpen)}
-        aria-label="Toggle navigation menu"
+        aria-label={ui.navigation.toggleMenu}
         aria-expanded={isOpen}
       >
         <svg
@@ -102,9 +103,9 @@ const Nav = ({ dict }: { dict: Dictionary }) => {
 
       <div className='hidden lg:block text-stone-300' aria-hidden="true">|</div>
 
-      <DarkModeSwitch />
-      <LangSwitch />
-      <DocumentationLink />
+      <DarkModeSwitch copy={ui.darkMode} />
+      <LangSwitch copy={ui.languageSwitch} />
+      <DocumentationLink ariaLabel={ui.documentationLink} />
     </nav>
   );
 };

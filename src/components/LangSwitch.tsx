@@ -1,9 +1,16 @@
 'use client';
 
 import { useParams, usePathname, useRouter } from 'next/navigation';
-import { type LangCode } from '@/dictionaries';
+import { type Dictionary, type LangCode } from '@/dictionaries';
 
-export const LangSwitch = () => {
+const fillTemplate = (template: string, replacements: Record<string, string>) => {
+  return Object.entries(replacements).reduce(
+    (result, [key, value]) => result.replace(`{${key}}`, value),
+    template
+  );
+};
+
+export const LangSwitch = ({ copy }: { copy: Dictionary['ui']['languageSwitch'] }) => {
 
   const params = useParams();
   const lang = params.lang as LangCode;
@@ -23,6 +30,7 @@ export const LangSwitch = () => {
 
   const selectedStyle = 'top-4/20 left-5/20 z-10 text-white dark:text-bg bg-stone-800 dark:bg-text';
   const normalStyle = 'top-8/20 left-9/20 border border-stone-800 dark:border-text';
+  const currentLanguageLabel = lang === 'en' ? copy.english : copy.chinese;
 
   return (
     <button
@@ -31,7 +39,7 @@ export const LangSwitch = () => {
         text-xs/4 text-stone-800 dark:text-text
         cursor-pointer hover:bg-surface-strong"
       onClick={toggleLang}
-      aria-label={`Toggle language. Current language: ${lang === 'en' ? 'English' : 'Chinese'}.`}
+      aria-label={fillTemplate(copy.toggleCurrent, { language: currentLanguageLabel })}
       aria-pressed={lang === 'zh'}
       data-dev-mode-react-name="LangSwitch"
     >

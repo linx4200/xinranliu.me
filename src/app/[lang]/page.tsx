@@ -12,6 +12,7 @@ import type { Metadata } from 'next';
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
   const dict = await getDictionary(lang);
+
   return {
     title: dict.metadata.home.title,
     description: dict.metadata.home.description,
@@ -35,7 +36,7 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
 
       <section className="w-full mt-20" aria-labelledby="selected-projects-heading">
         <h2 id="selected-projects-heading" className="pl-4 lg:pl-0 text-xl md:text-2xl font-bold mb-5 md:text-center" dev-mode="tailwind"><Link href="/projects">{dict.home.sections.selectedProjects}</Link></h2>
-        <SelectedProjectsList lang={lang} />
+        <SelectedProjectsList lang={lang} copy={dict.ui.projects} />
       </section>
 
       <section className="w-full mt-10 lg:mt-20" aria-labelledby="skills-heading">

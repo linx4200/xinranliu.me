@@ -90,9 +90,9 @@ export default async function Page({ params }: PageProps<'/[lang]'>) {
             height={280}
             className='w-full h-auto rounded-full aspect-square object-cover'
             src={profile}
-            alt="Portrait of Xinran Liu"
+            alt={dict.ui.contact.portraitAlt}
           />
-          <a href='https://www.instagram.com/xinranwhatever' target='_blank' rel="noreferrer noopener" aria-label="Visit Xinran Liu on Instagram" className="
+          <a href='https://www.instagram.com/xinranwhatever' target='_blank' rel="noreferrer noopener" aria-label={dict.ui.contact.instagram} className="
             absolute right-0 bottom-0 w-[60px] h-[60px] flex items-center justify-center
             rounded-[30%] bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#FCAF45]
           ">
