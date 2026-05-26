@@ -1,11 +1,13 @@
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { JsonLd } from '@/components/JsonLd';
+import { notFound } from 'next/navigation';
 
+import { JsonLd } from '@/components/JsonLd';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { FloatingToggle as DeveloperModeFloatingToggle } from '@/components/developer-mode/FloatingToggle';
 import { Info as DeveloperModePopUpInfo } from '@/components/developer-mode/Info';
-import { getDictionary, type LangCode } from '@/dictionaries';
+
+import { supportedLanguages, hasLocale, getDictionary, getHtmlLang, type LangCode } from '@/dictionaries';
 
 import { Geist, Geist_Mono } from 'next/font/google';
 
@@ -33,13 +35,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const languages = {
-  en: { htmlLang: 'en' },
-  zh: { htmlLang: 'zh-CN' }, // 内部路由叫 zh, HTML 标记为 zh-CN
-};
-
 export async function generateStaticParams() {
-  return ([{ lang: 'en' }, { lang: 'zh' }])
+  return supportedLanguages.map(lang => ({ lang} ));
 };
 
 export default async function RootLayout({
@@ -47,8 +44,13 @@ export default async function RootLayout({
   params,
 }: LayoutProps<'/[lang]'>) {
   const { lang } = await params;
-  const displayLang = languages[lang as LangCode].htmlLang;
+  if (!hasLocale(lang)) {
+    return notFound();
+  }
+
+  const displayLang = getHtmlLang(lang);
   const dict = await getDictionary(lang);
+
   return (
     <html lang={displayLang}>
       <head>

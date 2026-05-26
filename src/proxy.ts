@@ -25,7 +25,6 @@ function getLocale(request: NextRequest) {
 }
 
 export function proxy(request: NextRequest) {
-  // Check if there is any supported locale in the pathname
   const { pathname } = request.nextUrl;
 
   const pathnameHasLocale = supportedLanguages.some(
@@ -34,13 +33,13 @@ export function proxy(request: NextRequest) {
 
   if (pathnameHasLocale) return;
 
-  // Redirect if there is no locale
-  const locale = getLocale(request);
+  const redirectUrl = request.nextUrl.clone();
 
-  request.nextUrl.pathname = `/${locale}${pathname}`;
-
-  // 内部重写到 /{lang} 路径
-  return NextResponse.rewrite(request.nextUrl);
+  // Keep locale detection only on the root entrypoint.
+  if (pathname === '/') {
+    redirectUrl.pathname = `/${getLocale(request)}`;
+    return NextResponse.redirect(redirectUrl);
+  }
 }
 
 export const config = {

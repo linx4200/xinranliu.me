@@ -1,14 +1,14 @@
 'use client';
 
-import Link from 'next/link';
 import dynamic from 'next/dynamic'
-import { useParams, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { LangSwitch } from '@/components/LangSwitch';
 import { SayHi } from '@/components/SayHi';
 import { DocumentationLink } from '@/components/DocumentationLink';
+import Link, { isCurrentPath } from '@/components/Link';
 
-import type { LangCode, Dictionary } from '@/dictionaries';
+import type { Dictionary } from '@/dictionaries';
 
 const DarkModeSwitch = dynamic(() => import('@/components/DarkModeSwitch').then((mod) => mod.DarkModeSwitch), {
   ssr: false,
@@ -17,21 +17,7 @@ const DarkModeSwitch = dynamic(() => import('@/components/DarkModeSwitch').then(
 
 const Nav = ({ dict }: { dict: Dictionary }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const params = useParams();
-  const lang = params.lang as LangCode;
-
   const pathname = usePathname();
-
-  const isCurrentPath = (path: string) => {
-    let currentPath = pathname;
-    if (currentPath.startsWith(`/${lang}`)) {
-      currentPath = currentPath.replace(`/${lang}`, '');
-    }
-    if (currentPath === '') {
-      currentPath = '/';
-    }
-    return currentPath === path;
-  };
 
   const pages = [
     {
@@ -59,7 +45,7 @@ const Nav = ({ dict }: { dict: Dictionary }) => {
       dev-mode="tailwind"
       data-dev-mode-react-name="Nav"
     >
-      {!isCurrentPath('/') && <div className='hidden lg:block flex-1 text-primary text-left font-bold text-2xl/15'><SayHi name="Xinran Liu" /></div>}
+      {!isCurrentPath(pathname, '/') && <div className='hidden lg:block flex-1 text-primary text-left font-bold text-2xl/15'><SayHi name="Xinran Liu" /></div>}
 
       {/* Mobile Menu Toggle */}
       <button
@@ -92,19 +78,18 @@ const Nav = ({ dict }: { dict: Dictionary }) => {
           shadow-2xl shadow-stone-500/10 dark:shadow-black/50
           origin-top-left transition-all duration-300 cubic-bezier(0.4, 0, 0.2, 1)
           ${isOpen ? 'opacity-100 scale-100 translate-y-0 visible' : 'opacity-0 scale-95 -translate-y-2 invisible'}
-          
           lg:opacity-100 lg:scale-100 lg:translate-y-0 lg:visible
           lg:static lg:mt-0 lg:w-auto lg:p-0 lg:border-none lg:shadow-none lg:flex-row lg:bg-transparent lg:gap-15
         `}
       >
         {
           pages.map(page => {
-            const href = `/${lang}${page.route}`;
+            const current = isCurrentPath(pathname, page.route);
             return (
-              <li key={page.name} className={`${isCurrentPath(page.route) && 'text-primary'}`}>
+              <li key={page.name} className={`${current && 'text-primary'}`}>
                 <Link
-                  href={href}
-                  aria-current={isCurrentPath(page.route) ? 'page' : undefined}
+                  href={page.route}
+                  aria-current={current ? 'page' : undefined}
                   onClick={() => setIsOpen(false)}
                 >
                   {page.name}

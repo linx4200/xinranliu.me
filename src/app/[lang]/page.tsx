@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/Link';
 
 import { SayHi } from '@/components/SayHi';
 import { DevModeToggle } from '@/components/developer-mode/Toggle';
@@ -40,7 +40,7 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
           <p className="text-base text-text-muted mb-8" dev-mode="tailwind">{dict.home.sections.contact.description}</p>
           <Link className="inline-block py-2 px-4
           border border-solid rounded-lg
-          text-base border-primary text-primary hover:bg-primary/5 transition-colors" href={`/${lang}/contact`} dev-mode="tailwind">{dict.home.sections.contact.button}</Link>
+          text-base border-primary text-primary hover:bg-primary/5 transition-colors" href="/contact" dev-mode="tailwind">{dict.home.sections.contact.button}</Link>
         </div>
       </section>
     </>
