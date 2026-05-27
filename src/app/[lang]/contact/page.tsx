@@ -2,10 +2,24 @@ import Image from 'next/image';
 import profile from './profile.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
+
 import { Availability } from '@/components/Availability';
 import { getDictionary } from '@/dictionaries';
+import { getLocalizedAlternates } from '@/lib/seo';
+
+import type { Metadata } from 'next';
 
 const calendarUrl = `https://calendar.google.com/calendar/u/0?cid=${process.env.GOOGLE_CALENDAR_ID}`;
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
+  return {
+    title: dict.metadata.contact.title,
+    description: dict.metadata.contact.description,
+    alternates: getLocalizedAlternates(lang, '/contact'),
+  };
+}
 
 const CTAButton = ({ text, link, type = 'normal' }: { text: string, link?: string, type?: 'primary' | 'normal' }) => {
   const isDisabled = !link;
@@ -76,9 +90,9 @@ export default async function Page({ params }: PageProps<'/[lang]'>) {
             height={280}
             className='w-full h-auto rounded-full aspect-square object-cover'
             src={profile}
-            alt="Portrait of Xinran Liu"
+            alt={dict.ui.contact.portraitAlt}
           />
-          <a href='https://www.instagram.com/xinranwhatever' target='_blank' rel="noreferrer noopener" aria-label="Visit Xinran Liu on Instagram" className="
+          <a href='https://www.instagram.com/xinranwhatever' target='_blank' rel="noreferrer noopener" aria-label={dict.ui.contact.instagram} className="
             absolute right-0 bottom-0 w-[60px] h-[60px] flex items-center justify-center
             rounded-[30%] bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#FCAF45]
           ">

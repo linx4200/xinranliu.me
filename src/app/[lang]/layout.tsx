@@ -1,11 +1,14 @@
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { JsonLd } from '@/components/JsonLd';
+import { notFound } from 'next/navigation';
 
+import { JsonLd } from '@/components/JsonLd';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { FloatingToggle as DeveloperModeFloatingToggle } from '@/components/developer-mode/FloatingToggle';
 import { Info as DeveloperModePopUpInfo } from '@/components/developer-mode/Info';
-import { getDictionary, type LangCode } from '@/dictionaries';
+
+import { supportedLanguages, hasLocale, getDictionary, getHtmlLang } from '@/dictionaries';
+import { siteMetadataBase } from '@/lib/seo';
 
 import { Geist, Geist_Mono } from 'next/font/google';
 
@@ -13,15 +16,9 @@ import type { Metadata } from "next";
 
 import "@/styles/globals.css";
 
-
-
-export async function generateMetadata({ params }: { params: Promise<{ lang: LangCode }> }): Promise<Metadata> {
-  const { lang } = await params;
-  const dict = await getDictionary(lang);
-
+export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: dict.metadata.title,
-    description: dict.metadata.description,
+    metadataBase: siteMetadataBase,
   };
 }
 
@@ -35,13 +32,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const languages = {
-  en: { htmlLang: 'en' },
-  zh: { htmlLang: 'zh-CN' }, // 内部路由叫 zh, HTML 标记为 zh-CN
-};
-
 export async function generateStaticParams() {
-  return ([{ lang: 'en' }, { lang: 'zh' }])
+  return supportedLanguages.map(lang => ({ lang} ));
 };
 
 export default async function RootLayout({
@@ -49,14 +41,22 @@ export default async function RootLayout({
   params,
 }: LayoutProps<'/[lang]'>) {
   const { lang } = await params;
-  const displayLang = languages[lang as LangCode].htmlLang;
+  if (!hasLocale(lang)) {
+    return notFound();
+  }
+
+  const displayLang = getHtmlLang(lang);
   const dict = await getDictionary(lang);
+
   return (
     <html lang={displayLang}>
+      <head>
+        <JsonLd lang={lang} dict={dict} />
+      </head>
       <body
         className={`${geistSans.variable} ${geistSans.className} ${geistMono.variable} antialiased lg:w-5xl mx-auto`}
       >
-        <a href="#main-content" className="skip-link">Skip to main content</a>
+        <a href="#main-content" className="skip-link">{dict.ui.skipToMainContent}</a>
         <Nav dict={dict} />
         {/* The height of nav and footer is 15*spacing */}
         <main id="main-content" className="w-full min-h-[calc(100vh_-_var(--spacing)*30)]" role="main">
@@ -67,7 +67,7 @@ export default async function RootLayout({
 
         <DeveloperModeFloatingToggle />
         <DeveloperModePopUpInfo />
-        <JsonLd />
+
         <SpeedInsights />
       </body>
     </html>

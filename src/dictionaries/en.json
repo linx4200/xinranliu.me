@@ -1,12 +1,52 @@
 {
+  "jsonld": {
+    "jobTitle": "Independent Web Developer"
+  },
   "metadata": {
-    "title": "Xinran Liu | Independent Web Developer",
-    "description": "Xinran Liu is an independent web developer specializing in building fast, reliable, and scalable web applications using React, Vue, and Next.js. Available for freelance collaborations."
+    "home": {
+      "title": "Xinran Liu | Independent Web Developer",
+      "description": "Xinran Liu is an independent web developer specializing in building fast, reliable, and scalable web applications using React, Vue, and Next.js. Available for freelance collaborations."
+    },
+    "projects": {
+      "title": "Projects | Xinran Liu",
+      "description": "Explore projects and product experiments by Xinran Liu across React, Vue, Next.js, and independent product work."
+    },
+    "contact": {
+      "title": "Hire Me | Xinran Liu",
+      "description": "Contact Xinran Liu to discuss freelance web development, product engineering, technical consulting, and collaboration opportunities."
+    }
   },
   "nav": {
     "home": "Home",
     "projects": "Projects",
     "contact": "Hire Me"
+  },
+  "ui": {
+    "skipToMainContent": "Skip to main content",
+    "navigation": {
+      "primary": "Primary",
+      "toggleMenu": "Toggle navigation menu"
+    },
+    "languageSwitch": {
+      "toggleCurrent": "Toggle language. Current language: {language}.",
+      "english": "English",
+      "chinese": "Chinese"
+    },
+    "darkMode": {
+      "toggleCurrent": "Toggle dark mode. Currently {mode} mode.",
+      "light": "light",
+      "dark": "dark"
+    },
+    "documentationLink": "Documentation (opens in a new tab)",
+    "contact": {
+      "portraitAlt": "Portrait of Xinran Liu",
+      "instagram": "Visit Xinran Liu on Instagram"
+    },
+    "projects": {
+      "previewPlaceholder": "{title} project preview with vibrant gradient colors",
+      "openLiveSite": "Open {title} live site",
+      "openGithub": "Open {title} on GitHub"
+    }
   },
   "home": {
     "hero": {

@@ -42,6 +42,16 @@ export const projects: Project[] = [
   },
   {
     selected: true,
+    title: { en: 'Mirror On', zh: 'MirrorOn' },
+    desc: {
+      en: 'MirrorOn is a lightweight macOS menu bar utility for quickly toggling whether external display mirrors built-in display.',
+      zh: 'MirrorOn 是一个轻量的 macOS 菜单栏工具，用来快速切换外接显示器是否镜像内建显示器。',
+    },
+    image: '/images/mirroron.png',
+    tags: ['Vibe Coding', 'macOS'],
+    github: 'https://github.com/linx4200/MirrorOn',
+  },
+  {
     title: { en: 'AfterZzz Alarm', zh: 'AfterZzz Alarm' },
     desc: {
       en: 'AfterZzz is a minimalist smart alarm that wakes you up after you actually fall asleep.',

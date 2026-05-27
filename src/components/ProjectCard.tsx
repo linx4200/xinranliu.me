@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 
+import type { Dictionary } from '@/dictionaries';
+
 type Props = {
   title: string,
   desc?: string,
@@ -13,16 +15,20 @@ type Props = {
   role?: string,
   image?: string,
   hoveredImage?: string,
+  copy: Dictionary['ui']['projects'],
 }
 
 export const ProjectCard = (props: Props) => {
-  const { title, desc, tags, site, github, role, image, hoveredImage } = props;
+  const { title, desc, tags, site, github, role, image, hoveredImage, copy } = props;
   const safeTitleSlug = title
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '') || 'project';
   const titleId = `project-${safeTitleSlug}`;
   const descriptionId = desc ? `${titleId}-description` : undefined;
+  const previewLabel = copy.previewPlaceholder.replace('{title}', title);
+  const liveSiteLabel = copy.openLiveSite.replace('{title}', title);
+  const githubLabel = copy.openGithub.replace('{title}', title);
 
   return (
     <Card
@@ -43,7 +49,7 @@ export const ProjectCard = (props: Props) => {
       {hoveredImage && <Image src={hoveredImage} alt={title} className="w-full aspect-square group-hover:block hidden" width={500} height={500} />}
       {!image && <div
         role="img"
-        aria-label={`${title} project preview with vibrant gradient colors`}
+        aria-label={previewLabel}
         className="w-full aspect-square rounded-md overflow-hidden bg-[linear-gradient(135deg,#ff7e5f_0%,#feb47b_40%,#6dd5ed_100%)] dark:bg-[linear-gradient(135deg,#5e2d21_0%,#5e402b_40%,#204e5e_100%)]"
       />}
       <div className="mt-5 text-left text-base">
@@ -56,10 +62,10 @@ export const ProjectCard = (props: Props) => {
         ))}
       </div>}
       {(site || github) && <div className="flex gap-4 mt-5 justify-end text-text-muted">
-        {site && <a target='_blank' rel="noreferrer noopener" href={site} aria-label={`Open ${title} live site`}>
+        {site && <a target='_blank' rel="noreferrer noopener" href={site} aria-label={liveSiteLabel}>
           <FontAwesomeIcon icon={faLink} size='lg' />
         </a>}
-        {github && <a target='_blank' rel="noreferrer noopener" href={github} aria-label={`Open ${title} on GitHub`}>
+        {github && <a target='_blank' rel="noreferrer noopener" href={github} aria-label={githubLabel}>
           <FontAwesomeIcon icon={faGithub} size='lg' />
         </a>}
       </div>}

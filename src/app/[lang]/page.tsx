@@ -1,10 +1,24 @@
-import Link from 'next/link';
+import Link from '@/components/Link';
 
 import { SayHi } from '@/components/SayHi';
 import { DevModeToggle } from '@/components/developer-mode/Toggle';
 import { SelectedProjectsList } from '@/components/SelectedProjectsList';
 import { SkillSetList } from '@/components/SkillSetList';
 import { getDictionary } from '@/dictionaries';
+import { getLocalizedAlternates } from '@/lib/seo';
+
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
+
+  return {
+    title: dict.metadata.home.title,
+    description: dict.metadata.home.description,
+    alternates: getLocalizedAlternates(lang, '/'),
+  };
+}
 
 export default async function Home({ params }: PageProps<'/[lang]'>) {
   const { lang } = await params;
@@ -22,7 +36,7 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
 
       <section className="w-full mt-20" aria-labelledby="selected-projects-heading">
         <h2 id="selected-projects-heading" className="pl-4 lg:pl-0 text-xl md:text-2xl font-bold mb-5 md:text-center" dev-mode="tailwind"><Link href="/projects">{dict.home.sections.selectedProjects}</Link></h2>
-        <SelectedProjectsList lang={lang} />
+        <SelectedProjectsList lang={lang} copy={dict.ui.projects} />
       </section>
 
       <section className="w-full mt-10 lg:mt-20" aria-labelledby="skills-heading">
@@ -40,7 +54,7 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
           <p className="text-base text-text-muted mb-8" dev-mode="tailwind">{dict.home.sections.contact.description}</p>
           <Link className="inline-block py-2 px-4
           border border-solid rounded-lg
-          text-base border-primary text-primary hover:bg-primary/5 transition-colors" href={`/${lang}/contact`} dev-mode="tailwind">{dict.home.sections.contact.button}</Link>
+          text-base border-primary text-primary hover:bg-primary/5 transition-colors" href="/contact" dev-mode="tailwind">{dict.home.sections.contact.button}</Link>
         </div>
       </section>
     </>

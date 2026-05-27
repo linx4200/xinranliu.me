@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import type { Dictionary } from '@/dictionaries';
+
 type Theme = 'light' | 'dark';
 
 const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -16,7 +18,14 @@ const applyTheme = (theme: Theme) => {
 
 applyTheme(initialTheme);
 
-export const DarkModeSwitch = () => {
+const fillTemplate = (template: string, replacements: Record<string, string>) => {
+  return Object.entries(replacements).reduce(
+    (result, [key, value]) => result.replace(`{${key}}`, value),
+    template
+  );
+};
+
+export const DarkModeSwitch = ({ copy }: { copy: Dictionary['ui']['darkMode'] }) => {
   const [theme, setTheme] = useState<Theme>(initialTheme);
 
   const syncWithSystem = (event: MediaQueryListEvent) => {
@@ -40,12 +49,13 @@ export const DarkModeSwitch = () => {
   };
 
   const isDark = theme === 'dark';
+  const currentMode = isDark ? copy.dark : copy.light;
 
   return (
     <button
       type="button"
       role="switch"
-      aria-label={`Toggle dark mode. Currently ${isDark ? 'dark' : 'light'} mode.`}
+      aria-label={fillTemplate(copy.toggleCurrent, { mode: currentMode })}
       aria-checked={isDark}
       onClick={toggleTheme}
       className={`size-10 rounded-full p-2 hover:bg-surface-strong cursor-pointer`}
