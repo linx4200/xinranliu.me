@@ -7,7 +7,7 @@ export async function register() {
     const originalError = console.error;
     const originalWarn = console.warn;
 
-    const formatArg = (arg: any) => {
+    const formatArg = (arg: unknown) => {
       if (arg instanceof Error) {
         return arg.stack || arg.message || String(arg);
       }
@@ -17,17 +17,17 @@ export async function register() {
       return String(arg);
     };
 
-    console.log = (...args: any[]) => {
+    console.log = (...args: unknown[]) => {
       logger.info(args.map(formatArg).join(' '));
       originalLog.apply(console, args);
     };
 
-    console.error = (...args: any[]) => {
+    console.error = (...args: unknown[]) => {
       logger.error(args.map(formatArg).join(' '));
       originalError.apply(console, args);
     };
 
-    console.warn = (...args: any[]) => {
+    console.warn = (...args: unknown[]) => {
       logger.warn(args.map(formatArg).join(' '));
       originalWarn.apply(console, args);
     };
