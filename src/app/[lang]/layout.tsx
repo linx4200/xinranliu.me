@@ -1,7 +1,7 @@
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { notFound } from 'next/navigation';
 
-import { JsonLd } from '@/components/JsonLd';
+import { SiteJsonLd } from '@/components/JsonLd';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { FloatingToggle as DeveloperModeFloatingToggle } from '@/components/developer-mode/FloatingToggle';
@@ -51,7 +51,7 @@ export default async function RootLayout({
   return (
     <html lang={displayLang}>
       <head>
-        <JsonLd lang={lang} dict={dict} />
+        <SiteJsonLd dict={dict} />
       </head>
       <body
         className={`${geistSans.variable} ${geistSans.className} ${geistMono.variable} antialiased lg:w-5xl mx-auto`}

@@ -9,6 +9,10 @@ export type Response = {
   error?: string;
 };
 
+const nonIndexableHeaders = {
+  'X-Robots-Tag': 'noindex, nofollow',
+};
+
 // Helper: Check if a given time range overlaps with any busy interval
 function isBusy(targetStart: dayjs.Dayjs, targetEnd: dayjs.Dayjs, busyIntervals: { start: string, end: string }[]) {
   return busyIntervals.some(interval => {
@@ -27,7 +31,7 @@ export async function GET() {
     // If API fails or no busy array, be conservative? Or assume free?
     // Let's assume free if no data (or handle error). 
     // Code below handles empty array.
-    return Response.json({ error: 'Failed to fetch availability' });
+    return Response.json({ error: 'Failed to fetch availability' }, { headers: nonIndexableHeaders });
   }
 
   // start 和 end 都是 UTC（世界标准时间）， 如 ‘2026-01-23T23:30:00Z’
@@ -70,5 +74,5 @@ export async function GET() {
       availability,
       freeInDays
     }
-  });
+  }, { headers: nonIndexableHeaders });
 }

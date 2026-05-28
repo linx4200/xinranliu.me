@@ -12,14 +12,12 @@ const localizedPages: Array<{
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
-
   return localizedPages.flatMap(({ route, priority }) => {
     const alternates = getSitemapLanguageAlternates(route);
+    const canonicalUrls = [...new Set(Object.values(alternates))];
 
-    return Object.values(alternates).map((url) => ({
+    return canonicalUrls.map((url) => ({
       url: `${siteUrl}${url}`,
-      lastModified,
       changeFrequency: 'monthly' as const,
       priority,
       alternates: {

@@ -1,11 +1,12 @@
 import Link from '@/components/Link';
+import { HomePageJsonLd } from '@/components/JsonLd';
 
 import { SayHi } from '@/components/SayHi';
 import { DevModeToggle } from '@/components/developer-mode/Toggle';
 import { SelectedProjectsList } from '@/components/SelectedProjectsList';
 import { SkillSetList } from '@/components/SkillSetList';
 import { getDictionary } from '@/dictionaries';
-import { getLocalizedAlternates } from '@/lib/seo';
+import { buildPageMetadata } from '@/lib/seo';
 
 import type { Metadata } from 'next';
 
@@ -13,11 +14,12 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const { lang } = await params;
   const dict = await getDictionary(lang);
 
-  return {
+  return buildPageMetadata({
+    lang,
+    route: '/',
     title: dict.metadata.home.title,
     description: dict.metadata.home.description,
-    alternates: getLocalizedAlternates(lang, '/'),
-  };
+  });
 }
 
 export default async function Home({ params }: PageProps<'/[lang]'>) {
@@ -25,6 +27,7 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
   const dict = await getDictionary(lang);
   return (
     <>
+      <HomePageJsonLd lang={lang} dict={dict} />
       <section className="w-full mt-20 text-center" aria-labelledby="hero-heading">
         <h1 id="hero-heading" className="text-3xl md:text-5xl font-bold pb-1 mb-5 dark:text-primary" dev-mode="tailwind"><SayHi name={dict.home.hero.greeting} />.</h1>
         <p className="text-base md:text-lg text-text-muted px-5 lg:px-0" dev-mode="tailwind">{dict.home.hero.description.split(' ').map((word: string, i: number) => {

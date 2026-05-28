@@ -1,3 +1,4 @@
+import { ContactPageJsonLd } from '@/components/JsonLd';
 import Image from 'next/image';
 import profile from './profile.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -5,7 +6,7 @@ import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 import { Availability } from '@/components/Availability';
 import { getDictionary } from '@/dictionaries';
-import { getLocalizedAlternates } from '@/lib/seo';
+import { buildPageMetadata } from '@/lib/seo';
 
 import type { Metadata } from 'next';
 
@@ -14,11 +15,13 @@ const calendarUrl = `https://calendar.google.com/calendar/u/0?cid=${process.env.
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
   const dict = await getDictionary(lang);
-  return {
+
+  return buildPageMetadata({
+    lang,
+    route: '/contact',
     title: dict.metadata.contact.title,
     description: dict.metadata.contact.description,
-    alternates: getLocalizedAlternates(lang, '/contact'),
-  };
+  });
 }
 
 const CTAButton = ({ text, link, type = 'normal' }: { text: string, link?: string, type?: 'primary' | 'normal' }) => {
@@ -72,6 +75,7 @@ export default async function Page({ params }: PageProps<'/[lang]'>) {
 
   return (
     <div className="px-5 lg:px-0">
+      <ContactPageJsonLd lang={lang} dict={dict} />
       <section
         className="
           flex flex-col-reverse md:flex-row items-center md:justify-between md:items-start gap-5
