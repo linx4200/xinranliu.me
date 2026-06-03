@@ -203,8 +203,6 @@ const applyTheme = (theme: Theme) => {
 
 因为需要考虑 SEO，希望搜索引擎也能抓取到中文的信息，因此中英文切换需要使用路由切换，而不是 URL 参数切换。
 
-默认是英文，中文则切换到路由 `/cn/{page}`。
-
 ```plantuml
 @startuml
 start
@@ -285,17 +283,12 @@ https://nextjs.org/docs/app/api-reference/file-conventions/metadata/robots#stati
 
 在 `app/layout.tsx` 中加入 JSON-LD: https://nextjs.org/docs/app/guides/json-ld
 
-### A11y
-
-1. AI 工具
-2. 如何检查
-
 ## 数据统计
 
 https://nextjs.org/docs/app/guides/analytics
 
 ## 部署
 
-域名，部署，发布
+### Vercel 部署
 
-Vercel 部署
+todo: add
