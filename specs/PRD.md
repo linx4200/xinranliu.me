@@ -39,7 +39,7 @@ Xinran Liu 需要一个不只是“个人主页”的作品集网站，而是一
 21. As a technical collaborator, I want Developer Mode to highlight the inspected element, so that I can connect overlay information to the page surface.
 22. As a technical collaborator, I want Developer Mode to be optional, so that the main site remains clean for non-technical visitors.
 23. As a desktop visitor, I want a floating Developer Mode toggle, so that I can explore the implementation from anywhere on the site.
-24. As a homepage visitor, I want an in-hero Developer Mode prompt, so that the interactive technical layer feels intentional rather than hidden.
+24. As a homepage visitor, I want the hero to prioritize Proof Bingo over Developer Mode controls, so that the first screen stays focused on trust-building evidence.
 25. As a mobile visitor, I want the site to prioritize core content over complex developer tooling, so that the experience stays focused on a small screen.
 26. As a mobile visitor, I want navigation to collapse into a usable menu, so that I can reach Home, Projects, and Hire Me without layout clutter.
 27. As a mobile visitor, I want project cards to stack vertically, so that images, descriptions, tags, and links remain readable.
@@ -121,6 +121,7 @@ type AvailabilityResponse =
 - Project cards are semantic article-like units with image/placeholder, title, description, tags, and optional external links.
 - Project image hover variants are allowed when they clarify or enrich the presentation, but the base state must remain complete and accessible.
 - Developer Mode remains a desktop-oriented differentiator and should not expose full complex interactions on mobile.
+- The homepage hero should prioritize Proof Bingo as the core visual interaction; the previous in-hero Developer Mode prompt is not part of this hero surface.
 - Developer Mode global state is managed through a small store with enabled status, active mode, and hero-section visibility.
 - Developer Mode currently supports React and Tailwind modes. The Next.js mode is reserved in the state shape but not a committed user-facing mode.
 - React mode relies on explicit component markers and generated metadata. If marked components or prop shapes change, metadata generation must be rerun.
