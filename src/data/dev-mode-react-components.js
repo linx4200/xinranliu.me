@@ -97,6 +97,10 @@ export const data = {
     "name": "ProofBingo",
     "propList": [
       {
+        "key": "heading",
+        "value": "ReactNode"
+      },
+      {
         "key": "tiles",
         "value": "LocalizedProofBingoTile[]"
       },

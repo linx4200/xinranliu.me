@@ -8,7 +8,7 @@ Replace the current homepage hero with a focused **Proof Bingo** experience that
 
 The homepage hero has two layers:
 
-- **Hero Identity Anchor**: short static identity copy outside the bingo card.
+- **Hero Identity Anchor**: short static identity copy rendered in the bingo card header.
 - **Proof Bingo**: a 3x3 interactive card that carries the main trust-building narrative.
 
 Hero copy:
@@ -116,9 +116,9 @@ The center tile is `This portfolio is handmade` / `这个作品集手工打造` 
 Homepage route remains a Server Component:
 
 - `src/app/[lang]/page.tsx` gets the localized proof bingo data.
-- It renders the Hero Identity Anchor from the homepage dictionary, including the page-level `h1`.
+- It renders the Hero Identity Anchor from the homepage dictionary, including the page-level `h1`, and passes it into the card header.
 - It renders SEO and JSON-LD as before.
-- It passes only localized bingo data into the client component.
+- It passes only localized bingo data and the rendered card heading into the client component.
 
 Add a localized client component:
 
@@ -128,6 +128,7 @@ Suggested props:
 
 ```ts
 type ProofBingoProps = {
+  heading: ReactNode;
   tiles: LocalizedProofBingoTile[];
   completionActions: {
     cta: string;
@@ -146,7 +147,7 @@ The component owns only UI interaction state:
 - completion status
 
 Do not move the whole homepage to the client.
-Do not put the page-level `h1` inside `ProofBingo`; keep the Hero Identity Anchor in the homepage Server Component so the client boundary stays focused on bingo interaction.
+Keep the `h1` element authored in the homepage Server Component and pass it as a heading slot, so the card can visually contain the identity copy without moving page-level copy ownership into Proof Bingo data.
 
 ## Bingo Rules
 

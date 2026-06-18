@@ -30,21 +30,27 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
   return (
     <>
       <HomePageJsonLd lang={lang} dict={dict} />
-      <section className="w-full mt-8 px-4 text-center md:mt-10" aria-labelledby="hero-heading" dev-mode="tailwind">
-        <h1
-          id="hero-heading"
-          className="text-3xl md:text-5xl font-bold pb-1 mb-2 dark:text-primary"
-          dev-mode="tailwind"
-        >
-          {dict.home.hero.headline}
-        </h1>
-        <p className="text-sm md:text-base text-text-muted mb-4" dev-mode="tailwind">
-          {dict.home.hero.subline}
-        </p>
-        <ProofBingo {...proofBingo} />
+      <section className="w-full mt-5 px-4 text-center md:mt-6" aria-labelledby="hero-heading" dev-mode="tailwind">
+        <ProofBingo
+          {...proofBingo}
+          heading={(
+            <>
+              <h1
+                id="hero-heading"
+                className="text-3xl font-black uppercase leading-none tracking-[0.12em] sm:text-4xl"
+                dev-mode="tailwind"
+              >
+                {dict.home.hero.headline}
+              </h1>
+              <p className="mt-1 text-[0.6rem] font-semibold uppercase tracking-[0.28em] sm:text-[0.7rem]" dev-mode="tailwind">
+                {dict.home.hero.subline}
+              </p>
+            </>
+          )}
+        />
       </section>
 
-      <section className="w-full mt-8 md:mt-10" aria-labelledby="selected-projects-heading">
+      <section className="w-full mt-5 md:mt-6" aria-labelledby="selected-projects-heading">
         <h2 id="selected-projects-heading" className="pl-4 lg:pl-0 text-xl md:text-2xl font-bold mb-5 md:text-center" dev-mode="tailwind"><Link href="/projects">{dict.home.sections.selectedProjects}</Link></h2>
         <SelectedProjectsList lang={lang} copy={dict.ui.projects} />
       </section>
