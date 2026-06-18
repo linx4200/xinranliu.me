@@ -50,8 +50,8 @@
   },
   "home": {
     "hero": {
-      "greeting": "Hi, I'm Xinran Liu",
-      "description": "I design and build fast, reliable, and scalable web applications for modern businesses."
+      "headline": "Xinran Liu",
+      "subline": "Independent full-stack web developer"
     },
     "sections": {
       "selectedProjects": "Selected Projects",

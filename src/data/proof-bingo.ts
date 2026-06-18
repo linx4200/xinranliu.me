@@ -28,10 +28,6 @@ export type ProofBingoTile = {
 };
 
 export type ProofBingoCopy = {
-  identity: {
-    headline: LocalizedCopy;
-    subline: LocalizedCopy;
-  };
   completionActions: {
     cta: LocalizedCopy;
     reset: LocalizedCopy;
@@ -138,16 +134,6 @@ export const proofBingoTiles = [
 ] satisfies ProofBingoTile[];
 
 export const proofBingoCopy: ProofBingoCopy = {
-  identity: {
-    headline: {
-      en: 'Xinran Liu',
-      zh: 'Xinran Liu',
-    },
-    subline: {
-      en: 'Independent full-stack web developer',
-      zh: '独立全栈 Web 开发者',
-    },
-  },
   completionActions: {
     cta: {
       en: 'Hire Xinran',

@@ -14,11 +14,21 @@ export const data = {
   },
   "DarkModeSwitch": {
     "name": "DarkModeSwitch",
-    "propList": []
+    "propList": [
+      {
+        "key": "copy",
+        "value": "Dictionary"
+      }
+    ]
   },
   "LangSwitch": {
     "name": "LangSwitch",
-    "propList": []
+    "propList": [
+      {
+        "key": "copy",
+        "value": "Dictionary"
+      }
+    ]
   },
   "Nav": {
     "name": "Nav",
@@ -59,6 +69,14 @@ export const data = {
       {
         "key": "image",
         "value": "string | undefined"
+      },
+      {
+        "key": "hoveredImage",
+        "value": "string | undefined"
+      },
+      {
+        "key": "copy",
+        "value": "Dictionary"
       }
     ]
   },
@@ -68,6 +86,27 @@ export const data = {
       {
         "key": "lang",
         "value": "string"
+      },
+      {
+        "key": "copy",
+        "value": "Dictionary"
+      }
+    ]
+  },
+  "ProofBingo": {
+    "name": "ProofBingo",
+    "propList": [
+      {
+        "key": "tiles",
+        "value": "LocalizedProofBingoTile[]"
+      },
+      {
+        "key": "completionActions",
+        "value": "LocalizedProofBingoCompletionActions"
+      },
+      {
+        "key": "completionSummaries",
+        "value": "LocalizedProofBingoCompletionSummaries"
       }
     ]
   },

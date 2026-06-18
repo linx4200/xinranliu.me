@@ -23,11 +23,14 @@ The previous in-hero Developer Mode prompt should be removed. The global floatin
 ## Content Model
 
 Add a dedicated data source for the bingo configuration instead of scattering copy in JSX.
+Keep Hero Identity Anchor copy in the homepage dictionary because it is page-level hero copy, not Proof Bingo configuration.
 
 Recommended file:
 
 - `src/data/proof-bingo.ts`
 - `src/services/proof-bingo.ts`
+- `src/dictionaries/en.json`
+- `src/dictionaries/zh-CN.json`
 
 Recommended data shape:
 
@@ -60,10 +63,6 @@ export type ProofBingoTile = {
 };
 
 export type ProofBingoCopy = {
-  identity: {
-    headline: Record<LangCode, string>;
-    subline: Record<LangCode, string>;
-  };
   completionActions: {
     cta: Record<LangCode, string>;
     reset: Record<LangCode, string>;
@@ -82,7 +81,6 @@ export type LocalizedProofBingoTile = Omit<ProofBingoTile, 'label'> & {
 };
 
 export const getProofBingo = (lang: string) => ({
-  identity,
   tiles,
   completionActions,
   completionSummaries,
@@ -118,8 +116,9 @@ The center tile is `This portfolio is handmade` / `这个作品集手工打造` 
 Homepage route remains a Server Component:
 
 - `src/app/[lang]/page.tsx` gets the localized proof bingo data.
+- It renders the Hero Identity Anchor from the homepage dictionary, including the page-level `h1`.
 - It renders SEO and JSON-LD as before.
-- It passes localized data into the client component.
+- It passes only localized bingo data into the client component.
 
 Add a localized client component:
 
@@ -129,10 +128,6 @@ Suggested props:
 
 ```ts
 type ProofBingoProps = {
-  identity: {
-    headline: string;
-    subline: string;
-  };
   tiles: LocalizedProofBingoTile[];
   completionActions: {
     cta: string;
@@ -151,6 +146,7 @@ The component owns only UI interaction state:
 - completion status
 
 Do not move the whole homepage to the client.
+Do not put the page-level `h1` inside `ProofBingo`; keep the Hero Identity Anchor in the homepage Server Component so the client boundary stays focused on bingo interaction.
 
 ## Bingo Rules
 

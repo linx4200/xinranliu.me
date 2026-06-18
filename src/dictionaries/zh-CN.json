@@ -50,8 +50,8 @@
   },
   "home": {
     "hero": {
-      "greeting": "Hi，我是 Xinran Liu",
-      "description": "我设计和构建快速、可靠且可扩展的 Web 应用程序。"
+      "headline": "Xinran Liu",
+      "subline": "独立全栈 Web 开发者"
     },
     "sections": {
       "selectedProjects": "精选项目",
