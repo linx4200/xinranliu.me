@@ -2,13 +2,13 @@
 
 import { usePathname } from 'next/navigation';
 
-import { isCurrentPath } from '@/components/Link';
+import { isHomePath } from '@/components/Link';
 
 const Footer = () => {
   const pathname = usePathname();
   const year = (new Date()).getFullYear();
 
-  if (isCurrentPath(pathname, '/')) {
+  if (isHomePath(pathname)) {
     return null;
   }
 

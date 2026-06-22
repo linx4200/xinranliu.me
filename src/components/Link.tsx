@@ -34,6 +34,10 @@ export const isCurrentPath = (pathname: string, path: string) => {
   return stripLangPrefix(pathname) === path;
 };
 
+export const isHomePath = (pathname: string) => {
+  return isCurrentPath(pathname, '/');
+};
+
 const prefixPathname = (pathname: string, lang: LangCode) => {
   if (!pathname.startsWith('/') || pathname.startsWith('//') || hasLangPrefix(pathname)) {
     return pathname;

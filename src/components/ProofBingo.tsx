@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState, type ReactNode } from 'react';
+import { useMemo, useState } from 'react';
 
 import Link from '@/components/Link';
 import type { ProofBingoLineId } from '@/data/proof-bingo';

@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { LangSwitch } from '@/components/LangSwitch';
 import { SayHi } from '@/components/SayHi';
 import { DocumentationLink } from '@/components/DocumentationLink';
-import Link, { isCurrentPath } from '@/components/Link';
+import Link, { isCurrentPath, isHomePath } from '@/components/Link';
 
 import type { Dictionary } from '@/dictionaries';
 
@@ -19,7 +19,7 @@ const Nav = ({ dict }: { dict: Dictionary }) => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const ui = dict.ui;
-  const isHomePage = isCurrentPath(pathname, '/');
+  const isHomePage = isHomePath(pathname);
 
   const pages = [
     {
