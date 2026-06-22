@@ -77,19 +77,19 @@ export function ProofBingo({
 
   return (
     <div
-      className="mx-auto w-full overflow-hidden rounded-lg border-2 border-[#1a1b22] bg-[#fff9f1] text-center text-[#1a1b22] dark:border-[#f1effa] dark:bg-[#151313] dark:text-[#f1effa]"
+      className="mx-auto w-full overflow-hidden rounded-md border border-[#1a1b22]/70 bg-[#fffaf4] text-center text-[#1a1b22] dark:border-[#f1effa]/70 dark:bg-[#151313] dark:text-[#f1effa]"
       aria-label="Proof Bingo"
       data-dev-mode-react-name="ProofBingo"
       dev-mode="tailwind"
     >
-      <div className="border-b-2 border-[#1a1b22] bg-[#1a1b22] px-4 py-2 text-[#fff9f1] dark:border-[#f1effa] dark:bg-[#f1effa] dark:text-[#151313]" dev-mode="tailwind">
-        <p className="mt-1 text-[0.55rem] font-semibold uppercase tracking-[0.26em] sm:text-[0.65rem]" dev-mode="tailwind">
+      <div className="border-b border-[#1a1b22]/60 bg-[#fffaf4] px-4 py-2 text-[#4c4546] dark:border-[#f1effa]/60 dark:bg-[#151313] dark:text-[#cfc4c5]" dev-mode="tailwind">
+        <p className="text-[0.55rem] font-semibold uppercase tracking-[0.22em] sm:text-[0.62rem]" dev-mode="tailwind">
           {title}
         </p>
       </div>
 
       <div
-        className="grid grid-cols-3 border-t-0 border-[#1a1b22] dark:border-[#f1effa]"
+        className="grid grid-cols-3 border-t-0 border-[#1a1b22]/60 dark:border-[#f1effa]/60"
         dev-mode="tailwind"
       >
         {tiles.map((tile, index) => (
@@ -100,15 +100,15 @@ export function ProofBingo({
             disabled={Boolean(completedLineId)}
             onClick={() => handleTileToggle(tile.id)}
             className={[
-              'aspect-square cursor-pointer border-[#1a1b22] px-2 text-[0.75rem] font-black leading-tight transition-colors focus-visible:relative focus-visible:z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#b90538] sm:text-[0.95rem] dark:border-[#f1effa]',
-              index % 3 === 2 ? '' : 'border-r-2',
-              index < 6 ? 'border-b-2' : '',
-              'hover:bg-[#1a1b22] hover:text-[#fff9f1] hover:ring-2 hover:ring-inset hover:ring-[#b90538] dark:hover:bg-[#f1effa] dark:hover:text-[#151313]',
+              'aspect-square cursor-pointer border-[#1a1b22]/60 px-2 text-[0.72rem] font-extrabold leading-tight transition-colors focus-visible:relative focus-visible:z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#b90538] sm:text-[0.88rem] dark:border-[#f1effa]/60',
+              index % 3 === 2 ? '' : 'border-r',
+              index < 6 ? 'border-b' : '',
+              completedTileIds.has(tile.id)
+                ? 'border-[#1a1b22]/80 bg-[#b90538] text-white dark:border-[#f1effa]/80 dark:bg-[#ffb2b7] dark:text-[#40000d]'
+                : selectedTileIds.has(tile.id)
+                  ? 'bg-[#b90538]/10 text-[#b90538] hover:bg-[#b90538]/8 hover:text-[#b90538] hover:ring-2 hover:ring-inset hover:ring-[#b90538]/30 dark:bg-[#f43f5e]/20 dark:text-[#ffb2b7] dark:hover:bg-[#f43f5e]/15 dark:hover:text-[#ffb2b7]'
+                  : 'bg-[#fffaf4] text-[#1a1b22] hover:bg-[#b90538]/8 hover:text-[#b90538] hover:ring-2 hover:ring-inset hover:ring-[#b90538]/30 dark:bg-[#151313] dark:text-[#f1effa] dark:hover:bg-[#f43f5e]/15 dark:hover:text-[#ffb2b7]',
               'disabled:cursor-default disabled:hover:ring-0',
-              selectedTileIds.has(tile.id)
-                ? 'bg-[#b90538]/10 text-[#b90538] dark:bg-[#f43f5e]/20 dark:text-[#ffb2b7]'
-                : 'bg-[#fff9f1] text-[#1a1b22] dark:bg-[#151313] dark:text-[#f1effa]',
-              completedTileIds.has(tile.id) ? 'bg-[#b90538] text-white ring-4 ring-inset ring-[#1a1b22] dark:bg-[#ffb2b7] dark:text-[#40000d] dark:ring-[#f1effa]' : '',
             ].join(' ')}
             dev-mode="tailwind"
           >
@@ -116,21 +116,21 @@ export function ProofBingo({
           </button>
         ))}
       </div>
-      <div className="min-h-[8.5rem] border-t-2 border-[#1a1b22] px-4 py-4 dark:border-[#f1effa]" dev-mode="tailwind">
+      <div className="h-[8.75rem] border-t border-[#1a1b22]/60 px-4 py-3 dark:border-[#f1effa]/60" dev-mode="tailwind">
         {completionSummary ? (
-          <div role="status" aria-live="polite" dev-mode="tailwind">
-            <p className="text-sm font-semibold leading-6" dev-mode="tailwind">{completionSummary}</p>
-            <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:justify-center" dev-mode="tailwind">
+          <div className="flex h-full flex-col justify-between gap-2 overflow-hidden" role="status" aria-live="polite" dev-mode="tailwind">
+            <p className="overflow-y-auto text-sm font-medium leading-5" dev-mode="tailwind">{completionSummary}</p>
+            <div className="flex flex-col gap-2 sm:flex-row sm:justify-center" dev-mode="tailwind">
               <Link
                 href={projectsHref}
-                className="inline-flex min-h-10 items-center justify-center rounded-md border border-[#1a1b22] bg-[#1a1b22] px-3 text-xs font-bold uppercase tracking-[0.08em] text-[#fff9f1] transition-colors hover:bg-[#1a1b22]/85 dark:border-[#f1effa] dark:bg-[#f1effa] dark:text-[#151313] dark:hover:bg-[#f1effa]/85"
+                className="inline-flex min-h-9 items-center justify-center rounded-md border border-[#1a1b22] bg-[#1a1b22] px-3 text-[0.68rem] font-bold uppercase tracking-[0.08em] text-[#fff9f1] transition-colors hover:bg-[#1a1b22]/85 dark:border-[#f1effa] dark:bg-[#f1effa] dark:text-[#151313] dark:hover:bg-[#f1effa]/85"
                 dev-mode="tailwind"
               >
                 {projectCta}
               </Link>
               <Link
                 href={contactHref}
-                className="inline-flex min-h-10 items-center justify-center rounded-md border border-[#1a1b22] px-3 text-xs font-bold uppercase tracking-[0.08em] transition-colors hover:bg-[#1a1b22]/5 dark:border-[#f1effa] dark:hover:bg-[#f1effa]/10"
+                className="inline-flex min-h-9 items-center justify-center rounded-md border border-[#1a1b22] px-3 text-[0.68rem] font-bold uppercase tracking-[0.08em] transition-colors hover:bg-[#1a1b22]/5 dark:border-[#f1effa] dark:hover:bg-[#f1effa]/10"
                 dev-mode="tailwind"
               >
                 {completionActions.cta}
@@ -138,7 +138,7 @@ export function ProofBingo({
               <button
                 type="button"
                 onClick={handleReset}
-                className="inline-flex min-h-10 items-center justify-center rounded-md px-3 text-xs font-bold uppercase tracking-[0.08em] text-[#4c4546] transition-colors hover:bg-[#1a1b22]/5 dark:text-[#cfc4c5] dark:hover:bg-[#f1effa]/10"
+                className="inline-flex min-h-9 items-center justify-center rounded-md px-3 text-[0.68rem] font-bold uppercase tracking-[0.08em] text-[#4c4546] transition-colors hover:bg-[#1a1b22]/5 dark:text-[#cfc4c5] dark:hover:bg-[#f1effa]/10"
                 dev-mode="tailwind"
               >
                 {completionActions.reset}
@@ -146,7 +146,7 @@ export function ProofBingo({
             </div>
           </div>
         ) : (
-          <p className="flex min-h-[6.5rem] items-center justify-center text-xs font-semibold uppercase tracking-[0.16em] text-[#4c4546] dark:text-[#cfc4c5]" dev-mode="tailwind">
+          <p className="flex h-full items-center justify-center text-xs font-semibold uppercase tracking-[0.16em] text-[#4c4546] dark:text-[#cfc4c5]" dev-mode="tailwind">
             {selectedTileIds.size}/3
           </p>
         )}

@@ -2,41 +2,41 @@
 
 ## 1. Prepare Data
 
-- [ ] Create `src/data/proof-bingo.ts`.
-- [ ] Define tile category, tile, and copy types.
-- [ ] Add the fixed 3x3 tile data with `id`, `category`, `row`, `col`, and bilingual labels.
-- [ ] Add Hero Identity Anchor copy.
-- [ ] Add line-specific Bingo Completion summaries, CTA, and Reset copy.
-- [ ] Keep tile ids stable and readable, for example `stack-react-vue-next`, `project-vue-color`, and `style-accessible-ui`.
+- [x] Create `src/data/proof-bingo.ts`.
+- [x] Define tile category, tile, and copy types.
+- [x] Add the fixed 3x3 tile data with `id`, `category`, `row`, `col`, and bilingual labels.
+- [x] Keep Hero Identity Anchor copy in the homepage dictionaries.
+- [x] Add line-specific Bingo Completion summaries, CTA, and Reset copy.
+- [x] Keep tile ids stable and readable, for example `stack-react-vue-next`, `project-vue-color`, and `style-accessible-ui`.
 
 ## 2. Add Localization Service
 
-- [ ] Create `src/services/proof-bingo.ts`.
-- [ ] Use `resolveLocale` from `src/dictionaries`.
-- [ ] Return localized identity copy, tile labels, line-specific completion summaries, completion actions, and stable tile metadata.
-- [ ] Sort tiles by row and column before returning them.
-- [ ] Export localized types for component props.
+- [x] Create `src/services/proof-bingo.ts`.
+- [x] Use `resolveLocale` from `src/dictionaries`.
+- [x] Return localized tile labels, line-specific completion summaries, completion actions, and stable tile metadata.
+- [x] Sort tiles by row and column before returning them.
+- [x] Export localized types for component props.
 
 ## 3. Build Client Component
 
-- [ ] Create `src/components/ProofBingo.tsx`.
-- [ ] Mark it with `'use client'`.
-- [ ] Accept only localized data as props.
-- [ ] Render the Hero Identity Anchor.
-- [ ] Render the 3x3 tile grid using real buttons.
-- [ ] Add `data-dev-mode-react-name="ProofBingo"` on the root component container.
-- [ ] Add `dev-mode="tailwind"` to key containers and tile buttons.
+- [x] Create `src/components/ProofBingo.tsx`.
+- [x] Mark it with `'use client'`.
+- [x] Accept only localized data as props.
+- [x] Render the Hero Identity Anchor.
+- [x] Render the 3x3 tile grid using real buttons.
+- [x] Add `data-dev-mode-react-name="ProofBingo"` on the root component container.
+- [x] Add `dev-mode="tailwind"` to key containers and tile buttons.
 
 ## 4. Implement Interaction State
 
-- [ ] Track selected tile ids.
-- [ ] Track the completed line indexes or ids.
-- [ ] Add the fixed `WINNING_LINES` constant with stable line ids.
-- [ ] Allow select and unselect before completion.
-- [ ] Allow more than three selected tiles.
-- [ ] Check for completion after each selection.
-- [ ] Lock tile selection after the first completed line.
-- [ ] Render the completed line state.
+- [x] Track selected tile ids.
+- [x] Track the completed line indexes or ids.
+- [x] Add the fixed `WINNING_LINES` constant with stable line ids.
+- [x] Allow select and unselect before completion.
+- [x] Allow more than three selected tiles.
+- [x] Check for completion after each selection.
+- [x] Lock tile selection after the first completed line.
+- [x] Render the completed line state.
 
 ## 5. Add Completion Actions
 
@@ -70,22 +70,22 @@
 
 ## 8. Integrate Homepage
 
-- [ ] Update `src/app/[lang]/page.tsx` to import `getProofBingo`.
-- [ ] Replace the existing hero greeting/description block with `ProofBingo`.
-- [ ] Remove the in-hero `DevModeToggle` import and render call.
-- [ ] Keep the rest of homepage sections intact.
-- [ ] Confirm homepage remains a Server Component.
+- [x] Update `src/app/[lang]/page.tsx` to import `getProofBingo`.
+- [x] Replace the existing hero greeting/description block with `ProofBingo`.
+- [x] Remove the in-hero `DevModeToggle` import and render call.
+- [x] Keep the rest of homepage sections intact.
+- [x] Confirm homepage remains a Server Component.
 
 ## 9. Refresh Developer Mode Metadata
 
-- [ ] If React Developer Mode markers changed, run `npm run dev-mode:generate:react`.
-- [ ] Review generated `src/data/dev-mode-react-components.js`.
-- [ ] Do not hand-edit generated metadata.
+- [x] If React Developer Mode markers changed, run `npm run dev-mode:generate:react`.
+- [x] Review generated `src/data/dev-mode-react-components.js`.
+- [x] Do not hand-edit generated metadata.
 
 ## 10. Verify Quality
 
-- [ ] Run `npm run lint`.
-- [ ] Run `npm run build` if route, metadata, SSR, generated Developer Mode metadata, or build-sensitive behavior changed.
+- [x] Run `npm run lint`.
+- [x] Run `npm run build` if route, metadata, SSR, generated Developer Mode metadata, or build-sensitive behavior changed.
 - [ ] Manually verify `/en`.
 - [ ] Manually verify `/zh`.
 - [ ] Manually verify mobile `/en`.

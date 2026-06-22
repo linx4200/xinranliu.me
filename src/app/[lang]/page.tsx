@@ -40,7 +40,7 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
             </p>
             <h1
               id="hero-heading"
-              className="mt-4 text-5xl font-black uppercase leading-none tracking-[0.08em] text-primary sm:text-6xl lg:text-7xl"
+              className="mt-4 whitespace-nowrap text-[clamp(2.75rem,12vw,4rem)] font-black uppercase leading-none tracking-[0.06em] text-primary sm:text-6xl lg:text-[4.25rem]"
               dev-mode="tailwind"
             >
               {dict.home.hero.headline}
@@ -67,28 +67,12 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
           </div>
 
           <div className="mx-auto w-full max-w-[min(92vw,27rem)]" dev-mode="tailwind">
-            {/* <p className="mb-3 text-center text-xs font-semibold uppercase tracking-[0.22em] text-text-muted" dev-mode="tailwind">
-              {dict.home.hero.proofPrompt}
-            </p> */}
             <ProofBingo
               {...proofBingo}
               title={dict.home.hero.proofPrompt}
               projectCta={dict.home.hero.viewProjects}
               contactHref="/contact"
               projectsHref="/projects"
-              // heading={(
-              //   <>
-              //     <p
-              //       className="text-2xl font-black uppercase leading-none tracking-[0.12em] sm:text-3xl"
-              //       dev-mode="tailwind"
-              //     >
-              //       {dict.home.hero.headline}
-              //     </p>
-              //     <p className="mt-1 text-[0.55rem] font-semibold uppercase tracking-[0.26em] sm:text-[0.65rem]" dev-mode="tailwind">
-              //       {dict.home.hero.subline}
-              //     </p>
-              //   </>
-              // )}
             />
           </div>
         </div>
