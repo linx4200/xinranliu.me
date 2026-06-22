@@ -111,6 +111,18 @@ export const data = {
       {
         "key": "completionSummaries",
         "value": "LocalizedProofBingoCompletionSummaries"
+      },
+      {
+        "key": "projectCta",
+        "value": "string"
+      },
+      {
+        "key": "contactHref",
+        "value": "string"
+      },
+      {
+        "key": "projectsHref",
+        "value": "string"
       }
     ]
   },

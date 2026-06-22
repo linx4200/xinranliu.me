@@ -48,7 +48,7 @@ xinran.liu/
 
 根据 Next.js 的定义，页面文件放在项目的 src/app 目录下。
 
-使用 `src/app/layout.tsx` 页面组件作为布局组件，放置 `<Nav />` 和 `<Footer />` 等全局组件。
+使用 `src/app/[lang]/layout.tsx` 页面组件作为布局组件，放置 `<Nav />`、`<Footer />`、Developer Mode 浮动入口等全局组件。首页采用一屏数字名片布局，`<Nav />` 在首页只保留 theme、language、documentation 工具入口，Projects 与 Contact 由 hero CTA 承担；`<Footer />` 在首页隐藏，子页面保留。
 
 ## 具体功能设计
 
@@ -101,21 +101,11 @@ layout --> devinfo
 ```
 @startuml
 component "<Page /> (Index Page)" as page
-component "<SayHi />" as sayhi
-component "<DevModeToggle />" as devtoggle #Yellow
-component "<SelectedProjectsList />" as projects
-component "<SkillSetList />" as skills
+component "<ProofBingo />" as proof #Yellow
+component "<Link /> CTA" as cta #Yellow
 
-component "<ProjectCard />" as projectcard
-component "<SkillSet />" as skillset
-
-page --> sayhi
-page --> devtoggle
-page --> projects
-page --> skills
-
-projects --> projectcard
-skills --> skillset
+page --> proof
+page --> cta
 
 @enduml
 ```
@@ -132,7 +122,9 @@ projectgrid --> projectcard_grid
 @enduml
 ```
 
-- `<Nav />`: 头部导航组件，包含中英文切换、黑暗模式切换、项目切换等。
+- `<Nav />`: 头部导航组件。子页面包含 Home、Projects、Hire Me/Contact，以及中英文切换、黑暗模式切换、文档链接；首页只展示工具入口，主导航动作由 hero CTA 承担。
+- `<ProofBingo />`: 首页核心交互组件，以 3x3 proof matrix 展示技术栈、项目证据、工作方式和个人特质。用户点亮任意一条线后，展示本地化 summary、View Projects / Hire Xinran CTA 和 reset 控制。
+- `<Footer />`: 子页面页脚。首页为了保持一屏数字名片体验不渲染页脚。
 - `<Card />`: 卡片形式的容器组件，用于统一卡片的样式。使用 children prop 来进行子组件的渲染。
 - `<ProjectCard />`: 项目卡片组件，用于展示项目信息。该组件的最外层容器是 `<Card />`， 里面包含项目名称、项目描述、项目链接、项目图片等信息。
 - `<ProjectGrid />`: 项目网格组件，用于展示项目列表。获取 project data 后渲染多个 `<ProjectCard />`。

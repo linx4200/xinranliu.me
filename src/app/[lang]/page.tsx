@@ -2,8 +2,6 @@ import Link from '@/components/Link';
 import { HomePageJsonLd } from '@/components/JsonLd';
 
 import { ProofBingo } from '@/components/ProofBingo';
-import { SelectedProjectsList } from '@/components/SelectedProjectsList';
-import { SkillSetList } from '@/components/SkillSetList';
 import { getDictionary } from '@/dictionaries';
 import { buildPageMetadata } from '@/lib/seo';
 import { getProofBingo } from '@/services/proof-bingo';
@@ -30,47 +28,69 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
   return (
     <>
       <HomePageJsonLd lang={lang} dict={dict} />
-      <section className="w-full mt-5 px-4 text-center md:mt-6" aria-labelledby="hero-heading" dev-mode="tailwind">
-        <ProofBingo
-          {...proofBingo}
-          heading={(
-            <>
-              <h1
-                id="hero-heading"
-                className="text-3xl font-black uppercase leading-none tracking-[0.12em] sm:text-4xl"
-                dev-mode="tailwind"
-              >
-                {dict.home.hero.headline}
-              </h1>
-              <p className="mt-1 text-[0.6rem] font-semibold uppercase tracking-[0.28em] sm:text-[0.7rem]" dev-mode="tailwind">
-                {dict.home.hero.subline}
-              </p>
-            </>
-          )}
-        />
-      </section>
-
-      <section className="w-full mt-5 md:mt-6" aria-labelledby="selected-projects-heading">
-        <h2 id="selected-projects-heading" className="pl-4 lg:pl-0 text-xl md:text-2xl font-bold mb-5 md:text-center" dev-mode="tailwind"><Link href="/projects">{dict.home.sections.selectedProjects}</Link></h2>
-        <SelectedProjectsList lang={lang} copy={dict.ui.projects} />
-      </section>
-
-      <section className="w-full mt-10 lg:mt-20" aria-labelledby="skills-heading">
-        <h2 id="skills-heading" className="pl-4 lg:pl-0 text-xl md:text-2xl font-bold mb-5 md:text-center" dev-mode="tailwind">{dict.home.sections.skills}</h2>
-        <SkillSetList lang={lang} />
-      </section>
-
       <section
-        className="w-full mt-10 lg:mt-20 px-4 lg:px-0"
-        aria-labelledby="contact-heading"
+        className="flex w-full flex-col justify-center px-4 py-10 sm:py-14 lg:min-h-[calc(100svh_-_var(--spacing)*30)] lg:px-0 lg:py-8"
+        aria-labelledby="hero-heading"
         dev-mode="tailwind"
       >
-        <div className="w-full max-w-md lg:max-w-none mx-auto py-10 px-4 lg:px-0 bg-surface text-center" dev-mode="tailwind">
-          <h2 id="contact-heading" className="text-xl md:text-2xl font-bold mb-5" dev-mode="tailwind">{dict.home.sections.contact.title}</h2>
-          <p className="text-base text-text-muted mb-8" dev-mode="tailwind">{dict.home.sections.contact.description}</p>
-          <Link className="inline-block py-2 px-4
-          border border-solid rounded-lg
-          text-base border-primary text-primary hover:bg-primary/5 transition-colors" href="/contact" dev-mode="tailwind">{dict.home.sections.contact.button}</Link>
+        <div className="mx-auto grid w-full max-w-5xl items-center gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14" dev-mode="tailwind">
+          <div className="mx-auto max-w-xl text-center lg:mx-0 lg:text-left" dev-mode="tailwind">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-text-muted" dev-mode="tailwind">
+              {dict.home.hero.subline}
+            </p>
+            <h1
+              id="hero-heading"
+              className="mt-4 text-5xl font-black uppercase leading-none tracking-[0.08em] text-primary sm:text-6xl lg:text-7xl"
+              dev-mode="tailwind"
+            >
+              {dict.home.hero.headline}
+            </h1>
+            <p className="mt-6 text-base leading-7 text-text-muted sm:text-lg" dev-mode="tailwind">
+              {dict.home.hero.description}
+            </p>
+            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start" dev-mode="tailwind">
+              <Link
+                className="inline-flex min-h-11 items-center justify-center rounded-md border border-primary bg-primary px-5 text-sm font-semibold text-bg transition-colors hover:bg-primary/85"
+                href="/projects"
+                dev-mode="tailwind"
+              >
+                {dict.home.hero.viewProjects}
+              </Link>
+              <Link
+                className="inline-flex min-h-11 items-center justify-center rounded-md border border-primary px-5 text-sm font-semibold text-primary transition-colors hover:bg-primary/5"
+                href="/contact"
+                dev-mode="tailwind"
+              >
+                {dict.home.hero.hireMe}
+              </Link>
+            </div>
+          </div>
+
+          <div className="mx-auto w-full max-w-[min(92vw,27rem)]" dev-mode="tailwind">
+            {/* <p className="mb-3 text-center text-xs font-semibold uppercase tracking-[0.22em] text-text-muted" dev-mode="tailwind">
+              {dict.home.hero.proofPrompt}
+            </p> */}
+            <ProofBingo
+              {...proofBingo}
+              title={dict.home.hero.proofPrompt}
+              projectCta={dict.home.hero.viewProjects}
+              contactHref="/contact"
+              projectsHref="/projects"
+              // heading={(
+              //   <>
+              //     <p
+              //       className="text-2xl font-black uppercase leading-none tracking-[0.12em] sm:text-3xl"
+              //       dev-mode="tailwind"
+              //     >
+              //       {dict.home.hero.headline}
+              //     </p>
+              //     <p className="mt-1 text-[0.55rem] font-semibold uppercase tracking-[0.26em] sm:text-[0.65rem]" dev-mode="tailwind">
+              //       {dict.home.hero.subline}
+              //     </p>
+              //   </>
+              // )}
+            />
+          </div>
         </div>
       </section>
     </>

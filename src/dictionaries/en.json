@@ -51,7 +51,11 @@
   "home": {
     "hero": {
       "headline": "Xinran Liu",
-      "subline": "Independent full-stack web developer"
+      "subline": "Independent full-stack web developer",
+      "description": "I design and build fast, reliable, and scalable web applications for modern businesses.",
+      "proofPrompt": "Pick any three proof points",
+      "viewProjects": "View Projects",
+      "hireMe": "Hire Me"
     },
     "sections": {
       "selectedProjects": "Selected Projects",

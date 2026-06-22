@@ -1,5 +1,17 @@
+'use client';
+
+import { usePathname } from 'next/navigation';
+
+import { isCurrentPath } from '@/components/Link';
+
 const Footer = () => {
+  const pathname = usePathname();
   const year = (new Date()).getFullYear();
+
+  if (isCurrentPath(pathname, '/')) {
+    return null;
+  }
+
   return (
     <footer className="
       w-full mt-10 lg:mt-20 py-4

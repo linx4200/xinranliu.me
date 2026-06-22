@@ -10,7 +10,7 @@ Xinran Liu 需要一个不只是“个人主页”的作品集网站，而是一
 
 构建一个基于 Next.js App Router 的双语个人作品集网站，以 `full-stack engineer + freelancer` 为核心定位，通过首页、项目页、联系页和 Developer Mode 共同完成信任建立。
 
-首页负责快速传达 Xinran 的定位、精选项目、技能与联系 CTA；项目页负责集中展示业务能力和可验证成果；联系页负责承载雇佣入口、专业资料、个人头像和 Google Calendar availability；Developer Mode 则作为差异化体验，允许桌面访问者用 React 模式和 Tailwind 模式窥见站点的实现细节，从而把“专业能力”和“有趣灵魂”变成可交互证据。
+首页负责以一屏数字名片快速传达 Xinran 的定位，并通过 Proof Bingo、View Projects 和 Hire Me 两个 CTA 完成第一印象分流；项目页负责集中展示业务能力、技能脉络和可验证成果；联系页负责承载雇佣入口、专业资料、个人头像和 Google Calendar availability；Developer Mode 则作为差异化体验，允许桌面访问者用 React 模式和 Tailwind 模式窥见站点的实现细节，从而把“专业能力”和“有趣灵魂”变成可交互证据。
 
 整个体验应遵循 `Precision Minimalist` 设计系统：轻背景、清晰排版、大留白、细边框、低饱和玫瑰红点缀、克制动效和明确的信息层级。站点内容保持中英双语，路由使用 `/en` 与 `/zh` 前缀，中文 HTML 标记为 `zh-CN`，所有页面级内容都应有正确 metadata、canonical、alternate languages、Open Graph、JSON-LD、sitemap 和 robots 约束。
 
@@ -18,7 +18,7 @@ Xinran Liu 需要一个不只是“个人主页”的作品集网站，而是一
 
 1. As a potential client, I want to understand Xinran's professional positioning within the first screen, so that I can quickly decide whether this freelancer is relevant to my project.
 2. As a potential client, I want the homepage copy to emphasize fast, reliable, and scalable web applications, so that I can connect the site with business outcomes rather than only technical taste.
-3. As a potential client, I want to see selected projects before browsing the full project list, so that I can evaluate credibility without committing to a long page.
+3. As a potential client, I want the homepage to route me clearly to Projects or Hire Me after the first impression, so that I can choose between evaluating proof and starting contact.
 4. As a potential client, I want every project card to include a clear description, so that I can understand what problem the project represents.
 5. As a potential client, I want project cards to show technology tags, so that I can judge fit with my preferred stack.
 6. As a potential client, I want project cards to provide live site links when available, so that I can inspect the actual shipped result.
@@ -39,9 +39,9 @@ Xinran Liu 需要一个不只是“个人主页”的作品集网站，而是一
 21. As a technical collaborator, I want Developer Mode to highlight the inspected element, so that I can connect overlay information to the page surface.
 22. As a technical collaborator, I want Developer Mode to be optional, so that the main site remains clean for non-technical visitors.
 23. As a desktop visitor, I want a floating Developer Mode toggle, so that I can explore the implementation from anywhere on the site.
-24. As a homepage visitor, I want the hero to prioritize Proof Bingo over Developer Mode controls, so that the first screen stays focused on trust-building evidence.
+24. As a homepage visitor, I want the hero to combine concise positioning copy, two clear CTAs, and Proof Bingo, so that the first screen feels like a complete digital business card.
 25. As a mobile visitor, I want the site to prioritize core content over complex developer tooling, so that the experience stays focused on a small screen.
-26. As a mobile visitor, I want navigation to collapse into a usable menu, so that I can reach Home, Projects, and Hire Me without layout clutter.
+26. As a mobile visitor, I want subpage navigation to collapse into a usable menu, while the homepage uses direct hero CTAs instead of duplicated navigation links.
 27. As a mobile visitor, I want project cards to stack vertically, so that images, descriptions, tags, and links remain readable.
 28. As a mobile visitor, I want contact CTAs to be thumb-friendly, so that I can tap hiring links without precision effort.
 29. As a mobile visitor, I want the portrait and availability status to remain readable, so that the contact page keeps its trust-building role.
@@ -89,7 +89,7 @@ Xinran Liu 需要一个不只是“个人主页”的作品集网站，而是一
 
 ## Implementation Decisions
 
-- The product remains a three-page public portfolio: Home, Projects, and Contact. Home creates first-impression trust, Projects validates business and technical capability, and Contact converts interest into collaboration.
+- The product remains a three-page public portfolio: Home, Projects, and Contact. Home acts as a one-screen business card and proof gateway, Projects validates business and technical capability, and Contact converts interest into collaboration.
 - The core positioning remains `full-stack engineer + freelancer`, expressed through bilingual copy, project evidence, skills, availability, and hiring CTAs.
 - The site uses locale-prefixed routes for all public pages. Supported locales are `en` and `zh`; the Chinese route prefix remains `zh`, while the HTML language value is `zh-CN`.
 - The root entrypoint redirects to the preferred supported locale based on request language, with English as the default fallback.
@@ -116,12 +116,12 @@ type AvailabilityResponse =
 - The design system remains `Precision Minimalist`: light background, high-contrast text, restrained rose accent, thin borders, large whitespace, clear typography, and minimal shadows.
 - Dark mode is controlled by classes on the HTML element and backed by CSS variables. It should respect system preference on initial load and allow manual toggling.
 - Navigation remains a Client Component because it owns mobile menu state and route-aware interactions.
-- The primary navigation includes Home, Projects, and Hire Me/Contact, plus dark mode, language switch, and documentation access.
+- The primary navigation includes Home, Projects, and Hire Me/Contact on subpages, plus dark mode, language switch, and documentation access. On the homepage, the main navigation links are intentionally suppressed; Projects and Hire Me are exposed as hero CTAs, while theme, language, and documentation remain available as a compact utility group.
 - Accessibility requirements include skip link, semantic landmarks, page heading structure, visible focus states, accurate ARIA labels, and `aria-current` on active navigation.
 - Project cards are semantic article-like units with image/placeholder, title, description, tags, and optional external links.
 - Project image hover variants are allowed when they clarify or enrich the presentation, but the base state must remain complete and accessible.
 - Developer Mode remains a desktop-oriented differentiator and should not expose full complex interactions on mobile.
-- The homepage hero should prioritize Proof Bingo as the core visual interaction; the previous in-hero Developer Mode prompt is not part of this hero surface.
+- The homepage hero should fit as a focused first-screen experience on desktop: concise positioning copy, View Projects and Hire Me CTAs, and Proof Bingo as the core visual interaction. Proof Bingo completion should provide a localized summary, project/contact CTAs, and a reset control so the interaction closes the trust-building loop.
 - Developer Mode global state is managed through a small store with enabled status, active mode, and hero-section visibility.
 - Developer Mode currently supports React and Tailwind modes. The Next.js mode is reserved in the state shape but not a committed user-facing mode.
 - React mode relies on explicit component markers and generated metadata. If marked components or prop shapes change, metadata generation must be rerun.
@@ -136,11 +136,11 @@ type AvailabilityResponse =
 
 - The seam check for this PRD is based on the current codebase and specs. Because this document was requested without a user interview, these seams are treated as the expected default: localized public pages, locale routing, SEO metadata generation, dictionary/data localization, Availability API, Developer Mode store and DOM markers, sitemap/robots behavior, and responsive navigation.
 - Good tests should assert externally observable behavior: rendered content, route behavior, metadata, structured data, API response shape, ARIA states, link destinations, and mode transitions. They should avoid asserting private component structure, internal state names, exact Tailwind class strings, or implementation-only helper calls unless the public contract is the class metadata itself.
-- The highest-value page-level tests should cover Home, Projects, and Contact in both supported locales, verifying that the correct localized headings, navigation labels, CTAs, project content, and contact labels appear.
+- The highest-value page-level tests should cover Home, Projects, and Contact in both supported locales, verifying that the correct localized headings, homepage CTAs, subpage navigation labels, project content, and contact labels appear.
 - Routing tests should cover root locale redirect behavior, valid locale pages, invalid locale handling, and language switch path preservation.
 - SEO tests should cover canonical URLs, alternate language mappings, localized metadata, Open Graph locale values, JSON-LD presence, sitemap localized entries, and robots disallow rules for API routes.
-- Accessibility tests should cover skip link visibility on focus, primary navigation labeling, mobile menu expanded state, icon-only button labels, theme switch role/checked state, language switch labels, project card labelling, and availability `role=status` behavior.
-- Responsive tests should cover desktop and mobile layouts at the highest page level, especially mobile navigation, single-column project cards, contact CTA sizing, and hidden desktop-only Developer Mode controls.
+- Accessibility tests should cover skip link visibility on focus, homepage utility navigation labeling, subpage primary navigation labeling, mobile menu expanded state, icon-only button labels, theme switch role/checked state, language switch labels, Proof Bingo `aria-pressed` and completion `role=status` behavior, project card labelling, and availability `role=status` behavior.
+- Responsive tests should cover desktop and mobile layouts at the highest page level, especially the homepage one-screen composition on desktop, mobile hero stacking, subpage mobile navigation, single-column project cards, contact CTA sizing, and hidden desktop-only Developer Mode controls.
 - Dark mode tests should cover initial system preference application where feasible and manual theme toggling as a visible DOM/class behavior.
 - Dictionary tests should cover supported locale resolution, fallback locale behavior, paired dictionary shape compatibility, and `zh` to `zh-CN` HTML language mapping.
 - Static data service tests should cover localized project and skill transformation, selected project filtering, optional project links, and missing image fallback behavior.
