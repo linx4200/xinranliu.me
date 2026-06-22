@@ -11,6 +11,7 @@ export type LocalizedProofBingoTile = Omit<ProofBingoTile, 'label'> & {
 };
 
 export type LocalizedProofBingoCompletionActions = {
+  projects: string;
   cta: string;
   reset: string;
 };
@@ -23,6 +24,7 @@ export type LocalizedProofBingoCompletionSummaries = Record<
 >;
 
 export type LocalizedProofBingo = {
+  title: string;
   tiles: LocalizedProofBingoTile[];
   completionActions: LocalizedProofBingoCompletionActions;
   completionSummaries: LocalizedProofBingoCompletionSummaries;
@@ -48,8 +50,10 @@ export const getProofBingo = (lang: string): LocalizedProofBingo => {
   ) as LocalizedProofBingoCompletionSummaries;
 
   return {
+    title: proofBingoCopy.title[resolvedLang],
     tiles,
     completionActions: {
+      projects: proofBingoCopy.completionActions.projects[resolvedLang],
       cta: proofBingoCopy.completionActions.cta[resolvedLang],
       reset: proofBingoCopy.completionActions.reset[resolvedLang],
     },

@@ -28,7 +28,9 @@ export type ProofBingoTile = {
 };
 
 export type ProofBingoCopy = {
+  title: LocalizedCopy;
   completionActions: {
+    projects: LocalizedCopy;
     cta: LocalizedCopy;
     reset: LocalizedCopy;
   };
@@ -134,7 +136,15 @@ export const proofBingoTiles = [
 ] satisfies ProofBingoTile[];
 
 export const proofBingoCopy: ProofBingoCopy = {
+  title: {
+    en: 'Pick any three proof points',
+    zh: '点亮任意三个证据点',
+  },
   completionActions: {
+    projects: {
+      en: 'View Projects',
+      zh: '查看项目',
+    },
     cta: {
       en: 'Hire Xinran',
       zh: '联系 Xinran',

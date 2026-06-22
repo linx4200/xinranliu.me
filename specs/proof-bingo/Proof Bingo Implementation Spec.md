@@ -23,7 +23,7 @@ The previous in-hero Developer Mode prompt should be removed. The global floatin
 ## Content Model
 
 Add a dedicated data source for the bingo configuration instead of scattering copy in JSX.
-Keep Hero Identity Anchor copy in the homepage dictionary because it is page-level hero copy, not Proof Bingo configuration.
+Keep Hero Identity Anchor copy in the homepage dictionary because it is page-level hero copy, not Proof Bingo configuration. Keep the Proof Bingo card title in the Proof Bingo data source because it labels the interaction itself.
 
 Recommended file:
 
@@ -63,7 +63,9 @@ export type ProofBingoTile = {
 };
 
 export type ProofBingoCopy = {
+  title: Record<LangCode, string>;
   completionActions: {
+    projects: Record<LangCode, string>;
     cta: Record<LangCode, string>;
     reset: Record<LangCode, string>;
   };
@@ -81,6 +83,7 @@ export type LocalizedProofBingoTile = Omit<ProofBingoTile, 'label'> & {
 };
 
 export const getProofBingo = (lang: string) => ({
+  title,
   tiles,
   completionActions,
   completionSummaries,
@@ -116,9 +119,9 @@ The center tile is `This portfolio is handmade` / `这个作品集手工打造` 
 Homepage route remains a Server Component:
 
 - `src/app/[lang]/page.tsx` gets the localized proof bingo data.
-- It renders the Hero Identity Anchor from the homepage dictionary, including the page-level `h1`, and passes it into the card header.
+- It renders the Hero Identity Anchor from the homepage dictionary, including the page-level `h1`.
 - It renders SEO and JSON-LD as before.
-- It passes only localized bingo data and the rendered card heading into the client component.
+- It passes localized bingo data into the client component.
 
 Add a localized client component:
 
@@ -128,9 +131,10 @@ Suggested props:
 
 ```ts
 type ProofBingoProps = {
-  heading: ReactNode;
+  title: string;
   tiles: LocalizedProofBingoTile[];
   completionActions: {
+    projects: string;
     cta: string;
     reset: string;
   };
@@ -174,7 +178,6 @@ Selection rules:
 - The first matched line id becomes the completed line id.
 - After completion, tile selection is locked.
 - A visible Reset button clears the selected tiles, completed line, and completion state.
-- After Reset, focus returns to the first Proof Tile.
 
 ## Completion State
 
@@ -195,7 +198,11 @@ Recommended first-version summaries:
 
 Actions:
 
-- Primary CTA:
+- Primary project CTA:
+  - EN: `View Projects`
+  - ZH: `查看项目`
+  - destination: `/projects`
+- Secondary contact CTA:
   - EN: `Hire Xinran`
   - ZH: `联系 Xinran`
   - destination: `/contact`
@@ -203,7 +210,7 @@ Actions:
   - EN: `Reset`
   - ZH: `重置`
 
-The completion state should appear within the bingo hero area, not as a full-screen modal. It should render the summary for the completed line id.
+The completion state should appear within the bingo hero area, not as a full-screen modal. It should render the summary for the completed line id, make Projects the primary evidence path, and keep the Contact Page available as a secondary hiring action.
 
 ## Accessibility
 
@@ -217,7 +224,6 @@ Requirements:
 - Focus states are visibly clear in light and dark mode.
 - Completion summary uses `role="status"` or `aria-live="polite"`.
 - The winning line is not indicated by color alone; use line, border, weight, or text-state changes.
-- Reset returns focus to the first Proof Tile.
 - CTA link uses the existing localized `Link` component so `/contact` receives the current locale prefix.
 
 ## Visual And Motion
@@ -319,7 +325,7 @@ Manual checks:
 - English and Chinese copy render correctly.
 - Keyboard users can select tiles and trigger completion.
 - Completion is announced and CTA points to localized `/contact`.
-- Reset clears state and returns focus to the first tile.
+- Reset clears state.
 - Reduced motion remains understandable.
 - Global floating Developer Mode still works.
 - Hero no longer shows the old in-hero Developer Mode prompt.

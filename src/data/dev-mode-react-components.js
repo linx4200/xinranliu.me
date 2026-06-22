@@ -97,8 +97,8 @@ export const data = {
     "name": "ProofBingo",
     "propList": [
       {
-        "key": "heading",
-        "value": "ReactNode"
+        "key": "title",
+        "value": "string"
       },
       {
         "key": "tiles",
@@ -111,18 +111,6 @@ export const data = {
       {
         "key": "completionSummaries",
         "value": "LocalizedProofBingoCompletionSummaries"
-      },
-      {
-        "key": "projectCta",
-        "value": "string"
-      },
-      {
-        "key": "contactHref",
-        "value": "string"
-      },
-      {
-        "key": "projectsHref",
-        "value": "string"
       }
     ]
   },

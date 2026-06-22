@@ -71,13 +71,7 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
         </div>
 
         <div className="flex-[.95]" dev-mode="tailwind">
-          <ProofBingo
-            {...proofBingo}
-            title={dict.home.hero.proofPrompt}
-            projectCta={dict.home.hero.viewProjects}
-            contactHref="/contact"
-            projectsHref="/projects"
-          />
+          <ProofBingo {...proofBingo} />
         </div>
       </section>
     </>

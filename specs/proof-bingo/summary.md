@@ -34,7 +34,7 @@
   - EN: `Reset`
   - ZH: `重置`
   - 位置：完成态区域内，作为低权重 secondary action，视觉权重低于联系 CTA。
-  - 行为：清空已选 tile、完成线和完成态，回到初始 bingo 状态；Reset 后焦点回到第一个 Proof Tile。
+  - 行为：清空已选 tile、完成线和完成态，回到初始 bingo 状态。
 - CTA：互动完成后跳转到现有联系页；`Hire Me` 是 CTA 文案，不新增独立 `/hire-me` 页面。
 - 格子文案：由执行方基于现有网站内容先拟一版。
 - 首版 Proof Tile 英文文案：

@@ -15,9 +15,6 @@ type ProofBingoProps = {
   tiles: LocalizedProofBingoTile[];
   completionActions: LocalizedProofBingoCompletionActions;
   completionSummaries: LocalizedProofBingoCompletionSummaries;
-  projectCta: string;
-  contactHref: string;
-  projectsHref: string;
 };
 
 const WINNING_LINES = [
@@ -94,9 +91,6 @@ export function ProofBingo({
   tiles,
   completionActions,
   completionSummaries,
-  projectCta,
-  contactHref,
-  projectsHref,
 }: ProofBingoProps) {
   const [selectedTileIds, setSelectedTileIds] = useState<Set<string>>(() => new Set());
   const [completedLineId, setCompletedLineId] = useState<ProofBingoLineId | null>(null);
@@ -203,14 +197,14 @@ export function ProofBingo({
             </p>
             <div className="flex flex-col gap-2 sm:flex-row sm:justify-center" dev-mode="tailwind">
               <Link
-                href={projectsHref}
+                href="/projects"
                 className={`${ACTION_BASE_CLASS} ${PRIMARY_ACTION_CLASS}`}
                 dev-mode="tailwind"
               >
-                {projectCta}
+                {completionActions.projects}
               </Link>
               <Link
-                href={contactHref}
+                href="/contact"
                 className={`${ACTION_BASE_CLASS} ${SECONDARY_ACTION_CLASS}`}
                 dev-mode="tailwind"
               >
