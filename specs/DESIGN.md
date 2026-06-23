@@ -1,107 +1,95 @@
 ---
 name: Precision Minimalist
+description: The design system of https://xinranliu.me , Light theme (the Dark theme is documented at ./DESIGN.dark.md), desktop version (the mobile version is documented at ./DESIGN.mobile.md)
+
 colors:
-  surface: '#fbf8ff'
-  surface-dim: '#dad9e3'
-  surface-bright: '#fbf8ff'
-  surface-container-lowest: '#ffffff'
-  surface-container-low: '#f4f2fd'
-  surface-container: '#eeedf7'
-  surface-container-high: '#e8e7f1'
-  surface-container-highest: '#e3e1ec'
-  on-surface: '#1a1b22'
-  on-surface-variant: '#4c4546'
-  inverse-surface: '#2f3038'
-  inverse-on-surface: '#f1effa'
-  outline: '#7e7576'
-  outline-variant: '#cfc4c5'
-  surface-tint: '#5e5e5e'
-  primary: '#000000'
-  on-primary: '#ffffff'
-  primary-container: '#1b1b1b'
-  on-primary-container: '#848484'
-  inverse-primary: '#c6c6c6'
-  secondary: '#b90538'
-  on-secondary: '#ffffff'
-  secondary-container: '#dc2c4f'
-  on-secondary-container: '#fffbff'
-  tertiary: '#000000'
-  on-tertiary: '#ffffff'
-  tertiary-container: '#1b1b1b'
-  on-tertiary-container: '#848484'
-  error: '#ba1a1a'
-  on-error: '#ffffff'
-  error-container: '#ffdad6'
-  on-error-container: '#93000a'
-  primary-fixed: '#e2e2e2'
-  primary-fixed-dim: '#c6c6c6'
-  on-primary-fixed: '#1b1b1b'
-  on-primary-fixed-variant: '#474747'
-  secondary-fixed: '#ffdadb'
-  secondary-fixed-dim: '#ffb2b7'
-  on-secondary-fixed: '#40000d'
-  on-secondary-fixed-variant: '#92002a'
-  tertiary-fixed: '#e2e2e2'
-  tertiary-fixed-dim: '#c6c6c6'
-  on-tertiary-fixed: '#1b1b1b'
-  on-tertiary-fixed-variant: '#474747'
-  background: '#fbf8ff'
-  on-background: '#1a1b22'
-  surface-variant: '#e3e1ec'
-  surface-alt: '#F9FAFB'
-  border-subtle: '#E4E4E7'
-  accent-rose: '#F43F5E'
+  bg:
+    token: 'var(--color-bg)'
+    value: '#fff'
+  surface:
+    token: 'var(--color-surface)'
+    value: 'oklch(98.5% 0 0)'
+  surface-strong:
+    token: 'var(--color-surface-strong)'
+    value: 'oklch(37.1% 0 0)'
+  text:
+    token: 'var(--color-text)'
+    value: '#1f1510'
+  text-muted:
+    token: 'var(--color-text-muted)'
+    value: 'oklch(55.6% 0 0)'
+  border:
+    token: 'var(--color-border)'
+    value: 'oklch(20.5% 0 0)'
+  primary:
+    token: 'var(--color-primary)'
+    value: '#ff637e'
+  accent-400:
+    token: 'var(--color-accent-400)'
+    value: '#ff7d93'
+  accent-600:
+    token: 'var(--color-accent-600)'
+    value: '#e6526b'
+
 typography:
-  headline-xl:
-    fontFamily: Geist
-    fontSize: 48px
-    fontWeight: '600'
-    lineHeight: '1.1'
-    letterSpacing: -0.02em
-  headline-lg:
-    fontFamily: Geist
-    fontSize: 32px
-    fontWeight: '600'
-    lineHeight: '1.2'
-    letterSpacing: -0.01em
-  headline-lg-mobile:
-    fontFamily: Geist
-    fontSize: 28px
-    fontWeight: '600'
-    lineHeight: '1.2'
-  headline-md:
-    fontFamily: Geist
-    fontSize: 24px
-    fontWeight: '500'
-    lineHeight: '1.3'
-  body-lg:
-    fontFamily: Geist
-    fontSize: 18px
-    fontWeight: '400'
-    lineHeight: '1.6'
-  body-md:
-    fontFamily: Geist
-    fontSize: 16px
-    fontWeight: '400'
-    lineHeight: '1.6'
+  headline:
+    fontFamily: 'var(--font-geist-sans)'
+    fontSize: 'var(--text-5xl)'
+    lineHeight: 'var(--text-5xl--line-height)'
+    fontWeight: 'var(--font-weight-bold)'
+    utility: 'text-5xl font-bold'
+
+  sub-headline:
+    fontFamily: 'var(--font-geist-sans)'
+    fontSize: 'var(--text-lg)'
+    lineHeight: 'var(--text-lg--line-height)'
+    fontWeight: 'var(--font-weight-normal)'
+    utility: 'text-lg font-normal'
+
+  section-title:
+    fontFamily: 'var(--font-geist-sans)'
+    fontSize: 'var(--text-2xl)'
+    lineHeight: 'var(--text-2xl--line-height)'
+    fontWeight: 'var(--font-weight-bold)'
+    utility: 'text-2xl font-bold'
+
+  title:
+    element: 'h3'
+    fontFamily: 'var(--font-geist-sans)'
+    fontSize: 'var(--text-base)'
+    lineHeight: 'var(--text-base--line-height)'
+    fontWeight: 'var(--font-weight-semibold)'
+    utility: 'text-base font-semibold'
+
+  body:
+    fontFamily: 'var(--font-geist-sans)'
+    fontSize: 'var(--text-base)'
+    lineHeight: 'var(--text-base--line-height)'
+    fontWeight: 'var(--font-weight-normal)'
+    utility: 'text-base font-normal'
+
+  body-strong:
+    fontFamily: 'var(--font-geist-sans)'
+    fontSize: 'var(--text-base)'
+    lineHeight: 'var(--text-base--line-height)'
+    fontWeight: 'var(--font-weight-semibold)'
+    utility: 'text-base font-semibold'
+
   label-md:
-    fontFamily: Geist
-    fontSize: 14px
-    fontWeight: '500'
-    lineHeight: '1.4'
-    letterSpacing: 0.02em
-  label-sm:
-    fontFamily: Geist
-    fontSize: 12px
-    fontWeight: '500'
-    lineHeight: '1.4'
+    fontFamily: 'var(--font-geist-sans)'
+    fontSize: 'var(--text-xs)'
+    lineHeight: 'var(--text-xs--line-height)'
+    fontWeight: 'var(--font-weight-medium)'
+    utility: 'text-xs font-medium'
+
 rounded:
-  sm: 0.125rem
-  DEFAULT: 0.25rem
-  md: 0.375rem
-  lg: 0.5rem
-  xl: 0.75rem
-  full: 9999px
+  # sm: 0.125rem
+  # DEFAULT: 0.25rem
+  # md: 0.375rem
+  # lg: 0.5rem
+  # xl: 0.75rem
+  # full: 9999px
+
 spacing:
   container-max: 1120px
   gutter: 24px
@@ -112,26 +100,44 @@ spacing:
   section-gap: 80px
 ---
 
-## Brand & Style
+# Precision Minimalist
+
+## Overview
+
 The design system is defined by a "Precision Minimalist" aesthetic, prioritizing content clarity and typographic intent over decorative elements. It targets a sophisticated audience—likely in tech, design, or engineering—who values efficiency, readability, and subtle detail.
 
-The style is characterized by heavy use of negative space, a restricted monochromatic palette punctuated by high-energy accents, and a focus on structural alignment. It draws heavily from **Minimalism** and **Developer-centric** design movements, utilizing sharp layouts and high-contrast text to create a digital environment that feels both utilitarian and premium.
+The aesthetic is minimal and high-contrast: plenty of whitespace, restrained color, and content set on near-neutral surfaces. Prioritize readability and accessibility, and use color to signal state or hierarchy rather than decoration.
+
+This is the Light theme and desktop version. The Dark theme uses the same token names with different values and lives at `./design.dark.md`.
+The mobile version lives at `./DESIGN.mobile.md`.
+
+本 design system 沿用 Tailwind CSS 的设计语言。整个系统的技术实现也是使用 Tailwind CSS.
 
 ## Colors
-The palette is rooted in a high-contrast monochromatic base. White (`#FFFFFF`) serves as the primary canvas, while Black (`#000000`) is used for primary text and structural elements to ensure maximum legibility.
 
-- **Primary:** Black is used for all core communication and primary actions.
-- **Secondary/Accent:** Rose (`#F43F5E`) is used sparingly for interactive cues, highlights, and critical calls to action.
-- **Neutral:** Zinc (`#71717A`) is reserved for secondary metadata, labels, and helper text.
-- **Surface:** A very light gray (`#F9FAFB`) provides subtle tonal separation for cards or background sections without breaking the minimalist flow.
+The palette is rooted in a warm, high-contrast minimalist base.
+
+The design system uses semantic color tokens as the implementation source of truth. In the YAML metadata block at the top of this file, `token` is the value agents should use in implementation, while `value` is only the current light-theme visual reference. Use semantic Tailwind utilities such as `bg-bg`, `bg-surface`, `text-text`, `text-text-muted`, `border-border`, and `text-primary` / `bg-primary`; if raw CSS is required, use semantic variables such as `var(--color-text-muted)`. Do not replace semantic tokens with `value`, raw OKLCH, or hex colors unless the task is explicitly changing the token definition in `src/styles/theme.css`.
+
+- **Background:** `var(--color-bg)` serves as the primary canvas.
+- **Text:** `var(--color-text)` is used for primary text. `var(--color-text-muted)` is reserved for secondary metadata, labels, and helper text.
+- **Surface:** `var(--color-surface)` and `var(--color-surface-strong)` provide subtle tonal separation for cards or background sections without breaking the minimalist flow.
+- **Border:** `var(--color-border)` is used for structural edges.
+- **Primary:** `var(--color-primary)` is the primary action color.
+- **Accent:** `var(--color-accent-400)`, `var(--color-accent-500)`, and `var(--color-accent-600)` provide lighter, base, and stronger interaction states.
 
 ## Typography
-Typography is the primary vehicle for visual hierarchy in this design system. It exclusively uses **Geist**, a typeface that embodies technical precision and modern minimalism.
+
+Geist Sans sets UI and prose; Geist Mono sets code, data, and tabular figures. Both are open-source.
+
+Typography tokens follow the same rule as color tokens: use Tailwind CSS v4 theme variables and Next font variables as the source of truth. The `typography` map above documents both the CSS variables and the preferred Tailwind utility classes. Agents should use the listed utilities in React markup and only use raw CSS variables when writing CSS.
 
 - **Scale:** Headlines use tight tracking and leading to create a "block" effect.
 - **Body:** Body text is optimized for long-form reading with generous line-height (`1.6`) and standard tracking.
 - **Metadata:** Smaller labels and captions use a slightly heavier weight (`500`) and increased letter spacing to maintain clarity at small scales.
 - **Mobile:** Headline sizes reduce on mobile, but line-height remains consistent to preserve the airy feel.
+
+Implementation rule: do not replace typography tokens with copied `rem`, `px`, numeric font-weight, or browser-computed values. Use Tailwind utilities such as `text-5xl`, `text-lg`, `text-base`, `text-xs`, `font-bold`, `font-semibold`, `font-medium`, and `font-normal`. If raw CSS is required, use variables such as `var(--text-base)`, `var(--text-base--line-height)`, `var(--font-weight-semibold)`, `var(--font-geist-sans)`, or `var(--font-geist-mono)`.
 
 ## Layout & Spacing
 The layout follows a **Fixed Grid** philosophy for desktop, centering content within a clean 1120px container to prevent excessive line lengths.
@@ -144,9 +150,9 @@ The layout follows a **Fixed Grid** philosophy for desktop, centering content wi
 ## Elevation & Depth
 Depth is created through **Tonal Layers** and **Low-Contrast Outlines** rather than traditional shadows. 
 
-- **Surfaces:** Use `#F9FAFB` for background blocks or "cards" to distinguish them from the pure white background.
-- **Borders:** Instead of shadows, use 1px solid borders in `#E4E4E7` to define boundaries between interactive elements.
-- **Interactivity:** Elevation is implied by a color shift (e.g., a background change from White to `#F9FAFB`) or a slight increase in border contrast upon hover, rather than a physical lift.
+- **Surfaces:** Use `var(--color-surface)` for background blocks or "cards" to distinguish them from the primary canvas.
+- **Borders:** Instead of shadows, use 1px solid borders in `var(--color-border)` when a clear boundary is needed.
+- **Interactivity:** Elevation is implied by a color shift, such as moving from `var(--color-bg)` to `var(--color-surface)`, or by using the accent scale for active states rather than a physical lift.
 
 ## Shapes
 The shape language is "Soft" (`0.25rem`). This slight rounding takes the edge off the brutalist tendencies of the monochromatic palette without making the UI feel overly playful or "bubbly."
@@ -156,9 +162,9 @@ The shape language is "Soft" (`0.25rem`). This slight rounding takes the edge of
 - **Consistency:** All interactive elements must share the same corner radius to maintain a cohesive, disciplined appearance.
 
 ## Components
-- **Buttons:** Solid Black background with White text for primary actions. Ghost buttons (Black 1px border, transparent background) for secondary actions. Always 4px rounded.
-- **Chips:** Small, `#F9FAFB` background with Zinc (`#71717A`) text. Used for categories or tags.
-- **Inputs:** Minimalist bottom-border or 1px light gray outline. Focused state uses a 1px Black border. No heavy inner shadows.
-- **Cards:** Flat design. No shadow. Defined by a subtle border (`#E4E4E7`) or a tonal shift to `#F9FAFB`. 
-- **Links:** Inline links are underlined or use the Accent Rose color on hover. The transition should be an instant color snap, reflecting the technical nature of the system.
+- **Buttons:** Primary actions use `var(--color-primary)` with high-contrast foreground text. Ghost buttons use a `var(--color-border)` 1px border and transparent background. Always 4px rounded.
+- **Chips:** Small, `var(--color-surface)` background with `var(--color-text-muted)` text. Used for categories or tags.
+- **Inputs:** Minimalist bottom-border or 1px outline. Focused state uses `var(--color-border)`. No heavy inner shadows.
+- **Cards:** Flat design. No shadow. Defined by a subtle border or a tonal shift to `var(--color-surface)`. 
+- **Links:** Inline links are underlined or use the rose accent scale on hover. The transition should be an instant color snap, reflecting the technical nature of the system.
 - **Lists:** Clean, bulletless lists for navigation, using vertical spacing (`stack-md`) and subtle divider lines to separate items.
