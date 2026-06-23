@@ -31,57 +31,6 @@ colors:
     token: 'var(--color-accent-600)'
     value: '#e6526b'
 
-typography:
-  headline:
-    fontFamily: 'var(--font-geist-sans)'
-    fontSize: 'var(--text-5xl)'
-    lineHeight: 'var(--text-5xl--line-height)'
-    fontWeight: 'var(--font-weight-bold)'
-    utility: 'text-5xl font-bold'
-
-  sub-headline:
-    fontFamily: 'var(--font-geist-sans)'
-    fontSize: 'var(--text-lg)'
-    lineHeight: 'var(--text-lg--line-height)'
-    fontWeight: 'var(--font-weight-normal)'
-    utility: 'text-lg font-normal'
-
-  section-title:
-    fontFamily: 'var(--font-geist-sans)'
-    fontSize: 'var(--text-2xl)'
-    lineHeight: 'var(--text-2xl--line-height)'
-    fontWeight: 'var(--font-weight-bold)'
-    utility: 'text-2xl font-bold'
-
-  title:
-    element: 'h3'
-    fontFamily: 'var(--font-geist-sans)'
-    fontSize: 'var(--text-base)'
-    lineHeight: 'var(--text-base--line-height)'
-    fontWeight: 'var(--font-weight-semibold)'
-    utility: 'text-base font-semibold'
-
-  body:
-    fontFamily: 'var(--font-geist-sans)'
-    fontSize: 'var(--text-base)'
-    lineHeight: 'var(--text-base--line-height)'
-    fontWeight: 'var(--font-weight-normal)'
-    utility: 'text-base font-normal'
-
-  body-strong:
-    fontFamily: 'var(--font-geist-sans)'
-    fontSize: 'var(--text-base)'
-    lineHeight: 'var(--text-base--line-height)'
-    fontWeight: 'var(--font-weight-semibold)'
-    utility: 'text-base font-semibold'
-
-  label-md:
-    fontFamily: 'var(--font-geist-sans)'
-    fontSize: 'var(--text-xs)'
-    lineHeight: 'var(--text-xs--line-height)'
-    fontWeight: 'var(--font-weight-medium)'
-    utility: 'text-xs font-medium'
-
 rounded:
   # sm: 0.125rem
   # DEFAULT: 0.25rem
@@ -130,14 +79,17 @@ The design system uses semantic color tokens as the implementation source of tru
 
 Geist Sans sets UI and prose; Geist Mono sets code, data, and tabular figures. Both are open-source.
 
-Typography tokens follow the same rule as color tokens: use Tailwind CSS v4 theme variables and Next font variables as the source of truth. The `typography` map above documents both the CSS variables and the preferred Tailwind utility classes. Agents should use the listed utilities in React markup and only use raw CSS variables when writing CSS.
+Typography should feel crisp, direct, and editorial rather than decorative. Use semantic HTML first, then apply Tailwind typography utilities. Do not replace Tailwind utilities with copied `rem`, `px`, or computed font-weight values unless writing shared CSS.
 
-- **Scale:** Headlines use tight tracking and leading to create a "block" effect.
-- **Body:** Body text is optimized for long-form reading with generous line-height (`1.6`) and standard tracking.
-- **Metadata:** Smaller labels and captions use a slightly heavier weight (`500`) and increased letter spacing to maintain clarity at small scales.
-- **Mobile:** Headline sizes reduce on mobile, but line-height remains consistent to preserve the airy feel.
+- **Hero headline:** Use `h1` with `text-5xl font-bold` on desktop. On smaller screens, reduce the size with responsive utilities such as `text-3xl md:text-5xl`.
+- **Hero subtitle:** Use `text-lg font-normal` for the main supporting sentence. Keep it readable and restrained; do not make subtitle text compete with the headline.
+- **Section title:** Use `h2` with `text-2xl font-bold` on desktop. Current responsive pattern is usually `text-xl md:text-2xl`.
+- **Item title:** Use `h3` with `text-base font-semibold` for project names, contact links, and compact content headings.
+- **Body:** Use `text-base font-normal` for normal prose and descriptions.
+- **Body strong:** Use `text-base font-semibold` when a short phrase needs emphasis without becoming a heading.
+- **Label:** Use `text-xs font-medium` for tags, metadata, compact labels, and low-emphasis UI text.
 
-Implementation rule: do not replace typography tokens with copied `rem`, `px`, numeric font-weight, or browser-computed values. Use Tailwind utilities such as `text-5xl`, `text-lg`, `text-base`, `text-xs`, `font-bold`, `font-semibold`, `font-medium`, and `font-normal`. If raw CSS is required, use variables such as `var(--text-base)`, `var(--text-base--line-height)`, `var(--font-weight-semibold)`, `var(--font-geist-sans)`, or `var(--font-geist-mono)`.
+Use `var(--font-geist-sans)` and `var(--font-geist-mono)` only when writing CSS directly. In React markup, rely on the font variables already attached in `src/app/[lang]/layout.tsx` and use Tailwind utilities for size, weight, and line-height.
 
 ## Layout & Spacing
 The layout follows a **Fixed Grid** philosophy for desktop, centering content within a clean 1120px container to prevent excessive line lengths.
