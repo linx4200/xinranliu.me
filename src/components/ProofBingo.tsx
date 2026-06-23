@@ -32,11 +32,16 @@ const WINNING_LINES = [
 }[];
 
 const TILE_BASE_CLASS = `
-  relative flex aspect-square cursor-pointer items-center justify-center
+  relative flex aspect-square w-full cursor-pointer items-center justify-center
+  overflow-hidden
   px-2
   border-[#1a1b22]/60 dark:border-[#f1effa]/60
-  text-[0.72rem] font-extrabold leading-tight sm:text-[0.88rem]
-  transition-colors
+  text-[0.72rem] font-extrabold leading-tight text-balance sm:text-[0.88rem]
+  [overflow-wrap:anywhere]
+  transition-[background-color,border-color,color,box-shadow,transform]
+  duration-150 ease-out
+  active:scale-[0.985]
+  motion-reduce:transition-colors motion-reduce:active:scale-100
   focus-visible:relative focus-visible:z-10
   focus-visible:outline focus-visible:outline-2
   focus-visible:outline-offset-[-4px] focus-visible:outline-[#b90538]
@@ -46,12 +51,14 @@ const TILE_COMPLETED_CLASS = `
   border-[#1a1b22]/80 dark:border-[#f1effa]/80
   bg-[#b90538] dark:bg-[#ffb2b7]
   text-white dark:text-[#40000d]
-  // ring-2 ring-inset ring-[#1a1b22] dark:ring-[#f1effa]
+  ring-2 ring-inset ring-[#1a1b22] dark:ring-[#f1effa]
 `;
 
 const TILE_SELECTED_CLASS = `
+  border-[#b90538]/80 dark:border-[#ffb2b7]/80
   bg-[#b90538]/10 dark:bg-[#f43f5e]/20
   text-[#b90538] dark:text-[#ffb2b7]
+  ring-1 ring-inset ring-[#b90538]/30 dark:ring-[#ffb2b7]/30
   hover:bg-[#b90538]/8 dark:hover:bg-[#f43f5e]/15
   hover:text-[#b90538] dark:hover:text-[#ffb2b7]
   hover:ring-2 hover:ring-inset hover:ring-[#b90538]/30
@@ -64,7 +71,7 @@ const TILE_IDLE_CLASS = `
 `;
 
 const ACTION_BASE_CLASS = `
-  inline-flex min-h-9 items-center justify-center
+  inline-flex min-h-11 items-center justify-center
   rounded-md px-3
   text-[0.68rem] font-bold uppercase tracking-[0.08em]
   transition-colors
@@ -85,6 +92,21 @@ const SECONDARY_ACTION_CLASS = `
 const RESET_ACTION_CLASS = `
   text-[#4c4546] dark:text-[#cfc4c5]
   hover:bg-[#1a1b22]/5 dark:hover:bg-[#f1effa]/10
+`;
+
+const COMPLETION_PANEL_BASE_CLASS = `
+  absolute inset-0
+  px-4 py-3
+  transition-[opacity,transform] duration-200 ease-out
+  motion-reduce:transform-none motion-reduce:transition-opacity
+`;
+
+const COMPLETION_PANEL_VISIBLE_CLASS = `
+  translate-y-0 opacity-100
+`;
+
+const COMPLETION_PANEL_HIDDEN_CLASS = `
+  pointer-events-none translate-y-1 opacity-0
 `;
 
 export function ProofBingo({
@@ -172,8 +194,8 @@ export function ProofBingo({
             dev-mode="tailwind"
           >
             {tile.label}
+            {/* Winning tiles need a non-color cue so the completed line remains clear for color-blind users. */}
             {completedTileIds.has(tile.id) ? (
-              // Winning tiles need a non-color cue so the completed line remains clear for color-blind users.
               <span
                 aria-hidden="true"
                 className="absolute inset-x-3 bottom-2 h-0.5 rounded-full bg-current"
@@ -184,56 +206,71 @@ export function ProofBingo({
       </div>
 
       <div
-        className={[
-          `
-            h-[8.75rem]
-            px-4 py-3
-            border-t border-[#1a1b22]/60 dark:border-[#f1effa]/60
-          `,
-          completionSummary
-            ? 'flex flex-col justify-between gap-2 overflow-hidden'
-            : 'flex items-center justify-center',
-        ].join(' ')}
-        role="status"
-        aria-live="polite"
-        aria-atomic="true"
+        className="
+          relative h-[14.5rem] overflow-hidden sm:h-[9.25rem]
+          border-t border-[#1a1b22]/60 dark:border-[#f1effa]/60
+        "
         dev-mode="tailwind"
       >
-        {completionSummary ? (
-          <>
-            <p className="overflow-y-auto text-sm font-medium leading-5" dev-mode="tailwind">
-              {completionSummary}
-            </p>
-            <div className="flex flex-col gap-2 sm:flex-row sm:justify-center" dev-mode="tailwind">
-              <Link
-                href="/projects"
-                className={`${ACTION_BASE_CLASS} ${PRIMARY_ACTION_CLASS}`}
-                dev-mode="tailwind"
-              >
-                {completionActions.projects}
-              </Link>
-              <Link
-                href="/contact"
-                className={`${ACTION_BASE_CLASS} ${SECONDARY_ACTION_CLASS}`}
-                dev-mode="tailwind"
-              >
-                {completionActions.cta}
-              </Link>
-              <button
-                type="button"
-                onClick={handleReset}
-                className={`${ACTION_BASE_CLASS} ${RESET_ACTION_CLASS}`}
-                dev-mode="tailwind"
-              >
-                {completionActions.reset}
-              </button>
-            </div>
-          </>
-        ) : (
+        <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+          {completionSummary ?? ''}
+        </p>
+
+        <div
+          className={[
+            COMPLETION_PANEL_BASE_CLASS,
+            'flex items-center justify-center',
+            completionSummary ? COMPLETION_PANEL_HIDDEN_CLASS : COMPLETION_PANEL_VISIBLE_CLASS,
+          ].join(' ')}
+          aria-hidden={Boolean(completionSummary)}
+          dev-mode="tailwind"
+        >
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#4c4546] dark:text-[#cfc4c5]" dev-mode="tailwind">
             {selectedTileIds.size}/3
           </p>
-        )}
+        </div>
+
+        <div
+          className={[
+            COMPLETION_PANEL_BASE_CLASS,
+            'flex flex-col justify-between gap-2 overflow-hidden',
+            completionSummary ? COMPLETION_PANEL_VISIBLE_CLASS : COMPLETION_PANEL_HIDDEN_CLASS,
+          ].join(' ')}
+          aria-hidden={!completionSummary}
+          dev-mode="tailwind"
+        >
+          {completionSummary ? (
+            <>
+              <p className="overflow-y-auto text-sm font-medium leading-5" dev-mode="tailwind">
+                {completionSummary}
+              </p>
+              <div className="flex flex-col gap-2 sm:flex-row sm:justify-center" dev-mode="tailwind">
+                <Link
+                  href="/projects"
+                  className={`${ACTION_BASE_CLASS} ${PRIMARY_ACTION_CLASS}`}
+                  dev-mode="tailwind"
+                >
+                  {completionActions.projects}
+                </Link>
+                <Link
+                  href="/contact"
+                  className={`${ACTION_BASE_CLASS} ${SECONDARY_ACTION_CLASS}`}
+                  dev-mode="tailwind"
+                >
+                  {completionActions.cta}
+                </Link>
+                <button
+                  type="button"
+                  onClick={handleReset}
+                  className={`${ACTION_BASE_CLASS} ${RESET_ACTION_CLASS}`}
+                  dev-mode="tailwind"
+                >
+                  {completionActions.reset}
+                </button>
+              </div>
+            </>
+          ) : null}
+        </div>
       </div>
     </div>
   );
