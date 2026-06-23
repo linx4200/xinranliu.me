@@ -14,20 +14,19 @@ html.dark {
   --color-bg: #fff;
 
   /* 主要容器/卡片背景 */
-  --color-surface: var(--color-stone-50);
-  --color-surface-strong: var(--color-stone-200);
+  --color-surface: var(--color-neutral-50);
+  --color-surface-strong: var(--color-neutral-200);
 
   /* 主要文字 */
   --color-text: #1f1510;
   /* 次要文字 */
-  --color-text-muted: var(--color-stone-500);
+  --color-text-muted: var(--color-neutral-500);
 
-  --color-border: var(--color-zinc-900);
+  --color-border: var(--color-neutral-900);
 
   --color-primary: var(--color-accent-500);
-  /* Primary derived from oklch(71.2% 0.194 13.428) */
   --color-accent-400: #ff7d93;
-  --color-accent-500: #ff637e;
+  --color-accent-500: #ff637e; /* primary-color */
   --color-accent-600: #e6526b;
 }
 
@@ -35,13 +34,13 @@ html.dark {
 html.dark {
   --color-bg: #0f0b09;
 
-  --color-surface: var(--color-stone-800);
-  --color-surface-strong: var(--color-stone-700);
+  --color-surface: var(--color-neutral-800);
+  --color-surface-strong: var(--color-neutral-700);
 
   --color-text: #f2e9e2;
   --color-text-muted: #c8b8ad;
 
-  --color-border: var(--color-stone-500);
+  --color-border: var(--color-neutral-500);
 
   --color-primary: var(--color-amber-800);
   /* Primary derived from oklch(96.9% 0.015 12.422) */
