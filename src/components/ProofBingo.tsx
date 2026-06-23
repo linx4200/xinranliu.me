@@ -32,7 +32,7 @@ const WINNING_LINES = [
 }[];
 
 const TILE_BASE_CLASS = `
-  aspect-square cursor-pointer
+  relative flex aspect-square cursor-pointer items-center justify-center
   px-2
   border-[#1a1b22]/60 dark:border-[#f1effa]/60
   text-[0.72rem] font-extrabold leading-tight sm:text-[0.88rem]
@@ -46,6 +46,7 @@ const TILE_COMPLETED_CLASS = `
   border-[#1a1b22]/80 dark:border-[#f1effa]/80
   bg-[#b90538] dark:bg-[#ffb2b7]
   text-white dark:text-[#40000d]
+  // ring-2 ring-inset ring-[#1a1b22] dark:ring-[#f1effa]
 `;
 
 const TILE_SELECTED_CLASS = `
@@ -171,6 +172,13 @@ export function ProofBingo({
             dev-mode="tailwind"
           >
             {tile.label}
+            {completedTileIds.has(tile.id) ? (
+              // Winning tiles need a non-color cue so the completed line remains clear for color-blind users.
+              <span
+                aria-hidden="true"
+                className="absolute inset-x-3 bottom-2 h-0.5 rounded-full bg-current"
+              />
+            ) : null}
           </button>
         ))}
       </div>
@@ -186,8 +194,9 @@ export function ProofBingo({
             ? 'flex flex-col justify-between gap-2 overflow-hidden'
             : 'flex items-center justify-center',
         ].join(' ')}
-        role={completionSummary ? 'status' : undefined}
-        aria-live={completionSummary ? 'polite' : undefined}
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
         dev-mode="tailwind"
       >
         {completionSummary ? (
