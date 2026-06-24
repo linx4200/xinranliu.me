@@ -169,6 +169,20 @@ npm run lint
 4. 完成后做 lint、必要构建和手动核验。
 5. 如果引入了新约束或新模式，补文档。
 
+## 本地 Dev Server 与浏览器验证约束
+
+- 在启动 `npm run dev` 前，必须先检查是否已经有同一项目的 dev server 在运行：
+  - 优先用 `lsof -nP -iTCP:3000 -sTCP:LISTEN`
+  - 如发现监听进程的 `cwd` 是当前项目目录，直接复用现有服务。
+- 不要在已有同项目 `http://localhost:3000` 服务时再次运行 `npm run dev`。Next.js 会自动避让到 `3001`，这会造成验证 URL 混乱和重复进程。
+- 浏览器验证必须使用实际存在的服务地址。默认优先访问：
+  - `http://localhost:3000/en`
+  - `http://localhost:3000/zh`
+- 不要把 `3001` 当作默认验证端口。只有在明确从 dev server 输出中看到当前服务运行在 `3001`，并且确认 `3000` 不是本项目服务时，才使用 `3001`。
+- 如果命令行里的 `curl` / `nc` 因沙箱或本机网络限制无法连接本地端口，不要据此反复重启 dev server；应改用浏览器验证或检查 dev server 日志。
+- 不要擅自 kill 现有 dev server，除非 Owner 明确要求，或确认它不是当前项目且正在阻塞本次任务。
+- 访问本地站点时优先使用 `localhost`，不要随意切换到 `127.0.0.1`，避免触发 Next.js dev origin 限制。
+
 ## 常用命令
 
 ```bash
