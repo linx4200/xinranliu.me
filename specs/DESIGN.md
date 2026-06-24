@@ -30,23 +30,6 @@ colors:
   accent-600:
     token: 'var(--color-accent-600)'
     value: '#e6526b'
-
-rounded:
-  # sm: 0.125rem
-  # DEFAULT: 0.25rem
-  # md: 0.375rem
-  # lg: 0.5rem
-  # xl: 0.75rem
-  # full: 9999px
-
-spacing:
-  container-max: 1120px
-  gutter: 24px
-  margin-mobile: 20px
-  stack-sm: 8px
-  stack-md: 16px
-  stack-lg: 32px
-  section-gap: 80px
 ---
 
 # Precision Minimalist
@@ -91,32 +74,57 @@ Typography should feel crisp, direct, and editorial rather than decorative. Use 
 
 Use `var(--font-geist-sans)` and `var(--font-geist-mono)` only when writing CSS directly. In React markup, rely on the font variables already attached in `src/app/[lang]/layout.tsx` and use Tailwind utilities for size, weight, and line-height.
 
-## Layout & Spacing
-The layout follows a **Fixed Grid** philosophy for desktop, centering content within a clean 1120px container to prevent excessive line lengths.
+## Layout
 
-- **Grid:** A 12-column system is used, but content typically occupies the central 8 or 10 columns to increase white space on the peripheries.
-- **Vertical Rhythm:** Sections are separated by large gaps (`80px`+) to allow the design to "breathe." 
-- **Mobile:** On smaller screens, margins transition to `20px` and the layout collapses to a single-column stack. 
-- **Alignment:** Strict horizontal alignment is required; elements should align to the left edge of the typographic container to reinforce the structured, orderly feel.
+The site uses a centered desktop shell with a restrained maximum width. Pages should feel intentionally framed rather than full-bleed, with content aligned to a shared vertical axis across navigation, page sections, and footer.
 
-## Elevation & Depth
-Depth is created through **Tonal Layers** and **Low-Contrast Outlines** rather than traditional shadows. 
+Each route follows the same structural frame: navigation header, main content, and footer. The header and footer stay consistent across language routes and subpages; individual pages should only define the content inside `<main>`.
 
-- **Surfaces:** Use `var(--color-surface)` for background blocks or "cards" to distinguish them from the primary canvas.
-- **Borders:** Instead of shadows, use 1px solid borders in `var(--color-border)` when a clear boundary is needed.
-- **Interactivity:** Elevation is implied by a color shift, such as moving from `var(--color-bg)` to `var(--color-surface)`, or by using the accent scale for active states rather than a physical lift.
+Desktop layouts may use multiple columns for comparison, project cards, and contact options, but they should stay quiet and grid-led. Mobile layouts collapse to a focused single column with fewer simultaneous choices.
+
+Implementation note: the current desktop shell is implemented with `lg:w-5xl mx-auto`. Keep new page-level layouts aligned to that shell unless the design intentionally calls for a different container.
+
+## Spacing
+
+Spacing follows a simple three-step rhythm: compact spacing inside a group, medium spacing between related groups, and generous spacing between major sections.
+
+Sections need enough vertical separation to feel calm and breathable, but spacing should come from the shared rhythm rather than arbitrary margins.
+
+Cards use consistent internal padding. In multi-card rows, cards should distribute evenly across the parent width and keep enough gap for each card to read as an independent item.
+
+Implementation note: the current spacing rhythm maps to `calc(var(--spacing) * 5)` inside a group, `calc(var(--spacing) * 10)` between related groups, and `calc(var(--spacing) * 20)` between major sections.
+
 
 ## Shapes
-The shape language is "Soft" (`0.25rem`). This slight rounding takes the edge off the brutalist tendencies of the monochromatic palette without making the UI feel overly playful or "bubbly."
 
-- **Base Radius:** 4px for buttons, input fields, and small UI components.
-- **Large Radius:** 8px (`rounded-lg`) for container blocks or large imagery.
-- **Consistency:** All interactive elements must share the same corner radius to maintain a cohesive, disciplined appearance.
+The shape language is "Soft" (`0.375rem` to `0.5rem`). This slight rounding takes the edge off the brutalist tendencies of the monochromatic palette without making the UI feel overly playful or "bubbly."
+
+- **Consistency:** Interactive elements of the same type must share the same corner radius to maintain a cohesive, disciplined appearance. Do not mix pill buttons, squared buttons, and soft rectangular buttons within the same action family.
 
 ## Components
-- **Buttons:** Primary actions use `var(--color-primary)` with high-contrast foreground text. Ghost buttons use a `var(--color-border)` 1px border and transparent background. Always 4px rounded.
-- **Chips:** Small, `var(--color-surface)` background with `var(--color-text-muted)` text. Used for categories or tags.
-- **Inputs:** Minimalist bottom-border or 1px outline. Focused state uses `var(--color-border)`. No heavy inner shadows.
-- **Cards:** Flat design. No shadow. Defined by a subtle border or a tonal shift to `var(--color-surface)`. 
-- **Links:** Inline links are underlined or use the rose accent scale on hover. The transition should be an instant color snap, reflecting the technical nature of the system.
-- **Lists:** Clean, bulletless lists for navigation, using vertical spacing (`stack-md`) and subtle divider lines to separate items.
+
+- **Buttons:** Text CTA buttons are the main button family. Use the shared `CTAButton` component rather than hand-writing page-level button classes. CTA buttons use `inline-flex`, `min-h-11`, `px-5`, `py-2.5`, `text-sm`, `font-medium`, `rounded-lg`, and a 1px border. The shape is a soft rectangle, not a pill.
+
+  - **Primary CTA:** Use for the strongest conversion action in a group, such as hiring on Upwork. Style with `bg-primary`, `border-primary`, and high-contrast foreground text. Hover moves to the stronger accent state (`accent-600`) rather than adding shadow or scale.
+  - **Secondary CTA:** Use for supporting actions, such as Contact Me, LinkedIn, and GitHub. Style with transparent background, `text-text`, and a quiet low-opacity border. Hover may shift to the primary accent through border, background tint, and text color.
+  - **Disabled CTA:** Keep the same size, radius, and variant color as the enabled CTA, then add reduced opacity and a not-allowed cursor. Do not introduce a separate disabled shape.
+  - **Responsive behavior:** Contact-page CTA buttons are full width on mobile and return to content width from the `md` breakpoint. Homepage CTA buttons may stay content width because they sit in centered, isolated action areas.
+  - **Scope:** Navigation text links, icon-only controls, Developer Mode controls, and project-card icon links are not CTA buttons. They should stay visually distinct and follow their own component-level interaction patterns.
+
+- **Chips:** Chips are compact metadata for tags, categories, and short skill labels. Keep copy brief, use `text-xs`, compact padding, `rounded-full`, `bg-surface` or `bg-surface-strong`, and `text-text-muted`. Do not use `bg-primary` for ordinary metadata; reserve interaction states for chips that actually filter or navigate.
+
+- **Cards:** Cards are quiet content containers, not decorative panels. Prefer flat tonal separation with `bg-surface`, `rounded-md`, and consistent padding, currently `p-5`. Prefer no border by default; add a low-opacity 1px border only when the card needs clearer separation. Avoid shadows, nested cards, scale effects, and layout movement on hover.
+
+- **Links:** Links should stay text-first and visually lighter than CTA buttons. Use semantic anchors or the shared locale-aware `Link` component for internal routes. Inline links may use an underline; navigation and utility links may rely on inherited text color with `text-primary` for active states and restrained rose-accent hover. Icon-only links need an `aria-label`; external links use `target="_blank"` with `rel="noreferrer noopener"`.
+
+# Voice & Content
+
+Copy is part of the design; keep it precise and free of filler.
+
+- Use Title Case for labels, buttons, titles, and tabs; sentence case for body, helper text, and toasts.
+- Name actions with a verb and a noun (`Deploy Project`, `Delete Member`), never `Confirm`, `OK`, or a bare verb.
+- Write errors as what happened plus what to do next: `Build failed. Bundle exceeds 50 MB. Reduce it or raise the limit.`
+- Toasts name the specific thing that changed, drop the trailing period, and never say `successfully`: `Project deleted`, not `Successfully deleted the project.`
+- Empty states point to the first action: `No deployments yet. Push to your Git repository to create one.`
+- Use the present participle with an ellipsis for in-progress states: `Deploying…`, `Saving…`.
+- Use numerals (`3 projects`), curly quotes, and the ellipsis character; skip `please` and marketing superlatives.
