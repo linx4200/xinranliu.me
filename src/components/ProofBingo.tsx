@@ -34,64 +34,61 @@ const WINNING_LINES = [
 const TILE_BASE_CLASS = `
   relative flex aspect-square w-full cursor-pointer items-center justify-center
   overflow-hidden
-  px-2
-  border-[#1a1b22]/60 dark:border-[#f1effa]/60
-  text-[0.72rem] font-extrabold leading-tight text-balance sm:text-[0.88rem]
+  px-2.5 sm:px-3
+  border-border/15
+  bg-bg/45
+  text-[0.72rem] font-medium leading-snug text-balance text-text sm:text-[0.84rem]
   [overflow-wrap:anywhere]
   transition-[background-color,border-color,color,box-shadow,transform]
-  duration-150 ease-out
-  active:scale-[0.985]
-  motion-reduce:transition-colors motion-reduce:active:scale-100
+  duration-200 ease-out
+  active:translate-y-px
+  motion-reduce:transition-colors motion-reduce:active:translate-y-0
   focus-visible:relative focus-visible:z-10
   focus-visible:outline focus-visible:outline-2
-  focus-visible:outline-offset-[-4px] focus-visible:outline-[#b90538]
+  focus-visible:outline-offset-[-4px] focus-visible:outline-primary
 `;
 
 const TILE_COMPLETED_CLASS = `
-  border-[#1a1b22]/80 dark:border-[#f1effa]/80
-  bg-[#b90538] dark:bg-[#ffb2b7]
-  text-white dark:text-[#40000d]
-  ring-2 ring-inset ring-[#1a1b22] dark:ring-[#f1effa]
+  border-primary/80
+  bg-primary/12
+  font-semibold text-text
+  ring-1 ring-inset ring-primary/45
 `;
 
 const TILE_SELECTED_CLASS = `
-  border-[#b90538]/80 dark:border-[#ffb2b7]/80
-  bg-[#b90538]/10 dark:bg-[#f43f5e]/20
-  text-[#b90538] dark:text-[#ffb2b7]
-  ring-1 ring-inset ring-[#b90538]/30 dark:ring-[#ffb2b7]/30
-  hover:bg-[#b90538]/8 dark:hover:bg-[#f43f5e]/15
-  hover:text-[#b90538] dark:hover:text-[#ffb2b7]
-  hover:ring-2 hover:ring-inset hover:ring-[#b90538]/30
+  border-primary/65
+  bg-primary/8
+  text-text
+  ring-1 ring-inset ring-primary/25
+  hover:bg-primary/10
+  hover:ring-primary/35
 `;
 
 const TILE_IDLE_CLASS = `
-  hover:bg-[#b90538]/8 dark:hover:bg-[#f43f5e]/15
-  hover:text-[#b90538] dark:hover:text-[#ffb2b7]
-  hover:ring-2 hover:ring-inset hover:ring-[#b90538]/30
+  hover:border-primary/45
+  hover:bg-primary/5
 `;
 
 const ACTION_BASE_CLASS = `
   inline-flex min-h-11 items-center justify-center
-  rounded-md px-3
-  text-[0.68rem] font-bold uppercase tracking-[0.08em]
-  transition-colors
+  rounded-lg border px-5 py-2.5
+  text-sm font-medium
+  transition-colors duration-200 ease-out
 `;
 
 const PRIMARY_ACTION_CLASS = `
-  border border-[#1a1b22] dark:border-[#f1effa]
-  bg-[#1a1b22] dark:bg-[#f1effa]
-  text-[#fff9f1] dark:text-[#151313]
-  hover:bg-[#1a1b22]/85 dark:hover:bg-[#f1effa]/85
+  border-primary bg-primary text-white
+  hover:border-accent-600 hover:bg-accent-600
 `;
 
 const SECONDARY_ACTION_CLASS = `
-  border border-[#1a1b22] dark:border-[#f1effa]
-  hover:bg-[#1a1b22]/5 dark:hover:bg-[#f1effa]/10
+  border-border/25 bg-transparent text-text
+  hover:border-primary hover:bg-primary/5 hover:text-primary
 `;
 
 const RESET_ACTION_CLASS = `
-  text-[#4c4546] dark:text-[#cfc4c5]
-  hover:bg-[#1a1b22]/5 dark:hover:bg-[#f1effa]/10
+  border-transparent text-text-muted
+  hover:border-border/20 hover:bg-bg/60 hover:text-text
 `;
 
 const COMPLETION_PANEL_BASE_CLASS = `
@@ -151,9 +148,9 @@ export function ProofBingo({
     <div
       className="
         w-full overflow-hidden rounded-md
-        border border-[#1a1b22]/70 dark:border-[#f1effa]/70
-        bg-[#fffaf4] dark:bg-[#151313]
-        text-center text-[#1a1b22] dark:text-[#f1effa]
+        border border-border/20
+        bg-surface
+        text-center text-text
       "
       aria-label="Proof Bingo"
       data-dev-mode-react-name="ProofBingo"
@@ -161,13 +158,13 @@ export function ProofBingo({
     >
       <div
         className="
-          px-4 py-2
-          border-b border-[#1a1b22]/60 dark:border-[#f1effa]/60
-          text-[#4c4546] dark:text-[#cfc4c5]
+          px-5 py-3
+          border-b border-border/15
+          text-text-muted
         "
         dev-mode="tailwind"
       >
-        <p className="text-[0.55rem] font-semibold uppercase tracking-[0.22em] sm:text-[0.62rem]" dev-mode="tailwind">
+        <p className="text-xs font-medium uppercase tracking-[0.18em]" dev-mode="tailwind">
           {title}
         </p>
       </div>
@@ -189,7 +186,7 @@ export function ProofBingo({
                 : selectedTileIds.has(tile.id)
                   ? TILE_SELECTED_CLASS
                   : TILE_IDLE_CLASS,
-              'disabled:cursor-default disabled:hover:ring-0',
+              'disabled:cursor-default disabled:active:translate-y-0',
             ].join(' ')}
             dev-mode="tailwind"
           >
@@ -198,7 +195,7 @@ export function ProofBingo({
             {completedTileIds.has(tile.id) ? (
               <span
                 aria-hidden="true"
-                className="absolute inset-x-3 bottom-2 h-0.5 rounded-full bg-current"
+                className="absolute inset-x-4 bottom-2 h-0.5 rounded-full bg-primary"
               />
             ) : null}
           </button>
@@ -208,7 +205,7 @@ export function ProofBingo({
       <div
         className="
           relative h-[14.5rem] overflow-hidden sm:h-[9.25rem]
-          border-t border-[#1a1b22]/60 dark:border-[#f1effa]/60
+          border-t border-border/15
         "
         dev-mode="tailwind"
       >
@@ -225,7 +222,7 @@ export function ProofBingo({
           aria-hidden={Boolean(completionSummary)}
           dev-mode="tailwind"
         >
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#4c4546] dark:text-[#cfc4c5]" dev-mode="tailwind">
+          <p className="text-xs font-medium uppercase tracking-[0.16em] text-text-muted" dev-mode="tailwind">
             {selectedTileIds.size}/3
           </p>
         </div>
@@ -241,7 +238,7 @@ export function ProofBingo({
         >
           {completionSummary ? (
             <>
-              <p className="overflow-y-auto text-sm font-medium leading-5" dev-mode="tailwind">
+              <p className="overflow-y-auto text-sm font-medium leading-6 text-text" dev-mode="tailwind">
                 {completionSummary}
               </p>
               <div className="flex flex-col gap-2 sm:flex-row sm:justify-center" dev-mode="tailwind">
