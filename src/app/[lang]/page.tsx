@@ -1,6 +1,7 @@
 import Link from '@/components/Link';
 import { HomePageJsonLd } from '@/components/JsonLd';
 
+import { CTAButton } from '@/components/CTAButton';
 import { SayHi } from '@/components/SayHi';
 import { DevModeToggle } from '@/components/developer-mode/Toggle';
 import { SelectedProjectsList } from '@/components/SelectedProjectsList';
@@ -55,9 +56,7 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
         <div className="w-full max-w-md lg:max-w-none mx-auto py-10 px-4 lg:px-0 bg-surface text-center" dev-mode="tailwind">
           <h2 id="contact-heading" className="text-xl md:text-2xl font-bold mb-5" dev-mode="tailwind">{dict.home.sections.contact.title}</h2>
           <p className="text-base text-text-muted mb-8" dev-mode="tailwind">{dict.home.sections.contact.description}</p>
-          <Link className="inline-block py-2 px-4
-          border border-solid rounded-lg
-          text-base border-primary text-primary hover:bg-primary/5 transition-colors" href="/contact" dev-mode="tailwind">{dict.home.sections.contact.button}</Link>
+          <CTAButton href={`/${lang}/contact`}>{dict.home.sections.contact.button}</CTAButton>
         </div>
       </section>
     </>

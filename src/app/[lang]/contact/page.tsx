@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 import { Availability } from '@/components/Availability';
+import { CTAButton } from '@/components/CTAButton';
 import { getDictionary } from '@/dictionaries';
 import { buildPageMetadata } from '@/lib/seo';
 
@@ -23,40 +24,6 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     description: dict.metadata.contact.description,
   });
 }
-
-const CTAButton = ({ text, link, type = 'normal' }: { text: string, link?: string, type?: 'primary' | 'normal' }) => {
-  const isDisabled = !link;
-  const variantClassName = type === 'normal'
-    ? 'border-stone-300 dark:border-stone-600 text-stone-700 dark:text-stone-300 bg-white dark:bg-surface-strong'
-    : 'border-transparent bg-primary text-white';
-  const hoverClassName = isDisabled
-    ? 'cursor-not-allowed opacity-60'
-    : type === 'normal'
-      ? 'hover:border-stone-400 dark:hover:border-stone-500 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-100 dark:hover:bg-stone-700'
-      : 'hover:bg-primary/90';
-  /* Responsive button: full width on mobile, auto on desktop */
-  const responsiveClassName = 'w-full md:w-auto';
-  const sharedClassName = `inline-flex justify-center px-5 py-3 md:py-2 rounded-full border text-sm font-medium tracking-wide transition-all duration-200 ease-out ${variantClassName} ${hoverClassName} ${responsiveClassName}`;
-
-  if (isDisabled) {
-    return (
-      <button type="button" className={sharedClassName} disabled aria-disabled>
-        {text}
-      </button>
-    );
-  }
-
-  return (
-    <a
-      href={link}
-      target='_blank'
-      rel="noreferrer noopener"
-      className={sharedClassName}
-    >
-      {text}
-    </a>
-  );
-};
 
 export default async function Page({ params }: PageProps<'/[lang]'>) {
 
@@ -113,7 +80,9 @@ export default async function Page({ params }: PageProps<'/[lang]'>) {
             <h3 className="font-semibold mb-1 md:mb-2 text-lg md:text-base" dev-mode="tailwind">{dict.contact.links.linkedin.title}</h3>
             <p className="text-text-muted text-sm md:text-base" dev-mode="tailwind">{dict.contact.links.linkedin.description}</p>
           </div>
-          <CTAButton text={dict.contact.links.linkedin.button} link="https://www.linkedin.com/in/xinran-liu-502897318" />
+          <CTAButton href="https://www.linkedin.com/in/xinran-liu-502897318" fullWidthOnMobile>
+            {dict.contact.links.linkedin.button}
+          </CTAButton>
         </div>
 
         <div className="flex flex-col md:flex-row md:justify-between mt-5 md:items-center gap-3" dev-mode="tailwind">
@@ -121,7 +90,9 @@ export default async function Page({ params }: PageProps<'/[lang]'>) {
             <h3 className="font-semibold mb-1 md:mb-2 text-lg md:text-base" dev-mode="tailwind">{dict.contact.links.github.title}</h3>
             <p className="text-text-muted text-sm md:text-base" dev-mode="tailwind">{dict.contact.links.github.description}</p>
           </div>
-          <CTAButton text={dict.contact.links.github.button} link="https://github.com/linx4200" />
+          <CTAButton href="https://github.com/linx4200" fullWidthOnMobile>
+            {dict.contact.links.github.button}
+          </CTAButton>
         </div>
       </section>
 
@@ -133,7 +104,9 @@ export default async function Page({ params }: PageProps<'/[lang]'>) {
             <h3 className="font-semibold mb-1 md:mb-2 text-lg md:text-base" dev-mode="tailwind">{dict.contact.links.upwork.title}</h3>
             <p className="text-text-muted text-sm md:text-base" dev-mode="tailwind">{dict.contact.links.upwork.description}</p>
           </div>
-          <CTAButton text={dict.contact.links.upwork.button} link="https://www.upwork.com/freelancers/~01ac39294b49d6fc88?mp_source=share" type="primary" />
+          <CTAButton href="https://www.upwork.com/freelancers/~01ac39294b49d6fc88?mp_source=share" variant="primary" fullWidthOnMobile>
+            {dict.contact.links.upwork.button}
+          </CTAButton>
         </div>
 
         <div className="flex flex-col md:flex-row md:justify-between mt-5 md:items-center gap-3" dev-mode="tailwind">
@@ -141,7 +114,9 @@ export default async function Page({ params }: PageProps<'/[lang]'>) {
             <h3 className="font-semibold mb-1 md:mb-2 text-lg md:text-base" dev-mode="tailwind">{dict.contact.links.fiverr.title}</h3>
             <p className="text-text-muted text-sm md:text-base" dev-mode="tailwind">{dict.contact.links.fiverr.description}</p>
           </div>
-          <CTAButton text={dict.contact.links.fiverr.button} type="primary" />
+          <CTAButton variant="primary" fullWidthOnMobile>
+            {dict.contact.links.fiverr.button}
+          </CTAButton>
         </div>
       </section>
     </div>
