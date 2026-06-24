@@ -35,9 +35,8 @@ const TILE_BASE_CLASS = `
   relative flex aspect-square w-full cursor-pointer items-center justify-center
   overflow-hidden
   px-2.5 sm:px-3
-  border-border/15
   bg-bg/45
-  text-[0.72rem] font-medium leading-snug text-balance text-text sm:text-[0.84rem]
+  text-[0.68rem] font-medium leading-snug text-balance text-text sm:text-[0.8rem]
   [overflow-wrap:anywhere]
   transition-[background-color,border-color,color,box-shadow,transform]
   duration-200 ease-out
@@ -49,30 +48,26 @@ const TILE_BASE_CLASS = `
 `;
 
 const TILE_COMPLETED_CLASS = `
-  border-primary/80
   bg-primary/12
   font-semibold text-text
-  ring-1 ring-inset ring-primary/45
 `;
 
 const TILE_SELECTED_CLASS = `
-  border-primary/65
   bg-primary/8
   text-text
-  ring-1 ring-inset ring-primary/25
   hover:bg-primary/10
-  hover:ring-primary/35
 `;
 
 const TILE_IDLE_CLASS = `
-  hover:border-primary/45
   hover:bg-primary/5
 `;
 
+// Proof Bingo has a compact completion panel, so its actions intentionally use
+// smaller metrics than the global CTAButton while keeping the same shape language.
 const ACTION_BASE_CLASS = `
-  inline-flex min-h-11 items-center justify-center
-  rounded-lg border px-5 py-2.5
-  text-sm font-medium
+  inline-flex min-h-9 items-center justify-center
+  rounded-md border px-3 py-1.5
+  text-xs font-medium
   transition-colors duration-200 ease-out
 `;
 
@@ -106,6 +101,67 @@ const COMPLETION_PANEL_HIDDEN_CLASS = `
   pointer-events-none translate-y-1 opacity-0
 `;
 
+type ActiveTileEdgesProps = {
+  completed: boolean;
+  edges: {
+    top: boolean;
+    right: boolean;
+    bottom: boolean;
+    left: boolean;
+  };
+};
+
+const ACTIVE_TILE_EDGE_CLASS = 'pointer-events-none absolute bg-primary';
+const TILE_SEPARATOR_CLASS = 'pointer-events-none absolute bg-border/15';
+
+function TileSeparators({
+  index,
+  selectedTileIds,
+  tileIds,
+}: {
+  index: number;
+  selectedTileIds: Set<string>;
+  tileIds: string[];
+}) {
+  const isSelected = selectedTileIds.has(tileIds[index]);
+  const rightNeighborIsSelected = selectedTileIds.has(tileIds[index + 1]);
+  const bottomNeighborIsSelected = selectedTileIds.has(tileIds[index + 3]);
+  const showRight = index % 3 !== 2 && !isSelected && !rightNeighborIsSelected;
+  const showBottom = index < 6 && !isSelected && !bottomNeighborIsSelected;
+
+  return (
+    <>
+      {showRight ? (
+        <span aria-hidden="true" className={`${TILE_SEPARATOR_CLASS} inset-y-0 right-0 w-px`} />
+      ) : null}
+      {showBottom ? (
+        <span aria-hidden="true" className={`${TILE_SEPARATOR_CLASS} inset-x-0 bottom-0 h-px`} />
+      ) : null}
+    </>
+  );
+}
+
+function ActiveTileEdges({ completed, edges }: ActiveTileEdgesProps) {
+  const edgeColorClass = completed ? 'opacity-100' : 'opacity-70';
+
+  return (
+    <>
+      {edges.top ? (
+        <span aria-hidden="true" className={`${ACTIVE_TILE_EDGE_CLASS} ${edgeColorClass} inset-x-0 top-0 h-px`} />
+      ) : null}
+      {edges.right ? (
+        <span aria-hidden="true" className={`${ACTIVE_TILE_EDGE_CLASS} ${edgeColorClass} inset-y-0 right-0 w-px`} />
+      ) : null}
+      {edges.bottom ? (
+        <span aria-hidden="true" className={`${ACTIVE_TILE_EDGE_CLASS} ${edgeColorClass} inset-x-0 bottom-0 h-px`} />
+      ) : null}
+      {edges.left ? (
+        <span aria-hidden="true" className={`${ACTIVE_TILE_EDGE_CLASS} ${edgeColorClass} inset-y-0 left-0 w-px`} />
+      ) : null}
+    </>
+  );
+}
+
 export function ProofBingo({
   title,
   tiles,
@@ -119,6 +175,13 @@ export function ProofBingo({
   const completedLine = WINNING_LINES.find((line) => line.id === completedLineId);
   const completedTileIds = new Set(completedLine?.indexes.map((index) => tileIds[index]) ?? []);
   const completionSummary = completedLineId ? completionSummaries[completedLineId].summary : null;
+
+  const getActiveTileEdges = (index: number, activeTileIds: Set<string>) => ({
+    top: index < 3 || !activeTileIds.has(tileIds[index - 3]),
+    right: true,
+    bottom: true,
+    left: index % 3 === 0 || !activeTileIds.has(tileIds[index - 1]),
+  });
 
   const handleReset = () => {
     setSelectedTileIds(new Set());
@@ -140,7 +203,11 @@ export function ProofBingo({
       line.indexes.every((index) => nextSelectedTileIds.has(tileIds[index])),
     );
 
-    setSelectedTileIds(nextSelectedTileIds);
+    setSelectedTileIds(
+      nextCompletedLine
+        ? new Set(nextCompletedLine.indexes.map((index) => tileIds[index]))
+        : nextSelectedTileIds,
+    );
     setCompletedLineId(nextCompletedLine?.id ?? null);
   };
 
@@ -158,7 +225,7 @@ export function ProofBingo({
     >
       <div
         className="
-          px-5 py-3
+          px-4 py-2.5
           border-b border-border/15
           text-text-muted
         "
@@ -170,41 +237,40 @@ export function ProofBingo({
       </div>
 
       <div className="grid grid-cols-3" dev-mode="tailwind">
-        {tiles.map((tile, index) => (
-          <button
-            key={tile.id}
-            type="button"
-            aria-pressed={selectedTileIds.has(tile.id)}
-            disabled={Boolean(completedLineId)}
-            onClick={() => handleTileToggle(tile.id)}
-            className={[
-              TILE_BASE_CLASS,
-              index % 3 === 2 ? '' : 'border-r',
-              index < 6 ? 'border-b' : '',
-              completedTileIds.has(tile.id)
-                ? TILE_COMPLETED_CLASS
-                : selectedTileIds.has(tile.id)
-                  ? TILE_SELECTED_CLASS
-                  : TILE_IDLE_CLASS,
-              'disabled:cursor-default disabled:active:translate-y-0',
-            ].join(' ')}
-            dev-mode="tailwind"
-          >
-            {tile.label}
-            {/* Winning tiles need a non-color cue so the completed line remains clear for color-blind users. */}
-            {completedTileIds.has(tile.id) ? (
-              <span
-                aria-hidden="true"
-                className="absolute inset-x-4 bottom-2 h-0.5 rounded-full bg-primary"
-              />
-            ) : null}
-          </button>
-        ))}
+        {tiles.map((tile, index) => {
+          const isSelected = selectedTileIds.has(tile.id);
+          const isCompleted = completedTileIds.has(tile.id);
+
+          return (
+            <button
+              key={tile.id}
+              type="button"
+              aria-pressed={isSelected}
+              disabled={Boolean(completedLineId)}
+              onClick={() => handleTileToggle(tile.id)}
+              className={[
+                TILE_BASE_CLASS,
+                isCompleted ? TILE_COMPLETED_CLASS : isSelected ? TILE_SELECTED_CLASS : TILE_IDLE_CLASS,
+                'disabled:cursor-default disabled:active:translate-y-0',
+              ].join(' ')}
+              dev-mode="tailwind"
+            >
+              <TileSeparators index={index} selectedTileIds={selectedTileIds} tileIds={tileIds} />
+              {tile.label}
+              {isSelected ? (
+                <ActiveTileEdges
+                  completed={isCompleted}
+                  edges={getActiveTileEdges(index, selectedTileIds)}
+                />
+              ) : null}
+            </button>
+          );
+        })}
       </div>
 
       <div
         className="
-          relative h-[14.5rem] overflow-hidden sm:h-[9.25rem]
+          relative h-[12.5rem] overflow-hidden sm:h-[8.5rem]
           border-t border-border/15
         "
         dev-mode="tailwind"
