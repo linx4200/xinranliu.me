@@ -38,7 +38,7 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
         aria-labelledby="hero-heading"
         dev-mode="tailwind"
       >
-        <div className="flex-[1.05] text-center mb-8 lg:m-0 lg:text-left" dev-mode="tailwind">
+        <div className="flex-1 text-center mb-8 lg:m-0 lg:text-left" dev-mode="tailwind">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-text-muted" dev-mode="tailwind">
             {dict.home.hero.subline}
           </p>
@@ -70,7 +70,7 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
           </div>
         </div>
 
-        <div className="flex-[.95]" dev-mode="tailwind">
+        <div className="flex-1" dev-mode="tailwind">
           <ProofBingo {...proofBingo} />
         </div>
       </section>

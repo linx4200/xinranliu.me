@@ -29,11 +29,7 @@ export type ProofBingoTile = {
 
 export type ProofBingoCopy = {
   title: LocalizedCopy;
-  completionActions: {
-    projects: LocalizedCopy;
-    cta: LocalizedCopy;
-    reset: LocalizedCopy;
-  };
+  resetLabel: LocalizedCopy;
   completionSummaries: Record<
     ProofBingoLineId,
     {
@@ -140,19 +136,9 @@ export const proofBingoCopy: ProofBingoCopy = {
     en: 'Pick any three proof points',
     zh: '点亮任意三个证据点',
   },
-  completionActions: {
-    projects: {
-      en: 'View Projects',
-      zh: '查看项目',
-    },
-    cta: {
-      en: 'Hire Xinran',
-      zh: '联系 Xinran',
-    },
-    reset: {
-      en: 'Reset',
-      zh: '重置',
-    },
+  resetLabel: {
+    en: 'Reset',
+    zh: '重置',
   },
   completionSummaries: {
     'top-row': {

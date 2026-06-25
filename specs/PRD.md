@@ -121,7 +121,7 @@ type AvailabilityResponse =
 - Project cards are semantic article-like units with image/placeholder, title, description, tags, and optional external links.
 - Project image hover variants are allowed when they clarify or enrich the presentation, but the base state must remain complete and accessible.
 - Developer Mode remains a desktop-oriented differentiator and should not expose full complex interactions on mobile.
-- The homepage hero should fit as a focused first-screen experience on desktop: concise positioning copy, View Projects and Hire Me CTAs, and Proof Bingo as the core visual interaction. Proof Bingo completion should provide a localized summary, project/contact CTAs, and a reset control so the interaction closes the trust-building loop.
+- The homepage hero should fit as a focused first-screen experience on desktop: concise positioning copy, View Projects and Hire Me CTAs, and Proof Bingo as the core visual interaction. Proof Bingo completion should provide a localized summary and a reset control; project/contact conversion remains handled by the always-visible hero CTAs to avoid duplicated actions.
 - Developer Mode global state is managed through a small store with enabled status, active mode, and hero-section visibility.
 - Developer Mode currently supports React and Tailwind modes. The Next.js mode is reserved in the state shape but not a committed user-facing mode.
 - React mode relies on explicit component markers and generated metadata. If marked components or prop shapes change, metadata generation must be rerun.

@@ -2,10 +2,8 @@
 
 import { useMemo, useState } from 'react';
 
-import Link from '@/components/Link';
 import type { ProofBingoLineId } from '@/data/proof-bingo';
 import type {
-  LocalizedProofBingoCompletionActions,
   LocalizedProofBingoCompletionSummaries,
   LocalizedProofBingoTile,
 } from '@/services/proof-bingo';
@@ -13,7 +11,7 @@ import type {
 type ProofBingoProps = {
   title: string;
   tiles: LocalizedProofBingoTile[];
-  completionActions: LocalizedProofBingoCompletionActions;
+  resetLabel: string;
   completionSummaries: LocalizedProofBingoCompletionSummaries;
 };
 
@@ -69,16 +67,6 @@ const ACTION_BASE_CLASS = `
   rounded-md border px-3 py-1.5
   text-xs font-medium
   transition-colors duration-200 ease-out
-`;
-
-const PRIMARY_ACTION_CLASS = `
-  border-primary bg-primary text-white
-  hover:border-accent-600 hover:bg-accent-600
-`;
-
-const SECONDARY_ACTION_CLASS = `
-  border-border/25 bg-transparent text-text
-  hover:border-primary hover:bg-primary/5 hover:text-primary
 `;
 
 const RESET_ACTION_CLASS = `
@@ -165,7 +153,7 @@ function ActiveTileEdges({ completed, edges }: ActiveTileEdgesProps) {
 export function ProofBingo({
   title,
   tiles,
-  completionActions,
+  resetLabel,
   completionSummaries,
 }: ProofBingoProps) {
   const [selectedTileIds, setSelectedTileIds] = useState<Set<string>>(() => new Set());
@@ -214,7 +202,7 @@ export function ProofBingo({
   return (
     <div
       className="
-        w-full overflow-hidden rounded-md
+        w-full max-w-100 mx-auto overflow-hidden rounded-md
         border border-border/20
         bg-surface
         text-center text-text
@@ -296,7 +284,7 @@ export function ProofBingo({
         <div
           className={[
             COMPLETION_PANEL_BASE_CLASS,
-            'flex flex-col justify-between gap-2 overflow-hidden',
+            'flex flex-col items-center justify-between gap-2 overflow-hidden text-center',
             completionSummary ? COMPLETION_PANEL_VISIBLE_CLASS : COMPLETION_PANEL_HIDDEN_CLASS,
           ].join(' ')}
           aria-hidden={!completionSummary}
@@ -307,28 +295,14 @@ export function ProofBingo({
               <p className="overflow-y-auto text-sm font-medium leading-6 text-text" dev-mode="tailwind">
                 {completionSummary}
               </p>
-              <div className="flex flex-col gap-2 sm:flex-row sm:justify-center" dev-mode="tailwind">
-                <Link
-                  href="/projects"
-                  className={`${ACTION_BASE_CLASS} ${PRIMARY_ACTION_CLASS}`}
-                  dev-mode="tailwind"
-                >
-                  {completionActions.projects}
-                </Link>
-                <Link
-                  href="/contact"
-                  className={`${ACTION_BASE_CLASS} ${SECONDARY_ACTION_CLASS}`}
-                  dev-mode="tailwind"
-                >
-                  {completionActions.cta}
-                </Link>
+              <div className="flex justify-center" dev-mode="tailwind">
                 <button
                   type="button"
                   onClick={handleReset}
                   className={`${ACTION_BASE_CLASS} ${RESET_ACTION_CLASS}`}
                   dev-mode="tailwind"
                 >
-                  {completionActions.reset}
+                  {resetLabel}
                 </button>
               </div>
             </>

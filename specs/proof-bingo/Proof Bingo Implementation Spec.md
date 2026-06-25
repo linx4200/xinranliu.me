@@ -64,11 +64,7 @@ export type ProofBingoTile = {
 
 export type ProofBingoCopy = {
   title: Record<LangCode, string>;
-  completionActions: {
-    projects: Record<LangCode, string>;
-    cta: Record<LangCode, string>;
-    reset: Record<LangCode, string>;
-  };
+  resetLabel: Record<LangCode, string>;
   completionSummaries: Record<ProofBingoLineId, {
     summary: Record<LangCode, string>;
   }>;
@@ -85,7 +81,7 @@ export type LocalizedProofBingoTile = Omit<ProofBingoTile, 'label'> & {
 export const getProofBingo = (lang: string) => ({
   title,
   tiles,
-  completionActions,
+  resetLabel,
   completionSummaries,
 });
 ```
@@ -133,11 +129,7 @@ Suggested props:
 type ProofBingoProps = {
   title: string;
   tiles: LocalizedProofBingoTile[];
-  completionActions: {
-    projects: string;
-    cta: string;
-    reset: string;
-  };
+  resetLabel: string;
   completionSummaries: Record<ProofBingoLineId, {
     summary: string;
   }>;
@@ -196,21 +188,12 @@ Recommended first-version summaries:
 | `main-diagonal` | `Bingo. You found a precise builder with modern stack, handmade craft, and personality.` | `Bingo。你找到了一位有现代技术栈、手工质感和个人判断的开发者。` |
 | `anti-diagonal` | `Bingo. You found a web developer who balances accessibility, craft, and client-ready delivery.` | `Bingo。你找到了一位能平衡无障碍、质感和客户交付的 Web 开发者。` |
 
-Actions:
+Reset action:
 
-- Primary project CTA:
-  - EN: `View Projects`
-  - ZH: `查看项目`
-  - destination: `/projects`
-- Secondary contact CTA:
-  - EN: `Hire Xinran`
-  - ZH: `联系 Xinran`
-  - destination: `/contact`
-- Secondary Reset:
-  - EN: `Reset`
-  - ZH: `重置`
+- EN: `Reset`
+- ZH: `重置`
 
-The completion state should appear within the bingo hero area, not as a full-screen modal. It should render the summary for the completed line id, make Projects the primary evidence path, and keep the Contact Page available as a secondary hiring action.
+The completion state should appear within the bingo hero area, not as a full-screen modal. It should render the summary for the completed line id and a visible Reset control. Do not repeat View Projects or Hire Xinran inside Proof Bingo completion because those conversion actions are already always visible in the homepage hero.
 
 ## Accessibility
 
@@ -324,7 +307,7 @@ Manual checks:
 - 3x3 layout is stable on desktop and mobile.
 - English and Chinese copy render correctly.
 - Keyboard users can select tiles and trigger completion.
-- Completion is announced and CTA points to localized `/contact`.
+- Completion is announced and the hero-level View Projects / Hire Me CTAs remain available outside Proof Bingo.
 - Reset clears state.
 - Reduced motion remains understandable.
 - Global floating Developer Mode still works.

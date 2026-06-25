@@ -105,8 +105,8 @@ export const data = {
         "value": "LocalizedProofBingoTile[]"
       },
       {
-        "key": "completionActions",
-        "value": "LocalizedProofBingoCompletionActions"
+        "key": "resetLabel",
+        "value": "string"
       },
       {
         "key": "completionSummaries",

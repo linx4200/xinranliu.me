@@ -123,7 +123,7 @@ projectgrid --> projectcard_grid
 ```
 
 - `<Nav />`: 头部导航组件。子页面包含 Home、Projects、Hire Me/Contact，以及中英文切换、黑暗模式切换、文档链接；首页只展示工具入口，主导航动作由 hero CTA 承担。
-- `<ProofBingo />`: 首页核心交互组件，以 3x3 proof matrix 展示技术栈、项目证据、工作方式和个人特质。用户点亮任意一条线后，展示本地化 summary、View Projects / Hire Xinran CTA 和 reset 控制。
+- `<ProofBingo />`: 首页核心交互组件，以 3x3 proof matrix 展示技术栈、项目证据、工作方式和个人特质。用户点亮任意一条线后，展示本地化 summary 和 reset 控制；View Projects / Hire Me 转化入口由首页左侧 hero CTA 常驻承载，避免重复。
 - `<Footer />`: 子页面页脚。首页为了保持一屏数字名片体验不渲染页脚。
 - `<Card />`: 卡片形式的容器组件，用于统一卡片的样式。使用 children prop 来进行子组件的渲染。
 - `<ProjectCard />`: 项目卡片组件，用于展示项目信息。该组件的最外层容器是 `<Card />`， 里面包含项目名称、项目描述、项目链接、项目图片等信息。

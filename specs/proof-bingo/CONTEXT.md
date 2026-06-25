@@ -39,7 +39,7 @@ _Avoid_: Heavy game effects, animation showcase
 - **Proof Bingo** uses the familiar bingo card pattern to organize trust-building evidence in the homepage hero.
 - The **Hero Identity Anchor** supports **Proof Bingo** without competing with it.
 - A **Proof Tile** can represent a technical skill, project evidence, work style, service capability, or personal signal.
-- **Bingo Completion** turns selected **Proof Tile** evidence into a concise identity summary and a **Hire Me** call to action.
+- **Bingo Completion** turns selected **Proof Tile** evidence into a concise identity summary and a reset path; View Projects / Hire Me remain the persistent hero-level conversion actions.
 - **Proof Motion** clarifies selection, valid lines, and **Bingo Completion** without changing the site's Precision Minimalist character.
 
 ## Example Dialogue
