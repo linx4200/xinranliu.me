@@ -207,6 +207,7 @@ Requirements:
 - Focus states are visibly clear in light and dark mode.
 - Completion summary uses `role="status"` or `aria-live="polite"`.
 - The winning line is not indicated by color alone; use line, border, weight, or text-state changes.
+- Completed winning tiles must keep the short rose line inside each tile as the non-color accessibility cue. This helper belongs to the tile state itself; do not remove it, move it to the completion summary, or reuse it as decorative summary underline.
 - CTA link uses the existing localized `Link` component so `/contact` receives the current locale prefix.
 
 ## Visual And Motion
@@ -226,6 +227,7 @@ Motion behavior:
 - Tile click: small press or flip-like feedback.
 - Selected state: clear border/background change.
 - Winning line: thin rose line or connected emphasis across the three tiles.
+- Winning tile helper: each completed tile includes a short rose line near the bottom edge as an explicit non-color cue.
 - Completion: summary appears or expands inside the hero area.
 - Reduced motion: keep selected state, line state, and completion summary, but remove or reduce movement.
 

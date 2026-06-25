@@ -25,8 +25,12 @@ One cell in **Proof Bingo** that presents a single trust-building signal.
 _Avoid_: Generic skill tag
 
 **Bingo Completion**:
-The state reached when a visitor completes a valid line in **Proof Bingo** and sees the identity summary plus contact action.
+The state reached when a visitor completes a valid line in **Proof Bingo** and sees the identity summary plus reset path.
 _Avoid_: Game win screen
+
+**Winning Tile Helper**:
+The short rose line rendered inside each completed **Proof Tile** as a non-color accessibility cue for the winning line.
+_Avoid_: Summary underline, decorative divider
 
 **Proof Motion**:
 The restrained motion language for **Proof Bingo**, using precise tile, line, and completion feedback to support trust rather than spectacle.

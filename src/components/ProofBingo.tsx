@@ -63,20 +63,22 @@ const TILE_IDLE_CLASS = `
 // Proof Bingo has a compact completion panel, so its actions intentionally use
 // smaller metrics than the global CTAButton while keeping the same shape language.
 const ACTION_BASE_CLASS = `
-  inline-flex min-h-9 items-center justify-center
-  rounded-md border px-3 py-1.5
+  inline-flex min-h-8 items-center justify-center
+  border border-transparent px-1 py-1
   text-xs font-medium
+  underline-offset-4
   transition-colors duration-200 ease-out
 `;
 
 const RESET_ACTION_CLASS = `
-  border-transparent text-text-muted
-  hover:border-border/20 hover:bg-bg/60 hover:text-text
+  text-text-muted
+  hover:text-text hover:underline
+  focus-visible:underline
 `;
 
 const COMPLETION_PANEL_BASE_CLASS = `
   absolute inset-0
-  px-4 py-3
+  px-5 py-5
   transition-[opacity,transform] duration-200 ease-out
   motion-reduce:transform-none motion-reduce:transition-opacity
 `;
@@ -251,6 +253,13 @@ export function ProofBingo({
                   edges={getActiveTileEdges(index, selectedTileIds)}
                 />
               ) : null}
+              {/* Winning tiles need a non-color cue so the completed line remains clear for color-blind users. */}
+              {isCompleted ? (
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-x-4 bottom-2 h-0.5 rounded-full bg-primary"
+                />
+              ) : null}
             </button>
           );
         })}
@@ -258,7 +267,7 @@ export function ProofBingo({
 
       <div
         className="
-          relative h-[12.5rem] overflow-hidden sm:h-[8.5rem]
+          relative h-[14rem] overflow-hidden sm:h-[10.25rem]
           border-t border-border/15
         "
         dev-mode="tailwind"
@@ -284,7 +293,7 @@ export function ProofBingo({
         <div
           className={[
             COMPLETION_PANEL_BASE_CLASS,
-            'flex flex-col items-center justify-between gap-2 overflow-hidden text-center',
+            'flex flex-col items-center justify-between gap-4 overflow-hidden text-center',
             completionSummary ? COMPLETION_PANEL_VISIBLE_CLASS : COMPLETION_PANEL_HIDDEN_CLASS,
           ].join(' ')}
           aria-hidden={!completionSummary}
@@ -292,9 +301,25 @@ export function ProofBingo({
         >
           {completionSummary ? (
             <>
-              <p className="overflow-y-auto text-sm font-medium leading-6 text-text" dev-mode="tailwind">
-                {completionSummary}
-              </p>
+              <div
+                className="
+                  flex max-w-[20rem] grow items-center justify-center
+                  animate-proof-bingo-pop
+                  motion-reduce:animate-none
+                "
+                dev-mode="tailwind"
+              >
+                <p
+                  className="
+                    overflow-y-auto
+                    text-base font-semibold leading-6 text-text
+                    sm:text-lg sm:leading-7
+                  "
+                  dev-mode="tailwind"
+                >
+                  {completionSummary}
+                </p>
+              </div>
               <div className="flex justify-center" dev-mode="tailwind">
                 <button
                   type="button"

@@ -8,6 +8,7 @@
   --text-tiny: 0.6rem;
 
   --animate-wiggle: wiggle 0.75s ease-in-out infinite;
+  --animate-proof-bingo-pop: proof-bingo-pop 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
 
   @keyframes wiggle {
     0% {
@@ -20,6 +21,23 @@
 
     100% {
       transform: rotate(-10deg) translateX(-150%);
+    }
+  }
+
+  @keyframes proof-bingo-pop {
+    0% {
+      opacity: 0;
+      transform: translateY(0.375rem) scale(0.96);
+    }
+
+    58% {
+      opacity: 1;
+      transform: translateY(-0.125rem) scale(1.015);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
   }
 }

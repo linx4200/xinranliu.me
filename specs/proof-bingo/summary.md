@@ -75,6 +75,7 @@ TypeScript 优先构建        这个作品集手工打造        默认考虑 S
 - Developer Mode：移除 hero 内 `DevModeToggle` 入口，但保留全局 floating Developer Mode；Proof Bingo 关键容器仍应保留 Tailwind/React Developer Mode 标记。
 - 动效策略：这是展示动画能力的例外区域，不要求按常规 reduced-motion 关闭核心动画，但实现仍需保证基本可理解性和可操作性。
 - 视觉动效边界：采用高完成度的轻量动效，不引入动画库；点击格子有轻微翻牌/压下反馈，成线用细 rose 线条连接，完成态在 bingo 区域内浮现或展开，不做全屏 modal。
+- Winning tile 内部短 rose line 是非颜色 a11y helper，必须保留在完成线上的每个 tile 内；不要删除、移动到 summary 区域，或把它当作完成态装饰 underline 复用。
 - reduced-motion：不完全关闭核心反馈，但降为无位移/低动效版本，保留选中态、连线和完成文案。
 - 时间线：无明确 deadline，优先完成设计与实现质量。
 
