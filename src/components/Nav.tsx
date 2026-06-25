@@ -111,7 +111,7 @@ const Nav = ({ dict }: { dict: Dictionary }) => {
       {isHomePage && <div className="flex-1" aria-hidden="true" />}
 
       <div
-        className={isHomePage ? 'flex items-center gap-1 rounded-full border border-black/5 bg-white/70 px-1 py-1 backdrop-blur-md dark:border-white/10 dark:bg-[#0f0b09]/60' : 'contents'}
+        className="flex items-center gap-5"
         dev-mode="tailwind"
       >
         <DarkModeSwitch copy={ui.darkMode} />
