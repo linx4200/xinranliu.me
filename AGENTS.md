@@ -169,6 +169,13 @@ npm run lint
 4. 完成后做 lint、必要构建和手动核验。
 5. 如果引入了新约束或新模式，补文档。
 
+## Shell 命令安全约束
+
+- 运行任何包含路径或 glob 的命令前，必须考虑当前 shell 是 `zsh`，裸写 `[]`、`()`、空格、`?`、`*` 等字符可能被当作 glob 或特殊语法解析。
+- 对包含特殊字符的路径必须使用单引号包裹，例如 `src/app/'[lang]'/page.tsx`，不要裸写 `src/app/[lang]/page.tsx`。
+- 对 `git diff`、`git show`、`git checkout`、`rg`、`sed`、`ls` 等接收路径参数的命令，优先使用 `--` 分隔路径，例如 `git diff -- src/app/'[lang]'/page.tsx`。
+- 如果命令因为 `zsh: no matches found` 失败，不要继续基于失败结果推断；应立刻用正确引用方式重跑同一命令。
+
 ## 本地 Dev Server 与浏览器验证约束
 
 - 在启动 `npm run dev` 前，必须先检查是否已经有同一项目的 dev server 在运行：

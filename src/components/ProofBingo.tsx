@@ -267,7 +267,7 @@ export function ProofBingo({
 
       <div
         className="
-          relative h-[14rem] overflow-hidden sm:h-[10.25rem]
+          relative h-32 overflow-hidden sm:h-[10.25rem]
           border-t border-border/15
         "
         dev-mode="tailwind"
