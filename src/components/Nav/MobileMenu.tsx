@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react';
 
 import { LogoText } from '@/components/Nav/LogoText';
 
@@ -9,10 +9,40 @@ type MobileMenuProps = {
 };
 
 export const MobileMenu = ({ toggleLabel, PageList, isHomePage = false }: MobileMenuProps) => {
+  const menuRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const closeOnOutsideInteraction = (event: PointerEvent | FocusEvent) => {
+      if (
+        event.target instanceof Node
+        && !menuRef.current?.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('pointerdown', closeOnOutsideInteraction);
+    document.addEventListener('focusin', closeOnOutsideInteraction);
+
+    return () => {
+      document.removeEventListener('pointerdown', closeOnOutsideInteraction);
+      document.removeEventListener('focusin', closeOnOutsideInteraction);
+    };
+  }, [isOpen]);
+
+  const closeOnMenuItemClick = (event: MouseEvent<HTMLUListElement>) => {
+    if (event.target instanceof Element && event.target.closest('a')) {
+      setIsOpen(false);
+    }
+  };
+
   return (
-    <div className='flex'>
+    <div ref={menuRef} className='flex'>
       <button
         type="button"
         className="p-2 text-text-muted lg:hidden"
@@ -46,6 +76,7 @@ export const MobileMenu = ({ toggleLabel, PageList, isHomePage = false }: Mobile
         origin-top-left transition-all duration-300 cubic-bezier(0.4, 0, 0.2, 1)
         ${isOpen ? 'opacity-100 scale-100 translate-y-0 visible' : 'opacity-0 scale-95 -translate-y-2 invisible'}
       `}
+      onClick={closeOnMenuItemClick}
     >
       { PageList }
     </ul>
