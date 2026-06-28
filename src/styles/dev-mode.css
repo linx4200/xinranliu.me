@@ -1,7 +1,10 @@
 @layer components {
   .dev-mode-container-active {
-    /* 使用 ring-offset-0 确保贴合边缘，ring-1 代表 1px 宽度 */
-    /* 但 box-shadow 原生不支持 dashed（虚线） */
+    /* box-shadow based rings do not support dashed outlines. */
     @apply ring-1 ring-blue-300 ring-inset;
+  }
+
+  .dev-mode-container-active-react {
+    @apply outline outline-1 outline-offset-2 outline-blue-300;
   }
 }

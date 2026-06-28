@@ -12,6 +12,31 @@ export const data = {
       }
     ]
   },
+  "CTAButton": {
+    "name": "CTAButton",
+    "propList": [
+      {
+        "key": "children",
+        "value": "ReactNode"
+      },
+      {
+        "key": "href",
+        "value": "string | undefined"
+      },
+      {
+        "key": "variant",
+        "value": "\"primary\" | \"secondary\" | undefined"
+      },
+      {
+        "key": "fullWidthOnMobile",
+        "value": "boolean | undefined"
+      },
+      {
+        "key": "className",
+        "value": "string | undefined"
+      }
+    ]
+  },
   "DarkModeSwitch": {
     "name": "DarkModeSwitch",
     "propList": [
@@ -116,12 +141,7 @@ export const data = {
   },
   "SayHi": {
     "name": "SayHi",
-    "propList": [
-      {
-        "key": "name",
-        "value": "string"
-      }
-    ]
+    "propList": []
   },
   "SkillSet": {
     "name": "SkillSet",

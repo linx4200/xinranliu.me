@@ -55,7 +55,7 @@ export const Info = () => {
       }
 
       targetRef.current?.addEventListener('mouseleave', handleMouseLeft);
-      targetRef.current?.classList.add('dev-mode-container-active');
+      targetRef.current?.classList.add(devMode === 'react' ? 'dev-mode-container-active-react' : 'dev-mode-container-active');
 
       // the state `show` is not necessarily changed, so need to ensure rerender
       forceRerender();
@@ -68,7 +68,7 @@ export const Info = () => {
       setShow(false);
       targetRef.current = null;
 
-      target.classList.remove('dev-mode-container-active');
+      target.classList.remove('dev-mode-container-active', 'dev-mode-container-active-react');
       target.removeEventListener('mouseleave', handleMouseLeft);
     }
 

@@ -3,21 +3,18 @@ import { twMerge } from 'tailwind-merge';
 
 import type { ReactNode } from 'react';
 
-type CTAButtonVariant = 'primary' | 'secondary';
-
 type Props = {
   children: ReactNode;
   href?: string;
-  variant?: CTAButtonVariant;
+  variant?: 'primary' | 'secondary';
   fullWidthOnMobile?: boolean;
   className?: string;
 };
 
-const variantClassNames: Record<CTAButtonVariant, string> = {
+const variantClassNames: Record<'primary' | 'secondary', string> = {
   primary: 'border-primary bg-primary text-white hover:bg-primary/85',
   secondary: 'border-primary text-primary hover:bg-primary/5',
-};
-
+}
 export const CTAButton = ({
   children,
   href,
@@ -36,7 +33,14 @@ export const CTAButton = ({
 
   if (!href) {
     return (
-      <button type="button" className={sharedClassName} disabled aria-disabled dev-mode="tailwind">
+      <button
+        type="button"
+        className={sharedClassName}
+        disabled
+        aria-disabled
+        dev-mode="tailwind"
+        data-dev-mode-react-name="CTAButton"
+      >
         {children}
       </button>
     );
@@ -44,14 +48,21 @@ export const CTAButton = ({
 
   if (href.startsWith('/')) {
     return (
-      <Link href={href} className={sharedClassName} dev-mode="tailwind">
+      <Link href={href} className={sharedClassName} dev-mode="tailwind" data-dev-mode-react-name="CTAButton">
         {children}
       </Link>
     );
   }
 
   return (
-    <a href={href} target="_blank" rel="noreferrer noopener" className={sharedClassName} dev-mode="tailwind">
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer noopener"
+      className={sharedClassName}
+      dev-mode="tailwind"
+      data-dev-mode-react-name="CTAButton"
+    >
       {children}
     </a>
   );
