@@ -73,7 +73,7 @@ export default async function Page({ params }: PageProps<'/[lang]'>) {
       </section>
 
       <section className="mt-10 md:mt-20" aria-labelledby="professional-background-heading">
-        <h2 id="professional-background-heading" className="text-xl md:text-2xl pb-5 border-b border-border border-solid font-bold">{dict.contact.sections.professionalBackground}</h2>
+        <h2 id="professional-background-heading" className="text-xl md:text-2xl font-bold">{dict.contact.sections.professionalBackground}</h2>
 
         <div className="flex flex-col md:flex-row md:justify-between mt-5 md:items-center gap-3" dev-mode="tailwind">
           <div>
@@ -97,7 +97,7 @@ export default async function Page({ params }: PageProps<'/[lang]'>) {
       </section>
 
       <section className="mt-10 md:mt-20 mb-20 md:mb-0" aria-labelledby="hire-contact-heading">
-        <h2 id="hire-contact-heading" className="text-xl md:text-2xl pb-5 border-b border-border border-solid font-bold">{dict.contact.sections.hireOrContact}</h2>
+        <h2 id="hire-contact-heading" className="text-xl md:text-2xl font-bold">{dict.contact.sections.hireOrContact}</h2>
 
         <div className="flex flex-col md:flex-row md:justify-between mt-5 md:items-center gap-3" dev-mode="tailwind">
           <div>

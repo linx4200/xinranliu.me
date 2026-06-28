@@ -32,7 +32,7 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
         className="
           flex flex-wrap
           lg:min-h-[calc(100svh_-_var(--spacing)*36))]
-          justify-between items-center gap-4 lg:gap-4
+          justify-center items-center lg:justify-between
           px-4 lg:px-0
           mt-10 lg:mt-20
         "
@@ -40,8 +40,7 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
         dev-mode="tailwind"
       >
         <div
-          className="lg:text-left
-          "
+          className="lg:text-left max-w-100 lg:max-w-max"
           dev-mode="tailwind"
         >
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-text-muted" dev-mode="tailwind">
@@ -62,8 +61,8 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
             {dict.home.hero.description}
           </p>
           <div className="mt-5" dev-mode="tailwind">
-            <CTAButton href="/projects" variant="primary" className="mb-5 lg:mr-5" fullWidthOnMobile>{dict.home.hero.viewProjects}</CTAButton>
-            <CTAButton href="/contact" fullWidthOnMobile>{dict.home.hero.hireMe}</CTAButton>
+            <CTAButton href="/projects" variant="primary" className="mb-5 md:mr-5" fullWidthOnMobile>{dict.home.hero.viewProjects}</CTAButton>
+            <CTAButton href="/contact" className="mb-5" fullWidthOnMobile>{dict.home.hero.hireMe}</CTAButton>
           </div>
         </div>
 

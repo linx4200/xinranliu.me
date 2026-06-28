@@ -30,7 +30,7 @@ const WINNING_LINES = [
 }[];
 
 const TILE_BASE_CLASS = `
-  relative flex aspect-square w-full cursor-pointer items-center justify-center
+  relative flex aspect-square cursor-pointer items-center justify-center
   overflow-hidden
   px-2.5 sm:px-3
   bg-bg/45
@@ -60,18 +60,14 @@ const TILE_IDLE_CLASS = `
   hover:bg-primary/5
 `;
 
-// Proof Bingo has a compact completion panel, so its actions intentionally use
-// smaller metrics than the global CTAButton while keeping the same shape language.
-const ACTION_BASE_CLASS = `
-  inline-flex min-h-8 items-center justify-center
-  border border-transparent px-1 py-1
-  text-xs font-medium
-  underline-offset-4
-  transition-colors duration-200 ease-out
-`;
-
 const RESET_ACTION_CLASS = `
-  text-text-muted
+  inline-flex min-h-8 cursor-pointer items-center
+  justify-center border border-transparent px-1
+  py-1 text-xs
+  font-medium
+  text-text-muted underline-offset-4 transition-colors
+  duration-200
+  ease-out
   hover:text-text hover:underline
   focus-visible:underline
 `;
@@ -324,7 +320,7 @@ export function ProofBingo({
                 <button
                   type="button"
                   onClick={handleReset}
-                  className={`${ACTION_BASE_CLASS} ${RESET_ACTION_CLASS}`}
+                  className={RESET_ACTION_CLASS}
                   dev-mode="tailwind"
                 >
                   {resetLabel}
