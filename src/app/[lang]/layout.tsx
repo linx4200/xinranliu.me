@@ -58,8 +58,8 @@ export default async function RootLayout({
       >
         <a href="#main-content" className="skip-link">{dict.ui.skipToMainContent}</a>
         <Nav dict={dict} />
-        {/* The height of nav and footer is 15*spacing */}
-        <main id="main-content" className="w-full min-h-[calc(100vh_-_var(--spacing)*30)]" role="main">
+
+        <main id="main-content" className="w-full" role="main">
           {children}
         </main>
 

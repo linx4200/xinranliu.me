@@ -15,7 +15,7 @@ const Footer = () => {
   return (
     <footer className="
       w-full mt-10 lg:mt-20 py-4
-      border-t border-zinc-200/70 dark:border-zinc-800/80
+      border-t border-border/10
       text-center lg:text-left"
     >
       <p className="text-xs text-text-muted/50">
