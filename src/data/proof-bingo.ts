@@ -149,7 +149,7 @@ export const proofBingoCopy: ProofBingoCopy = {
     },
     'middle-row': {
       summary: {
-        en: 'Bingo. You found a product-minded engineer who builds websites with clean structure, reliable code, and SEO in mind.',
+        en: 'Bingo. You found a product-minded engineer who builds clean, searchable websites.',
         zh: 'Bingo。你找到了一位有产品思维的工程师，会把网站做得结构清晰、代码可靠，也照顾搜索体验。',
       },
     },
@@ -179,7 +179,7 @@ export const proofBingoCopy: ProofBingoCopy = {
     },
     'main-diagonal': {
       summary: {
-        en: 'Bingo. You found a developer who pairs modern front-end tools with thoughtful design and precise, playful details.',
+        en: 'Bingo. You found a developer with modern tools, design judgment, and playful detail.',
         zh: 'Bingo。你找到了一位能把现代前端技术、设计判断和精准有趣的细节结合起来的开发者。',
       },
     },
