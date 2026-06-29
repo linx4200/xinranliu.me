@@ -55,8 +55,8 @@ export const proofBingoTiles = [
     row: 0,
     col: 1,
     label: {
-      en: 'Vue Color is live',
-      zh: 'Vue Color 已上线',
+      en: 'Vue Color: 100k weekly downloads',
+      zh: 'Vue Color：周下载 10 万+',
     },
   },
   {
@@ -65,8 +65,8 @@ export const proofBingoTiles = [
     row: 0,
     col: 2,
     label: {
-      en: 'Accessible UI details',
-      zh: '无障碍 UI 细节',
+      en: 'Accessibility-minded UI',
+      zh: '关注无障碍体验的 UI',
     },
   },
   {
@@ -85,8 +85,8 @@ export const proofBingoTiles = [
     row: 1,
     col: 1,
     label: {
-      en: 'This portfolio is handmade',
-      zh: '这个作品集手工打造',
+      en: 'Designed and built this portfolio',
+      zh: '设计并开发这个作品集',
     },
   },
   {
@@ -105,8 +105,8 @@ export const proofBingoTiles = [
     row: 2,
     col: 0,
     label: {
-      en: 'Freelance web apps',
-      zh: '自由职业 Web 应用',
+      en: 'Independent contractor',
+      zh: '独立开发者',
     },
   },
   {
@@ -116,7 +116,7 @@ export const proofBingoTiles = [
     col: 1,
     label: {
       en: 'MirrorOn: tiny macOS utility',
-      zh: 'MirrorOn 小工具',
+      zh: 'MirrorOn 小 MacOS 工具',
     },
   },
   {
@@ -149,14 +149,14 @@ export const proofBingoCopy: ProofBingoCopy = {
     },
     'middle-row': {
       summary: {
-        en: 'Bingo. You found an engineer who treats the website itself as a maintainable, searchable product.',
-        zh: 'Bingo。你找到了一位会把网站本身也当作可维护、可搜索产品来做的工程师。',
+        en: 'Bingo. You found a product-minded engineer who builds websites with clean structure, reliable code, and SEO in mind.',
+        zh: 'Bingo。你找到了一位有产品思维的工程师，会把网站做得结构清晰、代码可靠，也照顾搜索体验。',
       },
     },
     'bottom-row': {
       summary: {
-        en: 'Bingo. You found an independent builder who keeps useful tools precise, practical, and human.',
-        zh: 'Bingo。你找到了一位会把实用工具做得精准、实际、有人味的独立开发者。',
+        en: 'Bingo. You found an independent builder who makes projects precise, efficient, and playful.',
+        zh: 'Bingo。你找到了一位会把项目做得精准、高效、有趣的独立开发者。',
       },
     },
     'left-column': {
@@ -179,8 +179,8 @@ export const proofBingoCopy: ProofBingoCopy = {
     },
     'main-diagonal': {
       summary: {
-        en: 'Bingo. You found a precise builder with modern stack, handmade craft, and personality.',
-        zh: 'Bingo。你找到了一位有现代技术栈、手工质感和个人判断的开发者。',
+        en: 'Bingo. You found a developer who pairs modern front-end tools with thoughtful design and precise, playful details.',
+        zh: 'Bingo。你找到了一位能把现代前端技术、设计判断和精准有趣的细节结合起来的开发者。',
       },
     },
     'anti-diagonal': {
