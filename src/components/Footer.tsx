@@ -17,6 +17,7 @@ const Footer = () => {
       w-full mt-10 lg:mt-20 py-4
       border-t border-border/10
       text-center lg:text-left"
+      data-dev-mode-react-name="Footer"
     >
       <p className="text-xs text-text-muted/50">
         © {year} Xinran Liu. <span className="hidden min-[375px]:inline">Built with Next.js, React, Tailwind CSS & <span className="text-base" aria-label="Love">♥</span>.</span>
