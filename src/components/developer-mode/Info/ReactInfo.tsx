@@ -9,21 +9,21 @@ export const ReactInfo = ({ name, propList }: Props) => {
   return (
     <>
       <div>
-        <span className="text-slate-400">&lt;</span>
-        <span className="text-rose-700/90 font-bold">{name}</span>
-        {!propList || propList.length === 0 && <span className="text-slate-400">&#47;&gt;</span>}
+        <span className="text-zinc-400">&lt;</span>
+        <span className="font-bold text-rose-700/90">{name}</span>
+        {!propList || propList.length === 0 && <span className="text-zinc-400">&#47;&gt;</span>}
       </div>
       <div className="text-xs/normal">
         {propList?.map(({ key, value }) =>
           <div className="flex" key={key}>
-            <span className="text-sky-600 indent-4">{key}</span>
-            <span className="text-slate-400">=</span>
-            <span className="text-orange-300/80 max-w-[300px] text-ellipsis line-clamp-1">{`"${value}`}</span>
-            <span className="text-orange-300/80">{`"`}</span>
+            <span className="indent-4 text-sky-300">{key}</span>
+            <span className="text-zinc-400">=</span>
+            <span className="max-w-[300px] text-ellipsis line-clamp-1 text-amber-200/90">{`"${value}`}</span>
+            <span className="text-amber-200/90">{`"`}</span>
           </div>
         )}
       </div>
-      {propList && propList.length > 0 && <div className="text-slate-400">&#47;&gt;</div>}
+      {propList && propList.length > 0 && <div className="text-zinc-400">&#47;&gt;</div>}
     </>
   )
 }

@@ -213,7 +213,7 @@ export const Info = () => {
       className="
         absolute z-50 max-h-[min(320px,40vh)] max-w-[calc(50vw-16px)]
         overflow-y-auto overscroll-contain
-        rounded-sm bg-border text-sm
+        rounded-sm border border-white/10 bg-zinc-900 text-sm text-white shadow-lg shadow-black/20
         p-2 font-mono"
       style={{
         top: position.top,
