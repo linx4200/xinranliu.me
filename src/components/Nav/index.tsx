@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
-import { twMerge } from 'tailwind-merge';
+import { twMerge, twJoin } from 'tailwind-merge';
 
 import { SayHi } from '@/components/SayHi';
 import { LogoText } from '@/components/Nav/LogoText';
@@ -68,7 +68,7 @@ const Nav = ({ dict }: { dict: Dictionary }) => {
       dev-mode="tailwind"
       data-dev-mode-react-name="Nav"
     >
-      {!isHomePage && <SayHi className={STYLE_ONLY_SHOW_IN_DESKTOP}><LogoText /></SayHi>}
+      <SayHi className={twJoin(STYLE_ONLY_SHOW_IN_DESKTOP, isHomePage ? 'invisible' :'visible')}><LogoText /></SayHi>
 
       <MobileMenu toggleLabel={ui.navigation.toggleMenu} PageList={PageList} isHomePage={isHomePage} />
 
