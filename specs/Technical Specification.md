@@ -137,15 +137,22 @@ projectgrid --> projectcard_grid
 
 #### 黑暗模式 JS 开关
 
-根据当前[系统设置(使用 `prefers-color-scheme` 媒体查询获取)](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-color-scheme)和开关状态，往 HTML 标签上添加 `.dark` 或者 `.light` 的 class。
+根据当前[系统设置(使用 `prefers-color-scheme` 媒体查询获取)](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-color-scheme)和当前浏览生命周期内的手动开关状态，往 HTML 标签上添加 `.dark` 或者 `.light` 的 class。
+
+初始化必须永远跟随系统偏好。这里的“进入网站”按浏览器页面生命周期理解：手动刷新、重新打开标签页、直接访问 URL 都会重新初始化为系统主题。用户手动切换主题后，主题只作为当前客户端运行时的内存 override 保留；通过 Next.js 站内导航进入下一个页面时继续沿用该 override。不要用 `localStorage`、`sessionStorage`、cookie 或 `theme=dark|light` search param 持久化主题状态。
 
 ```plantuml
 @startuml
 start;
 :Get initial mode by `window.matchMedia('(prefers-color-scheme: dark)`;
+if (manual override exists?) then (yes)
+  :ignore system change, use manual override value;
+else (no)
+  :apply system change;
+endif
 if (is dark mode?)
   :add `.dark` to html element;
-else 
+else
   :add `.light` to html element;
 endif
 fork
@@ -153,9 +160,9 @@ fork
 fork again
   :user clicks dark mode switch;
 end merge
-if (is dark mode?)
+if (effective theme is dark?)
   :add `.dark` to html element;
-else 
+else
   :add `.light` to html element;
 endif
 end

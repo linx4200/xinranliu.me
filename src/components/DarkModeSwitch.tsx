@@ -1,22 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useStore } from 'zustand';
+import { useLayoutEffect, useEffect, useCallback } from 'react';
+
+import { applyTheme } from '@/lib/color-theme';
+import { darkModeStore } from '@/store/useDarkModeStore';
 
 import type { Dictionary } from '@/dictionaries';
-
-type Theme = 'light' | 'dark';
-
-const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-const prefersDark = mediaQuery.matches;
-const initialTheme = prefersDark ? 'dark' : 'light';
-
-const applyTheme = (theme: Theme) => {
-  const root = document.documentElement;
-  root.classList.toggle('dark', theme === 'dark');
-  root.classList.toggle('light', theme === 'light');
-};
-
-applyTheme(initialTheme);
 
 const fillTemplate = (template: string, replacements: Record<string, string>) => {
   return Object.entries(replacements).reduce(
@@ -26,27 +16,26 @@ const fillTemplate = (template: string, replacements: Record<string, string>) =>
 };
 
 export const DarkModeSwitch = ({ copy }: { copy: Dictionary['ui']['darkMode'] }) => {
-  const [theme, setTheme] = useState<Theme>(initialTheme);
+  const { theme, setManualTheme, setSystemTheme } = useStore(darkModeStore);
 
-  const syncWithSystem = (event: MediaQueryListEvent) => {
-    const nextTheme: Theme = event.matches ? 'dark' : 'light';
-    applyTheme(nextTheme);
-    setTheme(nextTheme);
-  };
+  const toggleTheme = useCallback(() => {
+    const nextTheme = theme === 'dark' ? 'light' : 'dark';
+    setManualTheme(nextTheme);
+  }, [setManualTheme, theme]);
+
+  useLayoutEffect(() => {
+    applyTheme(theme);
+  }, [theme]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    mediaQuery.addEventListener('change', syncWithSystem);
-    return () => mediaQuery.removeEventListener('change', syncWithSystem);
-  }, []);
+    const handleSystemThemeChange = (event: MediaQueryListEvent) => {
+      setSystemTheme(event.matches ? 'dark' : 'light');
+    };
 
-  const toggleTheme = () => {
-    setTheme(current => {
-      const nextTheme: Theme = current === 'dark' ? 'light' : 'dark';
-      applyTheme(nextTheme);
-      return nextTheme;
-    });
-  };
+    mediaQuery.addEventListener('change', handleSystemThemeChange);
+    return () => mediaQuery.removeEventListener('change', handleSystemThemeChange);
+  }, [setSystemTheme]);
 
   const isDark = theme === 'dark';
   const currentMode = isDark ? copy.dark : copy.light;
