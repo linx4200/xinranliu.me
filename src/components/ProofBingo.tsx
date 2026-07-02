@@ -101,14 +101,46 @@ const ACTIVE_TILE_EDGE_CLASS = 'pointer-events-none absolute bg-primary';
 const TILE_SEPARATOR_CLASS = 'pointer-events-none absolute bg-border/15';
 
 const DESKTOP_MEDIA_QUERY = '(min-width: 1024px)';
+const REDUCED_MOTION_MEDIA_QUERY = '(prefers-reduced-motion: reduce)';
+const MOBILE_SCROLL_DURATION_MS = 260;
+
+let mobileScrollAnimationFrame: number | null = null;
 
 const scrollCardToTopOnMobile = (card: HTMLDivElement | null) => {
   if (!card || window.matchMedia(DESKTOP_MEDIA_QUERY).matches) return;
 
-  card.scrollIntoView({
-    behavior: 'auto',
-    block: 'start',
-  });
+  if (mobileScrollAnimationFrame !== null) {
+    window.cancelAnimationFrame(mobileScrollAnimationFrame);
+    mobileScrollAnimationFrame = null;
+  }
+
+  const startY = window.scrollY;
+  const maxScrollY = document.documentElement.scrollHeight - window.innerHeight;
+  const targetY = Math.min(startY + card.getBoundingClientRect().top, maxScrollY);
+  const distance = targetY - startY;
+
+  if (Math.abs(distance) < 1 || window.matchMedia(REDUCED_MOTION_MEDIA_QUERY).matches) {
+    window.scrollTo({ top: targetY, behavior: 'auto' });
+    return;
+  }
+
+  const animationStart = window.performance.now();
+
+  const animateScroll = (timestamp: number) => {
+    const progress = Math.min((timestamp - animationStart) / MOBILE_SCROLL_DURATION_MS, 1);
+    const easedProgress = 1 - (1 - progress) ** 3;
+
+    window.scrollTo(0, startY + distance * easedProgress);
+
+    if (progress < 1) {
+      mobileScrollAnimationFrame = window.requestAnimationFrame(animateScroll);
+      return;
+    }
+
+    mobileScrollAnimationFrame = null;
+  };
+
+  mobileScrollAnimationFrame = window.requestAnimationFrame(animateScroll);
 };
 
 function TileSeparators({
