@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
 import type { ProofBingoLineId } from '@/data/proof-bingo';
 import type {
@@ -100,6 +100,17 @@ type ActiveTileEdgesProps = {
 const ACTIVE_TILE_EDGE_CLASS = 'pointer-events-none absolute bg-primary';
 const TILE_SEPARATOR_CLASS = 'pointer-events-none absolute bg-border/15';
 
+const DESKTOP_MEDIA_QUERY = '(min-width: 1024px)';
+
+const scrollCardToTopOnMobile = (card: HTMLDivElement | null) => {
+  if (!card || window.matchMedia(DESKTOP_MEDIA_QUERY).matches) return;
+
+  card.scrollIntoView({
+    behavior: 'auto',
+    block: 'start',
+  });
+};
+
 function TileSeparators({
   index,
   selectedTileIds,
@@ -154,6 +165,7 @@ export function ProofBingo({
   resetLabel,
   completionSummaries,
 }: ProofBingoProps) {
+  const rootRef = useRef<HTMLDivElement>(null);
   const [selectedTileIds, setSelectedTileIds] = useState<Set<string>>(() => new Set());
   const [completedLineId, setCompletedLineId] = useState<ProofBingoLineId | null>(null);
 
@@ -177,6 +189,8 @@ export function ProofBingo({
   const handleTileToggle = (tileId: string) => {
     if (completedLineId) return;
 
+    scrollCardToTopOnMobile(rootRef.current);
+
     const nextSelectedTileIds = new Set(selectedTileIds);
 
     if (nextSelectedTileIds.has(tileId)) {
@@ -199,6 +213,7 @@ export function ProofBingo({
 
   return (
     <div
+      ref={rootRef}
       className="
         w-full max-w-100 mx-auto overflow-hidden rounded-md
         border border-border/20
