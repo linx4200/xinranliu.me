@@ -74,7 +74,7 @@ const RESET_ACTION_CLASS = `
 
 const COMPLETION_PANEL_BASE_CLASS = `
   absolute inset-0
-  px-5 py-5
+  p-2 sm:p-5
   transition-[opacity,transform] duration-200 ease-out
   motion-reduce:transform-none motion-reduce:transition-opacity
 `;
@@ -336,7 +336,7 @@ export function ProofBingo({
         <div
           className={[
             COMPLETION_PANEL_BASE_CLASS,
-            'flex flex-col items-center justify-between gap-4 overflow-hidden text-center',
+            'flex flex-col items-center justify-between sm:gap-4 overflow-hidden text-center',
             completionSummary ? COMPLETION_PANEL_VISIBLE_CLASS : COMPLETION_PANEL_HIDDEN_CLASS,
           ].join(' ')}
           aria-hidden={!completionSummary}
@@ -355,7 +355,7 @@ export function ProofBingo({
                 <p
                   className="
                     overflow-y-auto
-                    text-base font-semibold leading-6 text-text
+                    text-base font-semibold leading-5.5 text-text
                     sm:text-lg sm:leading-7
                   "
                   dev-mode="tailwind"

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react';
+import { twJoin } from 'tailwind-merge';
 
 import { LogoText } from '@/components/Nav/LogoText';
 
@@ -64,7 +65,7 @@ export const MobileMenu = ({ toggleLabel, PageList, isHomePage = false }: Mobile
         </svg>
       </button>
 
-      {!isHomePage && <LogoText className="lg:hidden" />}
+      <LogoText className={twJoin('lg:hidden', isHomePage ? 'invisible' :'visible')} />
 
       <ul className={`
         lg:hidden

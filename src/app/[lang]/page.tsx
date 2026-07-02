@@ -40,7 +40,7 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
         dev-mode="tailwind"
       >
         <div
-          className="lg:text-left w-full lg:max-w-max"
+          className="lg:text-left w-full md:max-w-100 lg:max-w-max"
           dev-mode="tailwind"
         >
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-text-muted" dev-mode="tailwind">
