@@ -34,13 +34,13 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
           lg:min-h-[calc(100svh_-_var(--spacing)*36))]
           justify-center items-center lg:justify-between
           px-4 lg:px-0
-          mt-10 lg:mt-20
+          mt-10 lg:mt-0
         "
         aria-labelledby="hero-heading"
         dev-mode="tailwind"
       >
         <div
-          className="lg:text-left max-w-100 lg:max-w-max"
+          className="lg:text-left w-full lg:max-w-max"
           dev-mode="tailwind"
         >
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-text-muted" dev-mode="tailwind">
