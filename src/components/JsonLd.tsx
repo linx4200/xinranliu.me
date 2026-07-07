@@ -1,4 +1,3 @@
-import { projects } from '@/data/projects';
 import {
   getHtmlLang,
   htmlLangMap,
@@ -6,6 +5,7 @@ import {
   supportedLanguages,
   type Dictionary,
 } from '@/dictionaries';
+import type { LocalizedProject } from '@/services/projects';
 import {
   getLocalizedUrl,
   getSocialImageUrl,
@@ -89,7 +89,7 @@ export const HomePageJsonLd = ({ lang, dict }: { lang: string; dict: Dictionary 
   return <JsonLdScript data={jsonLd} />;
 };
 
-export const ProjectsPageJsonLd = ({ lang, dict }: { lang: string; dict: Dictionary }) => {
+export const ProjectsPageJsonLd = ({ lang, dict, projects }: { lang: string; dict: Dictionary; projects: LocalizedProject[] }) => {
   const locale = resolveLocale(lang);
   const pageUrl = getLocalizedUrl(locale, '/projects');
   const inLanguage = getInLanguage(lang);
@@ -112,8 +112,8 @@ export const ProjectsPageJsonLd = ({ lang, dict }: { lang: string; dict: Diction
         url: project.site ?? project.github ?? getLocalizedUrl(locale, '/projects'),
         item: {
           '@type': 'CreativeWork',
-          name: project.title[locale],
-          description: project.desc[locale],
+          name: project.title,
+          description: project.desc,
           inLanguage,
           image: project.image ? getSocialImageUrl(project.image) : undefined,
           keywords: project.tags?.join(', ') ?? undefined,

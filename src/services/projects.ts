@@ -1,7 +1,8 @@
-import { projects } from '@/data/projects';
 import { resolveLocale } from '@/dictionaries';
+import { getSupabaseServerClient } from '@/lib/supabase/server';
 
 export interface LocalizedProject {
+  id: number;
   selected?: boolean;
   title: string;
   desc: string;
@@ -12,16 +13,59 @@ export interface LocalizedProject {
   hoveredImage?: string;
 }
 
-export const getAllProjects = (lang: string): LocalizedProject[] => {
-  const resolvedLang = resolveLocale(lang);
-  return projects.map((project) => ({
-    ...project,
-    title: project.title[resolvedLang],
-    desc: project.desc[resolvedLang],
-  }));
+type ProjectRow = {
+  id: number;
+  title_en: string;
+  title_zh: string;
+  desc_en: string;
+  desc_zh: string;
+  tags: string[] | null;
+  site: string | null;
+  github: string | null;
+  image: string | null;
 };
 
-export const getSelectedProjects = (lang: string): LocalizedProject[] => {
+const projectColumns = [
+  'id',
+  'title_en',
+  'title_zh',
+  'desc_en',
+  'desc_zh',
+  'tags',
+  'site',
+  'github',
+  'image',
+].join(',');
+
+const mapProjectRow = (project: ProjectRow, lang: ReturnType<typeof resolveLocale>): LocalizedProject => ({
+  id: project.id,
+  title: lang === 'zh' ? project.title_zh : project.title_en,
+  desc: lang === 'zh' ? project.desc_zh : project.desc_en,
+  tags: project.tags ?? undefined,
+  site: project.site ?? undefined,
+  github: project.github ?? undefined,
+  image: project.image ?? undefined,
+});
+
+export const getAllProjects = async (lang: string): Promise<LocalizedProject[]> => {
   const resolvedLang = resolveLocale(lang);
-  return getAllProjects(resolvedLang).filter((project) => project.selected);
+  const supabase = getSupabaseServerClient();
+  const { data, error } = await supabase
+    .from('projects')
+    .select(projectColumns)
+    .order('id', { ascending: true })
+    .overrideTypes<Array<ProjectRow>, { merge: false }>();
+
+  if (error) {
+    throw new Error(`Failed to load projects from Supabase: ${error.message}`);
+  }
+
+  return (data ?? []).map((project) => mapProjectRow(project, resolvedLang));
+};
+
+export const getSelectedProjects = async (lang: string): Promise<LocalizedProject[]> => {
+  const projects = await getAllProjects(lang);
+  const selectedProjects = projects.filter((project) => project.selected);
+
+  return selectedProjects.length > 0 ? selectedProjects : projects.slice(0, 3);
 };
