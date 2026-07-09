@@ -45,8 +45,8 @@ export const ProjectCard = (props: Props) => {
         bg-[radial-gradient(circle_at_20%_20%,rgba(0,0,0,0.05),transparent_35%),radial-gradient(circle_at_80%_0%,rgba(0,0,0,0.04),transparent_30%)]
         dark:bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.08),transparent_35%),radial-gradient(circle_at_80%_0%,rgba(255,255,255,0.05),transparent_30%)]"
       /> */}
-      {image && <Image src={image} alt={title} className={`w-full aspect-square ${hoveredImage ? 'group-hover:hidden' : ''}`} width={500} height={500} />}
-      {hoveredImage && <Image src={hoveredImage} alt={title} className="w-full aspect-square group-hover:block hidden" width={500} height={500} />}
+      {image && <Image preload src={image} alt={title} className={`w-full aspect-square ${hoveredImage ? 'group-hover:hidden' : ''}`} width={500} height={500} />}
+      {hoveredImage && <Image preload src={hoveredImage} alt={title} className="w-full aspect-square group-hover:block hidden" width={500} height={500} />}
       {!image && <div
         role="img"
         aria-label={previewLabel}
