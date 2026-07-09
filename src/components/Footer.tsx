@@ -1,12 +1,14 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-
 import { isHomePath } from '@/components/Link';
+import { useEnsureRunOnClient } from '@/hooks/useEnsureRunOnClient';
+
+const getCurrentYear = () => (new Date()).getFullYear();
 
 const Footer = () => {
   const pathname = usePathname();
-  const year = (new Date()).getFullYear();
+  const year = useEnsureRunOnClient(getCurrentYear);
 
   if (isHomePath(pathname)) {
     return null;
@@ -20,7 +22,7 @@ const Footer = () => {
       data-dev-mode-react-name="Footer"
     >
       <p className="text-xs text-text-muted/50">
-        © {year} Xinran Liu. <span className="hidden min-[375px]:inline">Built with Next.js, React, Tailwind CSS & <span className="text-base" aria-label="Love">♥</span>.</span>
+        { year ? `@ ${year} Xinran Liu.` : ''} <span className="hidden min-[375px]:inline">Built with Next.js, React, Tailwind CSS & <span className="text-base" aria-label="Love">♥</span>.</span>
       </p>
     </footer>
   );

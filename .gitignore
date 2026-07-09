@@ -140,3 +140,7 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 .DS_Store
+
+# Skills
+skills-lock.json
+.agents/skills

@@ -1,4 +1,3 @@
-import { projects } from '@/data/projects';
 import {
   getHtmlLang,
   htmlLangMap,
@@ -104,23 +103,6 @@ export const ProjectsPageJsonLd = ({ lang, dict }: { lang: string; dict: Diction
     inLanguage,
     isPartOf: { '@id': websiteId },
     about: { '@id': personId },
-    mainEntity: {
-      '@type': 'ItemList',
-      itemListElement: projects.map((project, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        url: project.site ?? project.github ?? getLocalizedUrl(locale, '/projects'),
-        item: {
-          '@type': 'CreativeWork',
-          name: project.title[locale],
-          description: project.desc[locale],
-          inLanguage,
-          image: project.image ? getSocialImageUrl(project.image) : undefined,
-          keywords: project.tags?.join(', ') ?? undefined,
-          author: { '@id': personId },
-        },
-      })),
-    },
   };
 
   return <JsonLdScript data={jsonLd} />;

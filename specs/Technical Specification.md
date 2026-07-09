@@ -230,7 +230,11 @@ https://nextjs.org/docs/app/getting-started/layouts-and-pages#creating-a-nested-
 
 #### 项目数据
 
-因为网站只设置简体中文和英文两种语言，因此采取简单高效的方式，把需要翻译的字段拆分为两个字段 `{keyName}_en` 和 `{keyName}_zh_CN`。
+项目展示数据来自 Supabase `projects` table，并在 `src/services/projects.ts` 中转换成页面组件使用的 `LocalizedProject`。页面组件不直接依赖数据库字段名，Projects 页面只取一次数据，并把同一份结果传给项目列表和 JSON-LD，避免页面内容与结构化数据漂移。Supabase 查询缓存应作用在包含中英文双列的原始项目数据上，语言切换只重新做本地化映射，不应因为 `en` / `zh` 参数不同而重复请求同一份项目表数据。
+
+因为网站只设置简体中文和英文两种语言，因此数据库里的可翻译字段使用简单高效的双列模型：`title_en` / `title_zh`、`desc_en` / `desc_zh`。项目按 `id` 升序展示；`tags` 使用数组字段；`site`、`github`、`image` 都是可选字段。
+
+`projects` 是公开展示内容，只需要匿名只读访问。Supabase 侧应保证该表已暴露给 Data API、启用 RLS，并为 `anon` 提供只读 SELECT policy，不要在站点代码中使用 `service_role` key。
 
 ### 移动端适配
 

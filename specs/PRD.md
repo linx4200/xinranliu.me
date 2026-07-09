@@ -95,7 +95,7 @@ Xinran Liu 需要一个不只是“个人主页”的作品集网站，而是一
 - The root entrypoint redirects to the preferred supported locale based on request language, with English as the default fallback.
 - Internal language switching preserves the current page route whenever possible, instead of sending users back to the homepage.
 - Page-level user-visible content is sourced from paired English and Simplified Chinese dictionaries. Any new visible copy must be checked in both languages.
-- Project and skill content remain centralized static data, then localized through service-level transformation before rendering.
+- Project content is loaded from the Supabase `projects` table through a service-level transformation before rendering; skill content remains centralized static data.
 - Public pages should remain Server Components by default. Client Components are reserved for navigation state, language switching, dark mode, availability fetching, and Developer Mode interactions.
 - SEO decisions are centralized through shared metadata helpers rather than repeated per-page metadata construction.
 - Every public page must provide localized title, description, canonical URL, alternate languages, Open Graph data, Twitter card data, and appropriate JSON-LD.
@@ -167,7 +167,7 @@ type AvailabilityResponse =
 - Turning the visual direction into a generic SaaS template or marketing landing page.
 - A full mobile Developer Mode experience equivalent to desktop.
 - A public API product, API documentation site, or indexed availability endpoint.
-- Runtime project fetching from a remote CMS or database.
+- A general-purpose CMS, admin dashboard, or authenticated project editing flow.
 - Comprehensive analytics dashboards beyond lightweight performance insight.
 - Rewriting the architecture away from Next.js App Router, React, Tailwind CSS, and Zustand.
 
