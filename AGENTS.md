@@ -134,6 +134,8 @@ npm run dev-mode:generate:react
 npm run lint
 ```
 
+- 每次验证结果时，忽略 `next-env.d.ts` 的改动，不要把它计入本次变更质量或验证结论。
+
 有以下情况时，额外执行：
 
 - 改了路由、metadata、SSR 或构建敏感逻辑：`npm run build`

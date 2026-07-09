@@ -48,13 +48,13 @@ const mapProjectRow = (project: ProjectRow, lang: ReturnType<typeof resolveLocal
   image: project.image ?? undefined,
 });
 
-export const getAllProjects = async (lang: string): Promise<LocalizedProject[]> => {
+const getProjectRows = async (): Promise<ProjectRow[]> => {
+  // 使用无参数的函数进行缓存，确保中英文共用一份缓存
   'use cache';
   cacheLife('hours');
 
-  const resolvedLang = resolveLocale(lang);
   const supabase = getSupabaseServerClient();
-  await sleep(1 * 60 * 1000);
+
   const { data, error } = await supabase
     .from('projects')
     .select(projectColumns)
@@ -66,7 +66,14 @@ export const getAllProjects = async (lang: string): Promise<LocalizedProject[]> 
     throw new Error(`Failed to load projects from Supabase: ${error.message}`);
   }
 
-  return (data ?? []).map((project) => mapProjectRow(project, resolvedLang));
+  return data ?? [];
+};
+
+export const getAllProjects = async (lang: string): Promise<LocalizedProject[]> => {
+  const resolvedLang = resolveLocale(lang);
+  const projects = await getProjectRows();
+
+  return projects.map((project) => mapProjectRow(project, resolvedLang));
 };
 
 export const getSelectedProjects = async (lang: string): Promise<LocalizedProject[]> => {
@@ -75,8 +82,3 @@ export const getSelectedProjects = async (lang: string): Promise<LocalizedProjec
 
   return selectedProjects.length > 0 ? selectedProjects : projects.slice(0, 3);
 };
-
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
