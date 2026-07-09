@@ -234,7 +234,7 @@ https://nextjs.org/docs/app/getting-started/layouts-and-pages#creating-a-nested-
 
 因为网站只设置简体中文和英文两种语言，因此数据库里的可翻译字段使用简单高效的双列模型：`title_en` / `title_zh`、`desc_en` / `desc_zh`。项目按 `id` 升序展示；`tags` 使用数组字段；`site`、`github`、`image` 都是可选字段。
 
-`projects` 是公开展示内容，只需要匿名只读访问。Supabase 侧应保证该表已暴露给 Data API、启用 RLS，并为 `anon` 提供只读 SELECT policy，不要在站点代码中使用 `service_role` key。
+`projects` 是公开展示内容，只需要匿名只读访问。Supabase 侧应保证该表已暴露给 Data API、启用 RLS，并为 `anon` 提供只读 SELECT policy，不要在站点代码中使用 `service_role` key。站点服务端通过运行时环境变量 `SUPABASE_URL` 与 `SUPABASE_PUBLISHABLE_KEY` 初始化 Supabase client；因为当前没有浏览器端 Supabase client，不使用 `NEXT_PUBLIC_` 前缀。
 
 ### 移动端适配
 

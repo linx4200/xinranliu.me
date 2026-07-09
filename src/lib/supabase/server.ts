@@ -3,8 +3,8 @@ import { createClient } from '@supabase/supabase-js';
 let supabaseServerClient: ReturnType<typeof createClient> | null = null;
 
 const getSupabaseConfig = () => {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_PUBLISHABLE_KEY;
 
   if (!supabaseUrl || !supabaseKey) {
     throw new Error('Supabase server client is not configured.');
