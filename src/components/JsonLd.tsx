@@ -5,7 +5,6 @@ import {
   supportedLanguages,
   type Dictionary,
 } from '@/dictionaries';
-import type { LocalizedProject } from '@/services/projects';
 import {
   getLocalizedUrl,
   getSocialImageUrl,
@@ -89,7 +88,7 @@ export const HomePageJsonLd = ({ lang, dict }: { lang: string; dict: Dictionary 
   return <JsonLdScript data={jsonLd} />;
 };
 
-export const ProjectsPageJsonLd = ({ lang, dict, projects }: { lang: string; dict: Dictionary; projects: LocalizedProject[] }) => {
+export const ProjectsPageJsonLd = ({ lang, dict }: { lang: string; dict: Dictionary }) => {
   const locale = resolveLocale(lang);
   const pageUrl = getLocalizedUrl(locale, '/projects');
   const inLanguage = getInLanguage(lang);
@@ -104,23 +103,6 @@ export const ProjectsPageJsonLd = ({ lang, dict, projects }: { lang: string; dic
     inLanguage,
     isPartOf: { '@id': websiteId },
     about: { '@id': personId },
-    mainEntity: {
-      '@type': 'ItemList',
-      itemListElement: projects.map((project, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        url: project.site ?? project.github ?? getLocalizedUrl(locale, '/projects'),
-        item: {
-          '@type': 'CreativeWork',
-          name: project.title,
-          description: project.desc,
-          inLanguage,
-          image: project.image ? getSocialImageUrl(project.image) : undefined,
-          keywords: project.tags?.join(', ') ?? undefined,
-          author: { '@id': personId },
-        },
-      })),
-    },
   };
 
   return <JsonLdScript data={jsonLd} />;

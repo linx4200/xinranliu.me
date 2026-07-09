@@ -113,8 +113,8 @@ export const data = {
     "name": "ProjectGrid",
     "propList": [
       {
-        "key": "projects",
-        "value": "LocalizedProject[]"
+        "key": "lang",
+        "value": "string"
       },
       {
         "key": "copy",

@@ -1,5 +1,6 @@
-import { resolveLocale } from '@/dictionaries';
+import { cacheLife } from 'next/cache';
 import { getSupabaseServerClient } from '@/lib/supabase/server';
+import { resolveLocale } from '@/dictionaries';
 
 export interface LocalizedProject {
   id: number;
@@ -48,11 +49,16 @@ const mapProjectRow = (project: ProjectRow, lang: ReturnType<typeof resolveLocal
 });
 
 export const getAllProjects = async (lang: string): Promise<LocalizedProject[]> => {
+  'use cache';
+  cacheLife('hours');
+
   const resolvedLang = resolveLocale(lang);
   const supabase = getSupabaseServerClient();
+  await sleep(1 * 60 * 1000);
   const { data, error } = await supabase
     .from('projects')
     .select(projectColumns)
+    .limit(10)
     .order('id', { ascending: true })
     .overrideTypes<Array<ProjectRow>, { merge: false }>();
 
@@ -69,3 +75,8 @@ export const getSelectedProjects = async (lang: string): Promise<LocalizedProjec
 
   return selectedProjects.length > 0 ? selectedProjects : projects.slice(0, 3);
 };
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
