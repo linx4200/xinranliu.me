@@ -16,6 +16,8 @@ import type { Metadata } from "next";
 
 import "@/styles/globals.css";
 
+const isVercelDeployment = process.env.VERCEL === '1';
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: siteMetadataBase,
@@ -68,7 +70,7 @@ export default async function RootLayout({
         <DeveloperModeFloatingToggle />
         <DeveloperModePopUpInfo />
 
-        <SpeedInsights />
+        { isVercelDeployment ? <SpeedInsights /> : null }
       </body>
     </html>
   );
