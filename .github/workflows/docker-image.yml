@@ -50,8 +50,8 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            docker pull tonibellbell/personal-website:latest
+            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/personal-website:latest
             docker stop lxr || true
             docker rm lxr || true
-            docker run --name lxr -p 127.0.0.1:3000:3000 --env-file /root/xinran.liu/.env -d tonibellbell/personal-website:latest
+            docker run --name lxr -p 127.0.0.1:3000:3000 --env-file /root/xinran.liu/.env -d ${{ secrets.DOCKER_HUB_USERNAME }}/personal-website:latest
             docker image prune -a

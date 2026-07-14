@@ -1,7 +1,11 @@
 export async function register() {
   if (process.env.NEXT_RUNTIME === 'nodejs') {
-    const { logger } = await import('./lib/logger');
+    const { isFileLoggingEnabled, logger } = await import('./lib/logger');
     logger.info('Instrumentation hook registered and logger initialized.');
+
+    if (!isFileLoggingEnabled) {
+      return;
+    }
 
     const originalLog = console.log;
     const originalError = console.error;
