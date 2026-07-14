@@ -63,6 +63,7 @@ const getProjectRows = async (): Promise<ProjectRow[]> => {
     .overrideTypes<Array<ProjectRow>, { merge: false }>();
 
   if (error) {
+    console.error(error);
     throw new Error(`Failed to load projects from Supabase: ${error.message}`);
   }
 
