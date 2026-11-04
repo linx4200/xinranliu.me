@@ -54,6 +54,7 @@ export default async function RootLayout({
     <html lang={displayLang}>
       <head>
         <SiteJsonLd dict={dict} />
+        <script defer src="https://cloud.umami.is/script.js" data-website-id="4196bb75-0a55-4cf5-84fb-5475dec978d0"></script>
       </head>
       <body
         className={`${geistSans.variable} ${geistSans.className} ${geistMono.variable} antialiased lg:w-5xl mx-auto`}
