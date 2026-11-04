@@ -14,6 +14,10 @@
     "contact": {
       "title": "联系我 | Xinran Liu",
       "description": "联系 Xinran Liu，讨论 Web 开发合作，技术咨询与产品实现。"
+    },
+    "privacy": {
+      "title": "隐私声明 | Xinran Liu",
+      "description": "了解 xinranliu.me 如何使用注重隐私的访问统计和匿名性能监测。"
     }
   },
   "nav": {
@@ -38,6 +42,9 @@
       "dark": "深色"
     },
     "documentationLink": "文档（在新标签页打开）",
+    "footer": {
+      "privacy": "隐私声明"
+    },
     "contact": {
       "portraitAlt": "Xinran Liu 的头像",
       "instagram": "在 Instagram 上访问 Xinran Liu"
@@ -63,6 +70,64 @@
         "title": "取得联系",
         "description": "如果您有兴趣合作，或者只是想打个招呼，请随时联系我！",
         "button": "联系我"
+      }
+    }
+  },
+  "privacy": {
+    "title": "隐私声明",
+    "lastUpdatedLabel": "更新日期：",
+    "lastUpdated": "2026 年 11 月 4 日",
+    "backHome": "返回首页",
+    "introduction": "本声明说明由 Xinran Liu 运营的 xinranliu.me 在你访问网站时如何处理有限的技术信息。本站使用注重隐私的统计工具了解整体使用情况并改善网站性能。",
+    "sections": {
+      "information": {
+        "title": "收集的信息",
+        "description": "本站可能处理以下技术和使用信息：",
+        "items": [
+          "访问的页面与路由、来源网址和访问时间。",
+          "浏览器、操作系统、设备类型、屏幕尺寸和语言。",
+          "通过 IP 地址推断的大致国家、地区或城市。",
+          "Core Web Vitals、网络速度等匿名页面性能指标。"
+        ]
+      },
+      "purpose": {
+        "title": "处理目的与依据",
+        "description": "这些信息仅用于了解网站的整体使用情况、诊断性能问题和改善网站。在适用法律要求下，此类处理基于运营和改进可靠作品集网站的合法利益。相关信息不会用于广告、用户画像或跨站跟踪。"
+      },
+      "umami": {
+        "title": "Umami Cloud 访问统计",
+        "paragraphs": [
+          "本站使用 Umami Cloud 统计访问流量。Umami 的标准网页跟踪器不使用 Cookie。本站不会向 Umami 发送姓名、邮箱、账户 ID、Distinct ID 或其他自定义身份数据。",
+          "Umami 会临时处理 IP 地址，以推断大致位置并生成匿名会话标识。IP 地址不会作为字段保存在标准分析记录中。该标识还会使用浏览器信息和定期轮换的 salt，其目的不是识别个人身份。"
+        ],
+        "providerPolicy": "阅读 Umami 隐私政策"
+      },
+      "speedInsights": {
+        "title": "Vercel Speed Insights",
+        "description": "在 Vercel 部署环境中，本站使用 Vercel Speed Insights 收集匿名性能数据，包括路由、URL、浏览器、设备类型、操作系统、国家、网络速度和 Core Web Vitals。Vercel 表示这些指标不会与特定访客或 IP 地址关联，也无法用于重建跨页面浏览会话。",
+        "providerPolicy": "阅读 Vercel 隐私声明"
+      },
+      "cookies": {
+        "title": "Cookie 与身份识别",
+        "description": "本声明所述的访问统计和性能工具不会在本站使用 Cookie。本站不会使用分析工具跨网站识别你，也不会有意收集能够直接识别你身份的信息。"
+      },
+      "retention": {
+        "title": "存储、保留期限与处理地区",
+        "paragraphs": [
+          "Umami Cloud 的分析数据存储在 EU 数据区域，并按照 Cloud Hobby 套餐保留 6 个月。根据 Umami 的常规备份周期，已到期或删除的数据可能仍会短期保留在备份中。",
+          "EU 区域仅适用于分析数据存储。CDN 分发、安全、支持、运行日志和其他服务处理可能涉及该区域以外的系统或服务商。Vercel 按照其服务条款和隐私声明保留性能及运行数据。"
+        ]
+      },
+      "rights": {
+        "title": "你的权利与联系渠道",
+        "beforeLink": "如果你对本声明或网站统计有疑问，可以通过",
+        "contactLink": "联系页面",
+        "afterLink": "列出的任一渠道与我联系。根据你所在地区的法律，你可能对个人数据享有访问、反对、限制处理或删除等权利。",
+        "limitation": "由于本站不收集稳定身份标识，且分析记录以匿名方式设计，因此可能无法定位与某位特定访客有关的记录。"
+      },
+      "changes": {
+        "title": "声明更新",
+        "description": "当本站的数据处理方式或服务提供商发生实质变化时，本声明会相应更新。最新修订日期会显示在页面顶部。"
       }
     }
   },

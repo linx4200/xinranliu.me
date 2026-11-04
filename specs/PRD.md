@@ -8,7 +8,7 @@ Xinran Liu 需要一个不只是“个人主页”的作品集网站，而是一
 
 ## Solution
 
-构建一个基于 Next.js App Router 的双语个人作品集网站，以 `full-stack engineer + freelancer` 为核心定位，通过首页、项目页、联系页和 Developer Mode 共同完成信任建立。
+构建一个基于 Next.js App Router 的双语个人作品集网站，以 `full-stack engineer + freelancer` 为核心定位，通过首页、项目页、联系页、隐私声明和 Developer Mode 共同完成信任建立。
 
 首页负责以一屏数字名片快速传达 Xinran 的定位，并通过 Proof Bingo、View Projects 和 Hire Me 两个 CTA 完成第一印象分流；项目页负责集中展示业务能力、技能脉络和可验证成果；联系页负责承载雇佣入口、专业资料、个人头像和 Google Calendar availability；Developer Mode 则作为差异化体验，允许桌面访问者用 React 模式和 Tailwind 模式窥见站点的实现细节，从而把“专业能力”和“有趣灵魂”变成可交互证据。
 
@@ -86,10 +86,12 @@ Xinran Liu 需要一个不只是“个人主页”的作品集网站，而是一
 68. As a future agent, I want the PRD to use the same vocabulary as the project specs, so that I can continue work without reinterpreting the product.
 69. As a future agent, I want testing decisions to name the highest useful boundaries, so that I can add coverage without overfitting to implementation details.
 70. As a future agent, I want out-of-scope boundaries to be explicit, so that I do not accidentally turn the site into a generic template, CMS, blog, or product dashboard.
+71. As a privacy-conscious visitor, I want a localized privacy notice, so that I can understand which analytics and performance services the site uses and how their data is handled.
+72. As a privacy-conscious visitor, I want the privacy notice to remain reachable from every public page, so that transparency does not depend on entering a particular section of the site.
 
 ## Implementation Decisions
 
-- The product remains a three-page public portfolio: Home, Projects, and Contact. Home acts as a one-screen business card and proof gateway, Projects validates business and technical capability, and Contact converts interest into collaboration.
+- The product has four localized public page types: Home, Projects, Contact, and Privacy. Home acts as a one-screen business card and proof gateway, Projects validates business and technical capability, Contact converts interest into collaboration, and Privacy documents the site's actual analytics and performance-data practices.
 - The core positioning remains `full-stack engineer + freelancer`, expressed through bilingual copy, project evidence, skills, availability, and hiring CTAs.
 - The site uses locale-prefixed routes for all public pages. Supported locales are `en` and `zh`; the Chinese route prefix remains `zh`, while the HTML language value is `zh-CN`.
 - The root entrypoint redirects to the preferred supported locale based on request language, with English as the default fallback.
@@ -130,15 +132,18 @@ type AvailabilityResponse =
 - Developer Mode should visually highlight inspected elements and position the overlay near the target without blocking normal page reading.
 - Documentation access points to the project specifications, reinforcing that the site is spec-driven and intentionally built.
 - Vercel Speed Insights remains part of the page shell to support performance awareness without adding visible UI complexity.
+- The Privacy page documents Umami Cloud and Vercel Speed Insights without introducing a consent banner while the site remains cookie-free and does not send custom identity data to analytics providers. Umami Cloud analytics use the EU data region and the Hobby plan's 6-month retention period.
+- Privacy questions use the channels already listed on the Contact page. The notice must explain that anonymous records may not be attributable to a specific visitor.
+- The Footer exposes a localized Privacy link on every public page. The homepage uses a compact Footer variant so the link remains discoverable without displacing the first-screen business-card experience.
 - No new heavy runtime dependency should be introduced for static presentation, localization, or simple interaction work unless it clearly reduces risk.
 
 ## Testing Decisions
 
 - The seam check for this PRD is based on the current codebase and specs. Because this document was requested without a user interview, these seams are treated as the expected default: localized public pages, locale routing, SEO metadata generation, dictionary/data localization, Availability API, Developer Mode store and DOM markers, sitemap/robots behavior, and responsive navigation.
 - Good tests should assert externally observable behavior: rendered content, route behavior, metadata, structured data, API response shape, ARIA states, link destinations, and mode transitions. They should avoid asserting private component structure, internal state names, exact Tailwind class strings, or implementation-only helper calls unless the public contract is the class metadata itself.
-- The highest-value page-level tests should cover Home, Projects, and Contact in both supported locales, verifying that the correct localized headings, homepage CTAs, subpage navigation labels, project content, and contact labels appear.
+- The highest-value page-level tests should cover Home, Projects, Contact, and Privacy in both supported locales, verifying that the correct localized headings, homepage CTAs, subpage navigation labels, project content, contact labels, privacy content, and Footer privacy links appear.
 - Routing tests should cover root locale redirect behavior, valid locale pages, invalid locale handling, and language switch path preservation.
-- SEO tests should cover canonical URLs, alternate language mappings, localized metadata, Open Graph locale values, JSON-LD presence, sitemap localized entries, and robots disallow rules for API routes.
+- SEO tests should cover canonical URLs, alternate language mappings, localized metadata, Open Graph locale values, JSON-LD presence, sitemap localized entries including Privacy, and robots disallow rules for API routes.
 - Accessibility tests should cover skip link visibility on focus, homepage utility navigation labeling, subpage primary navigation labeling, mobile menu expanded state, icon-only button labels, theme switch role/checked state, language switch labels, Proof Bingo `aria-pressed` and completion `role=status` behavior, project card labelling, and availability `role=status` behavior.
 - Responsive tests should cover desktop and mobile layouts at the highest page level, especially the homepage one-screen composition on desktop, mobile hero stacking, subpage mobile navigation, single-column project cards, contact CTA sizing, and hidden desktop-only Developer Mode controls.
 - Dark mode tests should cover initial system preference application where feasible and manual theme toggling as a visible DOM/class behavior.

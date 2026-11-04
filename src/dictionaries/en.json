@@ -14,6 +14,10 @@
     "contact": {
       "title": "Hire Me | Xinran Liu",
       "description": "Contact Xinran Liu to discuss freelance web development, product engineering, technical consulting, and collaboration opportunities."
+    },
+    "privacy": {
+      "title": "Privacy Notice | Xinran Liu",
+      "description": "Learn how xinranliu.me uses privacy-focused analytics and anonymous performance measurements."
     }
   },
   "nav": {
@@ -38,6 +42,9 @@
       "dark": "dark"
     },
     "documentationLink": "Documentation (opens in a new tab)",
+    "footer": {
+      "privacy": "Privacy"
+    },
     "contact": {
       "portraitAlt": "Portrait of Xinran Liu",
       "instagram": "Visit Xinran Liu on Instagram"
@@ -63,6 +70,64 @@
         "title": "Get in Touch",
         "description": "If you're interested in working together or just want to say hello, please reach out!",
         "button": "Contact Me"
+      }
+    }
+  },
+  "privacy": {
+    "title": "Privacy Notice",
+    "lastUpdatedLabel": "Last updated:",
+    "lastUpdated": "November 4, 2026",
+    "backHome": "Back to Home",
+    "introduction": "This notice explains how xinranliu.me, operated by Xinran Liu, processes limited technical information when you visit the site. The site uses privacy-focused analytics to understand aggregate usage and improve performance.",
+    "sections": {
+      "information": {
+        "title": "Information Collected",
+        "description": "The site may process the following technical and usage information:",
+        "items": [
+          "Pages and routes visited, referrer URLs, and visit timestamps.",
+          "Browser, operating system, device type, screen size, and language.",
+          "Approximate country, region, or city derived from an IP address.",
+          "Anonymous page-performance measurements such as Core Web Vitals and network speed."
+        ]
+      },
+      "purpose": {
+        "title": "Purpose and Basis",
+        "description": "This information is used only to understand aggregate site usage, diagnose performance issues, and improve the website. Where applicable, this processing is based on the legitimate interest in operating and improving a reliable portfolio website. It is not used for advertising, profiling, or cross-site tracking."
+      },
+      "umami": {
+        "title": "Umami Cloud Analytics",
+        "paragraphs": [
+          "The site uses Umami Cloud for traffic analytics. Umami does not use cookies for its standard web tracker. This site does not send names, email addresses, account IDs, distinct IDs, or other custom identity data to Umami.",
+          "Umami temporarily processes an IP address to derive an approximate location and create an anonymous session identifier. The IP address is not stored as a field in the standard analytics record. The identifier also uses browser information and a rotating salt and is not intended to identify a person."
+        ],
+        "providerPolicy": "Read Umami’s privacy policy"
+      },
+      "speedInsights": {
+        "title": "Vercel Speed Insights",
+        "description": "On Vercel deployments, the site uses Vercel Speed Insights to collect anonymous performance data, including the route, URL, browser, device type, operating system, country, network speed, and Core Web Vitals. Vercel states that these measurements are not associated with an individual visitor or IP address and cannot reconstruct a browsing session across pages.",
+        "providerPolicy": "Read Vercel’s privacy notice"
+      },
+      "cookies": {
+        "title": "Cookies and Identification",
+        "description": "The analytics and performance tools described in this notice do not use cookies on this site. The site does not use analytics to recognize you across other websites and does not intentionally collect information that directly identifies you."
+      },
+      "retention": {
+        "title": "Storage, Retention, and Processing Locations",
+        "paragraphs": [
+          "Umami Cloud analytics data is stored in the EU data region and retained for 6 months under the Cloud Hobby plan. Residual copies may remain in backups according to Umami’s ordinary backup cycles.",
+          "The EU region applies to analytics storage. CDN delivery, security, support, operational logging, and other service processing may involve systems or providers outside that region. Vercel retains performance and operational data according to its own service terms and privacy notice."
+        ]
+      },
+      "rights": {
+        "title": "Your Rights and Contact",
+        "beforeLink": "If you have questions about this notice or the site’s analytics, contact me through one of the channels on the",
+        "contactLink": "Contact page",
+        "afterLink": ". Depending on where you live, you may have rights concerning personal data, including access, objection, restriction, or deletion.",
+        "limitation": "Because the site does not collect a stable identifier and the analytics records are designed to be anonymous, it may not be possible to locate records associated with a particular visitor."
+      },
+      "changes": {
+        "title": "Changes to This Notice",
+        "description": "This notice will be updated when the site’s data practices or service providers materially change. The latest revision date appears at the top of this page."
       }
     }
   },

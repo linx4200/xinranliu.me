@@ -7,7 +7,7 @@ export const siteMetadataBase = new URL(siteUrl);
 export const siteName = 'Xinran Liu';
 export const homeSocialImagePath = '/images/search-landing-portfolio.png';
 
-export type LocalizedRoute = '/' | '/projects' | '/contact';
+export type LocalizedRoute = '/' | '/projects' | '/contact' | '/privacy';
 
 const openGraphLocaleMap: Record<LangCode, string> = {
   en: 'en_US',

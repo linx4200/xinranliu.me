@@ -27,11 +27,11 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
   return (
     <>
       <HomePageJsonLd lang={lang} dict={dict} />
-      {/* 36 = 16(NAV_HEIGHT_SPACING) + 20 (section margin-top) */}
+      {/* Desktop reserves 16 spacing units for Nav and 12 for the compact homepage Footer. */}
       <section
         className="
           flex flex-wrap
-          lg:min-h-[calc(100svh_-_var(--spacing)*36))]
+          lg:min-h-[calc(100svh-var(--spacing)*28)]
           justify-center items-center lg:justify-between
           px-4 lg:px-0
           mt-10 lg:mt-0

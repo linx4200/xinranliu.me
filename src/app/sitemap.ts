@@ -9,6 +9,7 @@ const localizedPages: Array<{
   { route: '/', priority: 1 },
   { route: '/projects', priority: 0.8 },
   { route: '/contact', priority: 0.8 },
+  { route: '/privacy', priority: 0.3 },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

@@ -48,7 +48,12 @@ export const data = {
   },
   "Footer": {
     "name": "Footer",
-    "propList": []
+    "propList": [
+      {
+        "key": "dict",
+        "value": "Dictionary"
+      }
+    ]
   },
   "LangSwitch": {
     "name": "LangSwitch",

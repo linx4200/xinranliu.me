@@ -40,15 +40,16 @@ xinran.liu/
 
 ### 页面路由设计
 
-| Page         	| Route Path 	| Page File  	|
-|--------------	|------------	|-------------	|
-| Home Page    	| /          	| src/app/page.tsx    	|
-| Project      	| /projects  	| src/app/projects/page.tsx 	|
-| Contact Page 	| /contact   	| src/app/contact/page.tsx  	|
+| Page | Route Path | Page File |
+|---|---|---|
+| Home Page | / | src/app/page.tsx |
+| Project | /projects | src/app/projects/page.tsx |
+| Contact Page | /contact | src/app/contact/page.tsx |
+| Privacy Notice | /privacy | src/app/privacy/page.tsx |
 
 根据 Next.js 的定义，页面文件放在项目的 src/app 目录下。
 
-使用 `src/app/[lang]/layout.tsx` 页面组件作为布局组件，放置 `<Nav />`、`<Footer />`、Developer Mode 浮动入口等全局组件。首页采用一屏数字名片布局，`<Nav />` 在首页只保留 theme、language、documentation 工具入口，Projects 与 Contact 由 hero CTA 承担；`<Footer />` 在首页隐藏，子页面保留。
+使用 `src/app/[lang]/layout.tsx` 页面组件作为布局组件，放置 `<Nav />`、`<Footer />`、Developer Mode 浮动入口等全局组件。首页采用一屏数字名片布局，`<Nav />` 在首页只保留 theme、language、documentation 工具入口，Projects 与 Contact 由 hero CTA 承担；`<Footer />` 在首页使用只包含隐私入口的紧凑形态，子页面保留完整版权信息与隐私入口。
 
 ## 具体功能设计
 
@@ -124,7 +125,7 @@ projectgrid --> projectcard_grid
 
 - `<Nav />`: 头部导航组件。子页面包含 Home、Projects、Hire Me/Contact，以及中英文切换、黑暗模式切换、文档链接；首页只展示工具入口，主导航动作由 hero CTA 承担。
 - `<ProofBingo />`: 首页核心交互组件，以 3x3 proof matrix 展示技术栈、项目证据、工作方式和个人特质。用户点亮任意一条线后，展示本地化 summary 和 reset 控制；View Projects / Hire Me 转化入口由首页左侧 hero CTA 常驻承载，避免重复。
-- `<Footer />`: 子页面页脚。首页为了保持一屏数字名片体验不渲染页脚。
+- `<Footer />`: 全站页脚。首页使用只包含本地化隐私入口的紧凑形态，并在 Hero 高度中为其预留空间；子页面展示版权信息与隐私入口。
 - `<Card />`: 卡片形式的容器组件，用于统一卡片的样式。使用 children prop 来进行子组件的渲染。
 - `<ProjectCard />`: 项目卡片组件，用于展示项目信息。该组件的最外层容器是 `<Card />`， 里面包含项目名称、项目描述、项目链接、项目图片等信息。
 - `<ProjectGrid />`: 项目网格组件，用于展示项目列表。获取 project data 后渲染多个 `<ProjectCard />`。
@@ -289,6 +290,10 @@ https://nextjs.org/docs/app/api-reference/file-conventions/metadata/robots#stati
 ## 数据统计
 
 https://nextjs.org/docs/app/guides/analytics
+
+站点使用 Umami Cloud 统计访问情况，并使用 Vercel Speed Insights 收集匿名性能指标。Privacy 页面通过 `/en/privacy` 与 `/zh/privacy` 两个本地化公开路由说明这些处理活动，并复用共享 metadata、canonical、alternate languages、Open Graph 与 sitemap 逻辑。页面保持 Server Component。
+
+Umami Cloud 使用 EU 数据区域，Hobby 套餐分析数据保留 6 个月。在站点不使用 Cookie、不向统计服务发送自定义身份标识的前提下，不展示 Cookie Banner。若后续增加自定义事件、Distinct ID、Session Replay、表单或其他数据处理能力，必须先更新隐私声明并重新评估同意机制。
 
 ## 部署
 
